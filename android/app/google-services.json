@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "882795617956",
+    "project_id": "gradgigs-eb479",
+    "storage_bucket": "gradgigs-eb479.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882795617956:android:13884243f19cec897b9031",
+        "android_client_info": {
+          "package_name": "com.example.gradgigs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGw8H6GbbAzxYjIJSVWGOw8kAIW91DGgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
