@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RecruiterSignupPage extends StatefulWidget {
-  const RecruiterSignupPage({super.key});
+  final String role;
+  const RecruiterSignupPage({super.key, required this.role});
 
   @override
   State<RecruiterSignupPage> createState() => _RecruiterSignupPageState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:gradgigs/view/authentication/login.dart';
+import 'view/authentication/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,17 +23,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromRGBO(91, 0, 31, 0)),
+          /*colorScheme:
+              ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 91, 0, 30)),*/
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
-              backgroundColor: Color.fromRGBO(228, 186, 112, 0),
+              backgroundColor: Color.fromARGB(255, 228, 185, 112),
               iconTheme: IconThemeData(color: Colors.black),
               centerTitle: false)),
       home: AnimatedSplashScreen(
-        backgroundColor: const Color.fromRGBO(228, 186, 112, 0), //change later
+        backgroundColor: Color.fromARGB(255, 228, 185, 112), //change later
         splash: const Center(
-          child: SizedBox(child: Text("GradGigs")),
+          child: Image(
+            image: AssetImage('assets/gardgigs_logo.jpg'),
+            width: 244,
+            height: 68,
+          ),
         ),
         nextScreen: const LoginPage(title: 'Sign In'), //login page
         splashTransition: SplashTransition.fadeTransition,
