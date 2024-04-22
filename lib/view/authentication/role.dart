@@ -18,15 +18,15 @@ class RoleSignUp extends StatelessWidget {
             fontSize: 24,
           ),
         ),
-        toolbarHeight: 90,
+        toolbarHeight: 80,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(25),
             bottomLeft: Radius.circular(25),
           ),
         ),
-        elevation: 15,
-        centerTitle: false,
+        elevation: 5,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -44,11 +44,11 @@ class RoleSignUp extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 35),
+            const SizedBox(height: 45),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Image(
-                image: AssetImage('assets/gardgigs_logo.jpg'),
+                image: AssetImage('assets/gradgigs_logo.png'),
                 width: 244,
                 height: 68,
               ),
@@ -61,14 +61,13 @@ class RoleSignUp extends StatelessWidget {
                   color: Color.fromARGB(255, 94, 91, 91),
                   fontFamily: 'Contrail One',
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 20,
                 ),
                 textAlign: TextAlign.left,
               ),
             ),
-            const SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 10),
               child: ElevatedButton(
                 onPressed: () {
                   _navigateToSignupPage(context, 'recruiter');
@@ -86,7 +85,7 @@ class RoleSignUp extends StatelessWidget {
                     Text(
                       'Job Recruiter',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 94, 91, 91),
+                        color: Color.fromARGB(255, 61, 61, 61),
                         fontFamily: 'Contrail One',
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -96,7 +95,7 @@ class RoleSignUp extends StatelessWidget {
                     Text(
                       'Looking for qualified teamand provide opportunities?',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 94, 91, 91),
+                        color: Color.fromARGB(255, 61, 61, 61),
                         fontFamily: 'Contrail One',
                         fontSize: 16,
                       ),
@@ -107,7 +106,7 @@ class RoleSignUp extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 10),
               child: ElevatedButton(
                 onPressed: () {
                   _navigateToSignupPage(context, 'applicant');
@@ -125,7 +124,7 @@ class RoleSignUp extends StatelessWidget {
                     Text(
                       'Job Applicant',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 94, 91, 91),
+                        color: Color.fromARGB(255, 61, 61, 61),
                         fontFamily: 'Contrail One',
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -135,7 +134,7 @@ class RoleSignUp extends StatelessWidget {
                     Text(
                       'Eager to gain out of class experience. Academically or non-academically',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 94, 91, 91),
+                        color: Color.fromARGB(255, 61, 61, 61),
                         fontFamily: 'Contrail One',
                         fontSize: 16,
                       ),
