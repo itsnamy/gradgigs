@@ -103,27 +103,27 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // const Text(
-                    //   "No Account? ",
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RecruiterProfile()),
-                        );
-                      },
-                      child: const Text(
-                        "No Account?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue, // Change the color to your preference
-                        ),
+                    const Text(
+                      "No Account? ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(builder: (context) => const RecruiterProfilePage()),
+                    //     );
+                    //   },
+                    //   child: const Text(
+                    //     "No Account?",
+                    //     style: TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Colors.blue, // Change the color to your preference
+                    //     ),
+                    //   ),
+                    // ),
 
                     TextButton(
                       onPressed: () {
