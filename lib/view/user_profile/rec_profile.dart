@@ -56,52 +56,55 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
           },
         ),
       ),
-      body: Center(
-        child: Container(
-          height: 600,
-          width: 400,
-          decoration: BoxDecoration(
-            color: Colors.brown[400],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: () => recruiterBasicInformation(context),
-                child: Text(
-                  'Full Name: ${widget.fullName}',
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 20.0),
+        child: Center(
+          child: Container(
+            height: 600,
+            width: 400,
+            decoration: BoxDecoration(
+              color: Colors.brown[400],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () => recruiterBasicInformation(context),
+                  child: Text(
+                    'Full Name: ${widget.fullName}',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),  // Spacer
+                Text(
+                  'Email: ${widget.email}',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 20,
                     color: Colors.white,
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),  // Spacer
-              Text(
-                'Email: ${widget.email}',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+                const SizedBox(height: 20),  // Spacer
+                Text(
+                  'Username: ${widget.username}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),  // Spacer
-              Text(
-                'Username: ${widget.username}',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+                const SizedBox(height: 20),  // Spacer
+                Text(
+                  'Selected Role: ${widget.selectedRole ?? 'N/A'}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),  // Spacer
-              Text(
-                'Selected Role: ${widget.selectedRole ?? 'N/A'}',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
