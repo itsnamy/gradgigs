@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/user_profile/rec_profile.dart';
+import 'package:gradgigs/view/authentication/login.dart';
 
 class RecruiterBasicInformation extends StatefulWidget {
   const RecruiterBasicInformation({super.key});
@@ -11,22 +12,37 @@ class RecruiterBasicInformation extends StatefulWidget {
 class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
   @override
   Widget build(BuildContext context) {
-
-    return MaterialApp(
-    theme: ThemeData(
-            /*colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 91, 0, 30)),*/
-            useMaterial3: true,
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Color.fromARGB(255, 228, 185, 112),
-                iconTheme: IconThemeData(color: Colors.black),
-                centerTitle: false)),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Sign Up")
-      )
-    )
-
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Basic information',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        toolbarHeight: 90,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 15,
+        centerTitle: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(title: 'Sign In'),
+              ),
+            );
+          },
+        ),
+      ),
     );
     //return const Placeholder();
   }

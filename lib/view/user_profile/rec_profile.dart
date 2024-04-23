@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/view/user_profile/rec_basic_information.dart';
+import 'package:gradgigs/view/user_profile/rec_role_information.dart';
+import 'package:gradgigs/view/user_profile/rec_contact_details.dart';
+
 
 class RecruiterProfilePage extends StatefulWidget {
   const RecruiterProfilePage(
@@ -71,12 +74,42 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
               children: [
                 TextButton(
                   onPressed: () => recruiterBasicInformation(context),
-                  child: Text(
-                    'Full Name: ${widget.fullName}',
+                  child: const Text(
+                    'Basic Information',
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,
                     ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextButton(
+                  onPressed: () => recruiterRoleInformation(context),
+                  child: const Text(
+                    'Role Information',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextButton(
+                  onPressed: () => recruiterContactDetails(context),
+                  child: const Text(
+                    'Contact Details',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Full Name: ${widget.fullName}',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 20),  // Spacer
@@ -114,4 +147,12 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
 
 void recruiterBasicInformation(BuildContext context){
   Navigator.push(context, MaterialPageRoute(builder: (context) => RecruiterBasicInformation()));
+}
+
+void recruiterRoleInformation(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (context) => RecruiterRoleInfo()));
+}
+
+void recruiterContactDetails(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (context) => RecruiterContactDetails()));
 }

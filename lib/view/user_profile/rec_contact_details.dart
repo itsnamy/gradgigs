@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 
-class RecruiterRoleInfo extends StatefulWidget {
-  const RecruiterRoleInfo({super.key});
+class RecruiterContactDetails extends StatefulWidget {
+  const RecruiterContactDetails({super.key});
 
   @override
-  State<RecruiterRoleInfo> createState() => _RecruiterRoleInfoState();
+  State <RecruiterContactDetails> createState() => RecruiterContactDetailsState();
 }
 
-class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
+class RecruiterContactDetailsState extends State<RecruiterContactDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Role information',
+          'Contact Details',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
