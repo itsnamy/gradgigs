@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 228, 185, 112), //change later
         splash: const Center(
           child: Image(
-            image: AssetImage('assets/gardgigs_logo.jpg'),
+            image: AssetImage('assets/gradgigs_logo.png'),
             width: 244,
             height: 68,
           ),
