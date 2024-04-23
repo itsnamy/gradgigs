@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -102,12 +103,28 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      "No Account? ",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    // const Text(
+                    //   "No Account? ",
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RecruiterProfile()),
+                        );
+                      },
+                      child: const Text(
+                        "No Account?",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue, // Change the color to your preference
+                        ),
                       ),
                     ),
+
                     TextButton(
                       onPressed: () {
                         Navigator.push(
