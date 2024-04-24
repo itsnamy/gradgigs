@@ -58,6 +58,8 @@ class RecruiterBasicInformation extends StatefulWidget {
 class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
   late RecruiterBasicInformation _model;
 
+  String? selectedNationality;
+
   @override
   void initState() {
     super.initState();
@@ -420,18 +422,165 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
               ),
 
               //----------------------------NATIONALITY----------------------------------//
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                child: Text(
-                  'Nationality',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        letterSpacing: 0,
-                      ),
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
+                    child: Text(
+                      'Nationality',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0,
+                          ),
+                    ),
+                  ),
+                ],
               ),
-              
+
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                  child: DropdownButtonFormField<String>(
+                    value: selectedNationality,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Please Choose a Nationality",
+                    ),
+                    items: ["Malaysia", "Country"].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedNationality = newValue;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a nationality';
+                      }
+                      return null; //if input
+                    },
+                  )),
+
               //----------------------------GENDER----------------------------------//
+
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
+                    child: Text(
+                      'Gender',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                  child: DropdownButtonFormField<String>(
+                    value: selectedNationality,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Please Choose a Gender",
+                    ),
+                    items: ["Male", "Female"].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedNationality = newValue;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a gender';
+                      }
+                      return null; //if input
+                    },
+                  )),
+
+              //------------------------------BUTTONS---------------------------------//
+
+              // Generated code for this Row Widget...
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 10, 0),
+                    child: FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: 'Cancel',
+                      options: FFButtonOptions(
+                        width: 160,
+                        height: 40,
+                        padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: FlutterFlowTheme.of(context).alternate,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                              fontFamily: 'Readex Pro',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              letterSpacing: 0,
+                            ),
+                        elevation: 3,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(10, 16, 20, 0),
+                    child: FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: 'Confirm',
+                      options: FFButtonOptions(
+                        width: 160,
+                        height: 40,
+                        padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: Color(0xFFE4BA70),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                              fontFamily: 'Readex Pro',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              letterSpacing: 0,
+                            ),
+                        elevation: 3,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+
+              //---------------------------------END---------------------------------//
             ],
           ),
         ));
