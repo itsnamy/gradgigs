@@ -53,8 +53,9 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
           child: Center(
-              child: Column(children: [
-            Container(
+              child: Column(
+              children: [
+              Container(
               height: 550,
               width: 400,
               decoration: BoxDecoration(
