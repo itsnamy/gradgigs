@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
 
-class RecruiterBasicInformation extends StatefulWidget {
-  const RecruiterBasicInformation({super.key});
+class ApplicantAcademicInformation extends StatefulWidget {
+  const ApplicantAcademicInformation({super.key});
 
   @override
-  State<RecruiterBasicInformation> createState() => _RecruiterBasicInformationState();
+  State<ApplicantAcademicInformation> createState() => _ApplicantAcademicInformationState();
 }
 
-class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
+class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Basic information',
+          'Academic Information',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
@@ -36,13 +36,12 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginPage(title: 'Sign In'),
+                builder: (context) => const ApplicantProfilePage(),
               ),
             );
           },
         ),
       ),
     );
-    //return const Placeholder();
   }
 }
