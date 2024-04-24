@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/view/authentication/rec_signup.dart';
 import 'package:gradgigs/view/user_profile/rec_basic_information.dart';
 import 'package:gradgigs/view/user_profile/rec_role_information.dart';
 import 'package:gradgigs/view/user_profile/rec_contact_details.dart';
@@ -53,7 +54,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginPage(title: 'Sign In'),
+                builder: (context) => const RecruiterSignupPage(role: 'recruiter'),
               ),
             );
           },
