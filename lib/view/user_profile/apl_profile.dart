@@ -116,7 +116,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(
+                Text (
                   'Settings',
                   style: TextStyle(
                     fontSize: 24,
@@ -128,6 +128,35 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
               ],
             ),
           ),
+
+          // child: ElevatedButton(
+          //       onPressed: () {
+          //         loginPage(context);
+          //       },
+          //       style: ElevatedButton.styleFrom(
+          //         padding:
+          //             const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10),
+          //         ),
+          //         backgroundColor: const Color.fromARGB(255, 228, 185, 112),
+          //       ),
+          //       child: const Column(
+          //         children: [
+          //           Text(
+          //             'Log out',
+          //             style: TextStyle(
+          //               color: Color.fromARGB(255, 61, 61, 61),
+          //               fontFamily: 'Contrail One',
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 18,
+          //             ),
+          //           ),
+          //           SizedBox(height: 10),
+          //         ],
+          //       ),
+          //     ),
+
         ),
       ),
     );
@@ -152,4 +181,8 @@ void applicantBankDetails(BuildContext context){
 
 void applicantSupportingDocuments(BuildContext context){
   Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantSupportingDocuments()));
+}
+
+void loginPage(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(title: 'Sign In')));
 }

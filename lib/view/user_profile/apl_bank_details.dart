@@ -14,7 +14,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Academic Information',
+          'Bank Details',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
