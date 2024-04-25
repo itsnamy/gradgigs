@@ -173,7 +173,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color:Color(0xFF5C001F),width:1)
+                    side: BorderSide(color:Color(0xFF5C001F),width:1),
                   ),
                   backgroundColor: Color(0xFFF5F5F5),
                 ),

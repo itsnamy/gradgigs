@@ -578,7 +578,8 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                     ),
                   ),
                 ],
-              )
+              ),
+              SizedBox(height: 10),
 
               //---------------------------------END---------------------------------//
             ],

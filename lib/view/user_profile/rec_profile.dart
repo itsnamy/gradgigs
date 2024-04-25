@@ -71,7 +71,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
               height: 600,
               width: 400,
               decoration: BoxDecoration(
-                color: Colors.brown[400],
+                color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -103,7 +103,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                   Text(
                     'Job reqruiter',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 20,
                       color: Colors.white,
                     ),
                   ),
@@ -113,7 +113,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     child: const Text(
                       'Basic Information',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -124,7 +124,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     child: const Text(
                       'Role Information',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -135,7 +135,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     child: const Text(
                       'Contact Details',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -144,7 +144,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                   Text(
                     'Full Name: ${widget.fullName}',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
@@ -152,7 +152,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                   Text(
                     'Email: ${widget.email}',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
@@ -160,7 +160,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                   Text(
                     'Username: ${widget.username}',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
@@ -168,7 +168,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                   Text(
                     'Selected Role: ${widget.selectedRole ?? 'N/A'}',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
@@ -187,8 +187,9 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color:Color(0xFF5C001F),width:1),
                   ),
-                  backgroundColor: const Color.fromARGB(255, 228, 185, 112),
+                  backgroundColor: Color(0xFFF5F5F5),
                 ),
                 child: const Column(
                   children: [
@@ -198,7 +199,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                         color: Color.fromARGB(255, 61, 61, 61),
                         fontFamily: 'Contrail One',
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                     ),
                   ],
