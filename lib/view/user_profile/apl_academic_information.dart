@@ -115,7 +115,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
             child: Center(
               child: Container(
-                height: 800,
+                height: 715,
                 width: 450,
                 decoration: BoxDecoration(
                   color: Color(0xFF5C001F),
