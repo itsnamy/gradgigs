@@ -59,7 +59,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
               height: 550,
               width: 400,
               decoration: BoxDecoration(
-                color: Colors.brown[400],
+                color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -173,8 +173,9 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color:Color(0xFF5C001F),width:1)
                   ),
-                  backgroundColor: const Color.fromARGB(255, 228, 185, 112),
+                  backgroundColor: Color(0xFFF5F5F5),
                 ),
                 child: const Column(
                   children: [
