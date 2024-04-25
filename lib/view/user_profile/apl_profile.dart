@@ -91,7 +91,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   Text(
                     'Job seeker',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 20,
                       color: Colors.white,
                     ),
                   ),
@@ -101,7 +101,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                     child: const Text(
                       'Basic Information',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -112,7 +112,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                     child: const Text(
                       'Academic Information',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -123,7 +123,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                     child: const Text(
                       'Contact Details',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -134,7 +134,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                     child: const Text(
                       'Bank Details',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -145,7 +145,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                     child: const Text(
                       'Supporting Documents',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
@@ -154,7 +154,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   Text(
                     'Settings',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ), // Spacer
@@ -184,7 +184,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                         color: Color.fromARGB(255, 61, 61, 61),
                         fontFamily: 'Contrail One',
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                     ),
                   ],
