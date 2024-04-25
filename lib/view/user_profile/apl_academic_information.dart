@@ -350,7 +350,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                       ],
                     ),
 
-                    //----------------------------NATIONALITY----------------------------------//
+                    //----------------------------FACULTY----------------------------------//
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -377,7 +377,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8), // Adjust border radius here
                             ),
-                            labelText: "Please Choose a Nationality",
+                            labelText: "Please Choose a Faculty",
                             labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -401,13 +401,13 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please select a nationality';
+                              return 'Please select a Faculty';
                             }
                             return null; //if input
                           },
                         )),
                 
-                    //----------------------------GENDER----------------------------------//
+                    //----------------------------COLLEGE----------------------------------//
                 
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -435,7 +435,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8), // Adjust border radius here
                             ),
-                            labelText: "Please Choose a Gender",
+                            labelText: "Please Choose a College",
                             labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -459,7 +459,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please select a gender';
+                              return 'Please select a College';
                             }
                             return null; //if input
                           },
