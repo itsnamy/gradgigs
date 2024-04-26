@@ -10,11 +10,11 @@ import 'package:gradgigs/view/user_profile/rec_contact_details.dart';
 class RecruiterProfilePage extends StatefulWidget {
   const RecruiterProfilePage(
       {Key? key,
-      required this.email,
-      required this.password,
-      required this.fullName,
-      required this.username,
-      required this.selectedRole})
+      this.email = "",
+      this.password = "",
+      this.fullName = "",
+      this.username = "",
+      this.selectedRole})
       : super(key: key);
 
   final String email;
@@ -142,36 +142,48 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                   ),
                   Divider(),
                   Text(
-                    'Full Name: ${widget.fullName}',
+                    'Settings',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
                     ),
-                  ),
-                  Divider(),  // Spacer
-                  Text(
-                    'Email: ${widget.email}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Divider(),  // Spacer
-                  Text(
-                    'Username: ${widget.username}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Divider(),  // Spacer
-                  Text(
-                    'Selected Role: ${widget.selectedRole ?? 'N/A'}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
+                  ), // Spacer
+
+                  //---------------------------USER DATA-----------------------------//
+
+                  // Text(
+                  //   'Full Name: ${widget.fullName}',
+                  //   style: TextStyle(
+                  //     fontSize: 18,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
+                  // Divider(),  // Spacer
+                  // Text(
+                  //   'Email: ${widget.email}',
+                  //   style: TextStyle(
+                  //     fontSize: 18,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
+                  // Divider(),  // Spacer
+                  // Text(
+                  //   'Username: ${widget.username}',
+                  //   style: TextStyle(
+                  //     fontSize: 18,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
+                  // Divider(),  // Spacer
+                  // Text(
+                  //   'Selected Role: ${widget.selectedRole ?? 'N/A'}',
+                  //   style: TextStyle(
+                  //     fontSize: 18,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
+
+
                 ],
               ),
             ),

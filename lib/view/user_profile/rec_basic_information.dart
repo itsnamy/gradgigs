@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -110,7 +111,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const LoginPage(title: 'Sign In'),
+                  builder: (context) => const RecruiterProfilePage(),
                 ),
               );
             },
@@ -199,7 +200,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Enter username',
                                   //labelStyle: TextStyle(color: Colors.white),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
@@ -293,7 +293,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Enter full name',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -387,7 +386,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Enter Date of Birth',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -476,7 +474,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8), // Adjust border radius here
                             ),
-                            labelText: "Please Choose a Nationality",
                             labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -534,7 +531,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8), // Adjust border radius here
                             ),
-                            labelText: "Please Choose a Gender",
                             labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
