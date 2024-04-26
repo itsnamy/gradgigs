@@ -74,7 +74,7 @@ class _ApplicantSupportingDocumentsState extends State<ApplicantSupportingDocume
             fontSize: 24,
           ),
         ),
-        toolbarHeight: 90,
+        toolbarHeight: 60,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(25),
@@ -173,7 +173,7 @@ class _ApplicantSupportingDocumentsState extends State<ApplicantSupportingDocume
                           child: Align(
                             alignment: AlignmentDirectional(0, -1),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16,0),
                               child: TextFormField(
                                 controller: _model.textController1,
                                 focusNode: _model.textFieldFocusNode1,
@@ -226,8 +226,6 @@ class _ApplicantSupportingDocumentsState extends State<ApplicantSupportingDocume
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
                                 ),
                                 style:
                                     FlutterFlowTheme.of(context).bodyMedium.override(

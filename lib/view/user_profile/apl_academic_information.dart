@@ -16,10 +16,6 @@ class ApplicantAcademicInformation extends StatefulWidget {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
@@ -39,8 +35,6 @@ class ApplicantAcademicInformation extends StatefulWidget {
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
 
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
   }
 
   @override
@@ -65,8 +59,6 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
   }
 
   @override
@@ -158,6 +150,9 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                         ),
                       ],
                     ),
+
+                    //----------------------------STUDENT EMAIL----------------------------------//
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -176,8 +171,6 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                         ),
                       ],
                     ),
-                
-                    //----------------------------USERNAME----------------------------------//
                 
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -256,7 +249,8 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                       ],
                     ),
                 
-                    //----------------------------FULL NAME----------------------------------//
+                    //----------------------------YEAR/PROGRAMME----------------------------------//
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -273,6 +267,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                         ),
                       ],
                     ),
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -351,6 +346,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                     ),
 
                     //----------------------------FACULTY----------------------------------//
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
