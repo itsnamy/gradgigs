@@ -283,7 +283,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                           const SizedBox(
                             width: 300,
                             child: Text(
-                              "Catergory",
+                              "Faculty",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -304,7 +304,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                   ),
                                   filled: true,
                                   fillColor: Colors.white,
-                                  hintText: "Please Choose a Category",
+                                  hintText: "Please Choose a faculty",
                                 ),
                                 items: [
                                   "Faculty of Computing",
@@ -326,7 +326,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                 },
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please select a role';
+                                    return 'Please select a faculty';
                                   }
                                   return null; //if input
                                 },

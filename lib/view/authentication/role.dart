@@ -167,7 +167,7 @@ void _navigateToSignupPage(BuildContext context, String role) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ApplicantProfilePage(),
+          builder: (context) => const ApplicantSignupPage(role: 'applicant'),
         ),
       );
       break;
