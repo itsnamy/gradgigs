@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-
 // ignore_for_file: prefer_const_constructors
 
-class RecruiterBasicInformation extends StatefulWidget {
-  // RecruiterBasicInformation(Key? key, this.email, this.fullName, this.username)
-  //     : super(key: key);
 
-  // final String email;
-  // final String fullName;
-  // final String username;
-
-  RecruiterBasicInformation();
+class ApplicantSupportingDocuments extends StatefulWidget {
+  //const ApplicantSupportingDocuments({super.key});
+  ApplicantSupportingDocuments();
 
   final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
@@ -23,16 +17,6 @@ class RecruiterBasicInformation extends StatefulWidget {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue1;
-  FormFieldController<String>? dropDownValueController1;
-  // State field(s) for DropDown widget.
-  String? dropDownValue2;
-  FormFieldController<String>? dropDownValueController2;
 
   @override
   void initState(BuildContext context) {}
@@ -45,18 +29,15 @@ class RecruiterBasicInformation extends StatefulWidget {
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
-
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
   }
 
   @override
-  State<RecruiterBasicInformation> createState() =>
-      _RecruiterBasicInformationState();
+  State<ApplicantSupportingDocuments> createState() => _ApplicantSupportingDocumentsState();
 }
 
-class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
-  late RecruiterBasicInformation _model;
+class _ApplicantSupportingDocumentsState extends State<ApplicantSupportingDocuments> {
+
+  late ApplicantSupportingDocuments _model;
 
   String? selectedNationality;
 
@@ -64,7 +45,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
   void initState() {
     super.initState();
 
-    _model = RecruiterBasicInformation();
+    _model = ApplicantSupportingDocuments();
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -72,8 +53,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
   }
 
   @override
@@ -85,43 +64,44 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Basic information',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
-          toolbarHeight: 60,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25),
-            ),
-          ),
-          elevation: 15,
-          centerTitle: false,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginPage(title: 'Sign In'),
-                ),
-              );
-            },
+     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Supporting Documents',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
           ),
         ),
-        body: SingleChildScrollView(
+        toolbarHeight: 90,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 15,
+        centerTitle: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ApplicantProfilePage(),
+              ),
+            );
+          },
+        ),
+      ),
+
+      body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
             child: Center(
               child: Container(
-                height: 800,
+                height: 600,
                 width: 450,
                 decoration: BoxDecoration(
                   color: Color(0xFF5C001F),
@@ -164,6 +144,9 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                         ),
                       ],
                     ),
+
+                    //----------------------------RESUME ----------------------------------//
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -172,7 +155,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
-                            'Username',
+                            'Resume',
                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                   fontFamily: 'Readex Pro',
                                   letterSpacing: 0,
@@ -182,9 +165,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                         ),
                       ],
                     ),
-                
-                    //----------------------------USERNAME----------------------------------//
-                
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -199,7 +180,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Enter username',
+                                  labelText: 'Upload Resume',
                                   //labelStyle: TextStyle(color: Colors.white),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
@@ -246,7 +227,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                                      EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
                                 ),
                                 style:
                                     FlutterFlowTheme.of(context).bodyMedium.override(
@@ -261,15 +242,16 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                         ),
                       ],
                     ),
-                
-                    //----------------------------FULL NAME----------------------------------//
+
+                    //----------------------------CERTIFICATIONS----------------------------------//
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
-                            'Full Name',
+                            'Certifications',
                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                   fontFamily: 'Readex Pro',
                                   letterSpacing: 0,
@@ -293,7 +275,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Enter full name',
+                                  labelText: 'Upload Certifications',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -355,218 +337,9 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                         ),
                       ],
                     ),
-                
-                    //----------------------------DATE OF BIRTH----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            'Date of Birth',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional(0, -1),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                              child: TextFormField(
-                                controller: _model.textController3,
-                                focusNode: _model.textFieldFocusNode3,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Enter Date of Birth',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        letterSpacing: 0,
-                                        color: Color.fromARGB(255, 153, 143, 143),
-                                      ),
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        letterSpacing: 0,
-                                        color: Colors.white,
-                                      ),
-                                  filled: true, // Add this line
-                                  fillColor: Colors.white,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFFB5F69),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFFB5F69),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                                ),
-                                style:
-                                    FlutterFlowTheme.of(context).bodyMedium.override(
-                                          fontFamily: 'Readex Pro',
-                                          letterSpacing: 0,
-                                        ),
-                                validator: _model.textController3Validator
-                                    .asValidator(context),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                
-                    //----------------------------NATIONALITY----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                          child: Text(
-                            'Nationality',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                
-                    Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                        child: DropdownButtonFormField<String>(
-                          value: selectedNationality,
-                          decoration:  InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8), // Adjust border radius here
-                            ),
-                            labelText: "Please Choose a Nationality",
-                            labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        letterSpacing: 0,
-                                        color: Color.fromARGB(255, 153, 143, 143),
-                                      ),
-                            fillColor: Colors.white, // Add this line
-                            filled: true, 
-                          ),
-                          items: ["Malaysia", "Country"].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedNationality = newValue;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please select a nationality';
-                            }
-                            return null; //if input
-                          },
-                        )),
-                
-                    //----------------------------GENDER----------------------------------//
-                
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                          child: Text(
-                            'Gender',
-                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                
-                    Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                        child: DropdownButtonFormField<String>(
-                          value: selectedNationality,
-                          decoration:  InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8), // Adjust border radius here
-                            ),
-                            labelText: "Please Choose a Gender",
-                            labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        letterSpacing: 0,
-                                        color: Color.fromARGB(255, 153, 143, 143),
-                                      ), 
-                            fillColor: Colors.white, // Add this line
-                            filled: true, 
-                          ),
-                          items: ["Male", "Female"].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedNationality = newValue;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please select a gender';
-                            }
-                            return null; //if input
-                          },
-                        )),
-                
+
                     //------------------------------BUTTONS---------------------------------//
                 
-                    // Generated code for this Row Widget...
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -631,6 +404,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                         ),
                       ],
                     ),
+              
                     SizedBox(height: 10),
                 
                     //---------------------------------END---------------------------------//
@@ -640,6 +414,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
             ),
           ),
         ),
-      );
+
+    );
   }
 }

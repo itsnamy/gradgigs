@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-
 // ignore_for_file: prefer_const_constructors
 
-class RecruiterBasicInformation extends StatefulWidget {
-  // RecruiterBasicInformation(Key? key, this.email, this.fullName, this.username)
-  //     : super(key: key);
-
-  // final String email;
-  // final String fullName;
-  // final String username;
-
-  RecruiterBasicInformation();
+class ApplicantBasicInformation extends StatefulWidget {
+  //const ApplicantBasicInformation({super.key});
+  ApplicantBasicInformation();
 
   final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
@@ -50,13 +43,13 @@ class RecruiterBasicInformation extends StatefulWidget {
     textController3?.dispose();
   }
 
+
   @override
-  State<RecruiterBasicInformation> createState() =>
-      _RecruiterBasicInformationState();
+  State<ApplicantBasicInformation> createState() => _ApplicantBasicInformationState();
 }
 
-class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
-  late RecruiterBasicInformation _model;
+class _ApplicantBasicInformationState extends State<ApplicantBasicInformation> {
+  late ApplicantBasicInformation _model;
 
   String? selectedNationality;
 
@@ -64,7 +57,7 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
   void initState() {
     super.initState();
 
-    _model = RecruiterBasicInformation();
+    _model = ApplicantBasicInformation();
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -86,37 +79,38 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Basic information',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
-          toolbarHeight: 60,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25),
-            ),
-          ),
-          elevation: 15,
-          centerTitle: false,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginPage(title: 'Sign In'),
-                ),
-              );
-            },
+      appBar: AppBar(
+        title: const Text(
+          'Basic Information',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
           ),
         ),
-        body: SingleChildScrollView(
+        toolbarHeight: 60,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 15,
+        centerTitle: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ApplicantProfilePage(),
+              ),
+            );
+          },
+        ),
+      ),
+
+      body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
             child: Center(
@@ -641,5 +635,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
           ),
         ),
       );
+    
   }
 }
