@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_basic_information.dart';
@@ -9,7 +10,10 @@ import 'package:gradgigs/view/user_profile/apl_create_profile/apl_contact_detail
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantProfilePage extends StatefulWidget {
-  const ApplicantProfilePage({super.key});
+
+  final ApplicantProfile applicant;
+
+  const ApplicantProfilePage({super.key, required this.applicant});
 
   @override
   State<ApplicantProfilePage> createState() => _ApplicantProfilePageState();
@@ -96,7 +100,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   ),
                   const SizedBox(height: 30),
                   TextButton(
-                    onPressed: () => applicantBasicInformation(context),
+                    onPressed: () => applicantBasicInformation(context, widget.applicant),
                     child: const Text(
                       'Basic Information',
                       style: TextStyle(
@@ -107,7 +111,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   ),
                   Divider(),
                   TextButton(
-                    onPressed: () => applicantAcademicInformation(context),
+                    onPressed: () => applicantAcademicInformation(context, widget.applicant),
                     child: const Text(
                       'Academic Information',
                       style: TextStyle(
@@ -118,7 +122,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   ),
                   Divider(),
                   TextButton(
-                    onPressed: () => applicantContactDetails(context),
+                    onPressed: () => applicantContactDetails(context, widget.applicant),
                     child: const Text(
                       'Contact Details',
                       style: TextStyle(
@@ -129,7 +133,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   ),
                   Divider(),
                   TextButton(
-                    onPressed: () => applicantBankDetails(context),
+                    onPressed: () => applicantBankDetails(context, widget.applicant),
                     child: const Text(
                       'Bank Details',
                       style: TextStyle(
@@ -140,7 +144,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                   ),
                   Divider(),
                   TextButton(
-                    onPressed: () => applicantSupportingDocuments(context),
+                    onPressed: () => applicantSupportingDocuments(context, widget.applicant),
                     child: const Text(
                       'Supporting Documents',
                       style: TextStyle(
@@ -165,7 +169,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
               width: 400,
               child: ElevatedButton(
                 onPressed: () {
-                  loginPage(context);
+                  loginPage(context, widget.applicant);
                 },
                 style: ElevatedButton.styleFrom(
                   padding:
@@ -198,32 +202,32 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
   }
 }
 
-void applicantBasicInformation(BuildContext context) {
+void applicantBasicInformation(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantBasicInformation()));
+      MaterialPageRoute(builder: (context) => ApplicantBasicInformation(applicant: applicant)));
 }
 
-void applicantAcademicInformation(BuildContext context) {
+void applicantAcademicInformation(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantAcademicInformation()));
+      MaterialPageRoute(builder: (context) => ApplicantAcademicInformation(applicant: applicant)));
 }
 
-void applicantContactDetails(BuildContext context) {
+void applicantContactDetails(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantContactDetails()));
+      MaterialPageRoute(builder: (context) => ApplicantContactDetails(applicant: applicant)));
 }
 
-void applicantBankDetails(BuildContext context) {
+void applicantBankDetails(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => ApplicantBankDetails()));
+      context, MaterialPageRoute(builder: (context) => ApplicantBankDetails(applicant: applicant)));
 }
 
-void applicantSupportingDocuments(BuildContext context) {
+void applicantSupportingDocuments(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantSupportingDocuments()));
+      MaterialPageRoute(builder: (context) => ApplicantSupportingDocuments(applicant: applicant)));
 }
 
-void loginPage(BuildContext context) {
+void loginPage(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
       MaterialPageRoute(builder: (context) => LoginPage(title: 'Sign In')));
 }

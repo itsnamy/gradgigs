@@ -31,7 +31,7 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-              ApplicantSupportingDocuments(recruiter: widget.recruiter)));
+              ApplicantSupportingDocuments(applicant: widget.applicant)));
   }
 
   @override

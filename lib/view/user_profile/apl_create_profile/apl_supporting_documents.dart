@@ -98,17 +98,19 @@ class _ApplicantSupportingDocumentsState
                           horizontal: 20, vertical: 16),
                       child: Center(
                         child: Container(
-                          height: 300,
+                          height: 100,
                           width: 400,
                           decoration: BoxDecoration(
                               color: Color(0xF5F5F5F5),
                               borderRadius: BorderRadius.circular(20)),
-                          child: Row(
-                            children: const [
-                              Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
-                              Text("Upload Resume",
-                                  style: TextStyle(color: Color(0xCCCCCCCC)))
-                            ],
+                          child: Center(
+                            child: Row(
+                              children: const [
+                                Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
+                                Text("Upload Resume",
+                                    style: TextStyle(color: Color(0xCCCCCCCC)))
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -120,17 +122,19 @@ class _ApplicantSupportingDocumentsState
                           horizontal: 20, vertical: 16),
                       child: Center(
                         child: Container(
-                          height: 300,
+                          height: 100,
                           width: 400,
                           decoration: BoxDecoration(
                               color: Color(0xF5F5F5F5),
                               borderRadius: BorderRadius.circular(20)),
-                          child: Row(
-                            children: const [
-                              Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
-                              Text("Upload Certifications",
-                                  style: TextStyle(color: Color(0xCCCCCCCC)))
-                            ],
+                          child: Center(
+                            child: Row(
+                              children: const [
+                                Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
+                                Text("Upload Certifications",
+                                    style: TextStyle(color: Color(0xCCCCCCCC)))
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -213,5 +213,5 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 void applicantProfilePage(BuildContext context){
-  Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
+  // Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
 }

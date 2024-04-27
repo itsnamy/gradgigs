@@ -3,6 +3,7 @@ import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/service/auth_validator.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantBankDetails extends StatefulWidget {
@@ -27,13 +28,13 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
 
     widget.applicant.setBankName = bankName;
     widget.applicant.setBankHolderName = bankHolderName;
-    widget.applicant.bankName = bankName;
+    widget.applicant.bankName = bankNumber;
 
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                ApplicantProfilePage(recruiter: widget.recruiter)));
+                ApplicantProfilePage(applicant: widget.applicant)));
 
   }
 
@@ -187,7 +188,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
                                   fillColor: Colors.white,
                                 ),
                                 validator: (value) =>
-                                    Validator.validateYearProgramme(value!),
+                                    Validator.validateFaculty(value!),
                               ),
                             ),
                           ),
@@ -202,7 +203,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
                           child: Text(
-                            'Faculty',
+                            'Bank Account Number',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

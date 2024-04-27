@@ -40,7 +40,7 @@ class _ApplicantAcademicInformationState
         context,
         MaterialPageRoute(
             builder: (context) =>
-                ApplicantContactDetails(recruiter: widget.recruiter)));
+                ApplicantContactDetails(applicant: widget.applicant)));
 
   }
 

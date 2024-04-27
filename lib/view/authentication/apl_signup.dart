@@ -90,7 +90,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 20),
                             child: Text(
-                              'Job Recruiter',
+                              'Job Applicant',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Contrail One',

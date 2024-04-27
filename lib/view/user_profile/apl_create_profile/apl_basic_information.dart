@@ -3,6 +3,7 @@ import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantBasicInformation extends StatefulWidget {
