@@ -101,7 +101,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     ),
                   ),
                   Text(
-                    'Job reqruiter',
+                    'Job recruiter',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
