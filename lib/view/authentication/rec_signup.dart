@@ -128,7 +128,7 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
                                 fillColor: Colors.white,
                               ),
                               validator: (value) =>
-                                  Validator.validateEmail(value!),
+                                  Validator.validateUTMEmail(value!),
                             ),
                           ),
                           //-------------------------------------PASSWORD INPUT---------------------------------//

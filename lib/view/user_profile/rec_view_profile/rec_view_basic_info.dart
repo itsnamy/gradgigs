@@ -20,6 +20,7 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: const Text(
           'Basic information',
           style: TextStyle(
@@ -102,13 +103,19 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                           child: Container(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                           width: double.infinity,
+                                //width: MediaQuery.of(context).size.width-64,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                                ),
                            decoration: BoxDecoration(
+                            color: Colors.white,
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             widget.recruiter.getUsername,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                           ),
                         ),
@@ -139,13 +146,19 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                           child: Container(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            width: double.infinity,
+                                //width: MediaQuery.of(context).size.width-64,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                                ),
                             decoration: BoxDecoration(
+                            color: Colors.white,
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             widget.recruiter.getDOB,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                           ),
                         ),
@@ -176,13 +189,19 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                           child: Container(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            width: double.infinity,
+                                //width: MediaQuery.of(context).size.width-64,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                                ),
                             decoration: BoxDecoration(
+                              color: Colors.white,
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             widget.recruiter.getNationality,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                           ),
                         ),
@@ -215,13 +234,19 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                           child: Container(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            width: double.infinity,
+                                //width: MediaQuery.of(context).size.width-64,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                                ),
                             decoration: BoxDecoration(
+                              color: Colors.white,
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             widget.recruiter.getgender,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                           ),
                           ),
                         ),
@@ -271,5 +296,6 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
         ),
       ),
     );
+      
   }
 }

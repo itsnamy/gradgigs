@@ -169,7 +169,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                 ),
                               ),
                               validator: (value) =>
-                                  Validator.validatePassword(value!),
+                                  Validator.validateUTMEmail(value!),
                             ),
                           ),
                           //-------------------------------------CONFIRM PASSWORD INPUT---------------------------------//
@@ -246,7 +246,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                   Validator.validateName(value!),
                             ),
                           ),
-                          //-------------------------------------CATEGORY INPUT---------------------------------//
+                          /* //-------------------------------------CATEGORY INPUT---------------------------------//
                           const SizedBox(
                             width: 300,
                             child: Text(
@@ -293,6 +293,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                               },
                             ),
                           ),
+                           */
                           //-------------------------------------SIGN UP BUTTON---------------------------------//
                           Container(
                             padding: const EdgeInsets.symmetric(

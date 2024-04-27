@@ -27,6 +27,7 @@ class RecruiterProfilePage extends StatefulWidget {
 }
 
 class _RecruiterProfileState extends State<RecruiterProfilePage> {
+  ReqruiterProfile recruiter = ReqruiterProfile();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +215,6 @@ void recruiterBasicInformation(BuildContext context, ReqruiterProfile recruiter)
           builder: (context) =>
               RecruiterViewBasicInformation(recruiter: recruiter))); //navigate to view basic info page
 }
-
 
 void recruiterRoleInformation(BuildContext context, ReqruiterProfile recruiter) {
   //change to view page

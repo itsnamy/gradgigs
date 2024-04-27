@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/view/authentication/apl_signup.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_basic_information.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_supporting_documents.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_contact_details.dart';
+import 'package:gradgigs/view/user_profile/apl_view_profile/apl_view_acad_info.dart';
+import 'package:gradgigs/view/user_profile/apl_view_profile/apl_view_bank_details.dart';
+import 'package:gradgigs/view/user_profile/apl_view_profile/apl_view_basic_info.dart';
+import 'package:gradgigs/view/user_profile/apl_view_profile/apl_view_supporting_documents.dart';
+import 'package:gradgigs/view/user_profile/apl_view_profile/apl_view_contact_details.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -204,27 +205,27 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
 
 void applicantBasicInformation(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantBasicInformation(applicant: applicant)));
+      MaterialPageRoute(builder: (context) => ApplicantViewBasicInformation(applicant: applicant)));
 }
 
 void applicantAcademicInformation(BuildContext context, ApplicantProfile applicant) {
-  Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantAcademicInformation(applicant: applicant)));
+  // Navigator.push(context,
+  //     MaterialPageRoute(builder: (context) => ApplicantAcademicInformation(applicant: applicant)));
 }
 
 void applicantContactDetails(BuildContext context, ApplicantProfile applicant) {
-  Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantContactDetails(applicant: applicant)));
+  // Navigator.push(context,
+  //     MaterialPageRoute(builder: (context) => ApplicantContactDetails(applicant: applicant)));
 }
 
 void applicantBankDetails(BuildContext context, ApplicantProfile applicant) {
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => ApplicantBankDetails(applicant: applicant)));
+  // Navigator.push(
+  //     context, MaterialPageRoute(builder: (context) => ApplicantBankDetails(applicant: applicant)));
 }
 
 void applicantSupportingDocuments(BuildContext context, ApplicantProfile applicant) {
-  Navigator.push(context,
-      MaterialPageRoute(builder: (context) => ApplicantSupportingDocuments(applicant: applicant)));
+  // Navigator.push(context,
+  //     MaterialPageRoute(builder: (context) => ApplicantSupportingDocuments(applicant: applicant)));
 }
 
 void loginPage(BuildContext context, ApplicantProfile applicant) {
