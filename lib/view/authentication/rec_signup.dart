@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/model/req_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/authentication/login.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
+
+import '../user_profile/rec_create_profile/rec_basic_information.dart';
 
 class RecruiterSignupPage extends StatefulWidget {
   final String role;
@@ -12,6 +14,7 @@ class RecruiterSignupPage extends StatefulWidget {
 }
 
 class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
+  ReqruiterProfile recruiter = ReqruiterProfile();
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
@@ -26,19 +29,20 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
   void recruiterSignUp() {
     //get details recruiter
     String email = emailController.text;
-    String password = passwordController.text;
+    //String password = passwordController.text;
     String fullname = fullnameController.text;
-    String username = usernameController.text;
 
+    // create account in firebase
+
+    // save data to class
+    recruiter.setEmail = email;
+    recruiter.setFullname = fullname;
+    recruiter.setCategory = selectedCategory!;
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => RecruiterProfilePage(
-                email: email,
-                password: password,
-                fullName: fullname,
-                username: username,
-                selectedRole: selectedCategory)));
+            builder: (context) =>
+                RecruiterBasicInformation(recruiter: recruiter)));
   }
 
   @override
@@ -53,7 +57,7 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
             fontSize: 24,
           ),
         ),
-        toolbarHeight: 80,
+        toolbarHeight: 70,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(25),
@@ -244,37 +248,7 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
                                   Validator.validateName(value!),
                             ),
                           ),
-                          //-------------------------------------USERNAME INPUT---------------------------------//
-                          const SizedBox(
-                            width: 300,
-                            child: Text(
-                              "Username",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            child: TextFormField(
-                              controller: usernameController,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 0),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              validator: (value) =>
-                                  Validator.validateName(value!),
-                            ),
-                          ),
-                          //-------------------------------------ROLE INPUT---------------------------------//
+                          //-------------------------------------CATEGORY INPUT---------------------------------//
                           const SizedBox(
                             width: 300,
                             child: Text(
@@ -286,40 +260,41 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
                             ),
                           ),
                           Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              child: DropdownButtonFormField<String>(
-                                value: selectedCategory,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 0),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  hintText: "Please Choose a Category",
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: DropdownButtonFormField<String>(
+                              value: selectedCategory,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 0),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                items: ["Academician", "Organisation/Club"]
-                                    .map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedCategory = newValue;
-                                  });
-                                },
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please select a role';
-                                  }
-                                  return null; //if input
-                                },
-                              )),
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: "Please Choose a Category",
+                              ),
+                              items: ["Academician", "Non-Academician"]
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedCategory = newValue;
+                                });
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please select a role';
+                                }
+                                return null; //if input
+                              },
+                            ),
+                          ),
                           //-------------------------------------SIGN UP BUTTON---------------------------------//
                           Container(
                             padding: const EdgeInsets.symmetric(

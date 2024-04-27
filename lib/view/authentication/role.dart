@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'rec_signup.dart';
 import 'apl_signup.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
 
 class RoleSignUp extends StatelessWidget {
   const RoleSignUp({super.key});

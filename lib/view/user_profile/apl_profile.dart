@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
-import 'package:gradgigs/view/user_profile/apl_academic_information.dart';
-import 'package:gradgigs/view/user_profile/apl_bank_details.dart';
-import 'package:gradgigs/view/user_profile/apl_basic_information.dart';
-import 'package:gradgigs/view/user_profile/apl_supporting_documents.dart';
-import 'package:gradgigs/view/user_profile/apl_contact_details.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_basic_information.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_supporting_documents.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_contact_details.dart';
 
 // ignore_for_file: prefer_const_constructors
 
