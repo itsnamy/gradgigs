@@ -84,22 +84,6 @@ class _RecruiterBasicInformationState extends State<RecruiterBasicInformation> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(0, -1),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            'https://picsum.photos/seed/890/600',
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.none,
-                            alignment: Alignment(0, -1),
-                          ),
-                        ),
-                      ),
-                    ),
                     //----------------------------FULLNAME DISPLAY----------------------------------//
                     Row(
                       mainAxisSize: MainAxisSize.max,

@@ -9,7 +9,10 @@ import 'rec_view_profile/rec_view_basic_info.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterProfilePage extends StatefulWidget {
-  const RecruiterProfilePage({super.key, required ReqruiterProfile recruiter});
+
+  final ReqruiterProfile recruiter;
+
+  const RecruiterProfilePage({super.key, required this.recruiter});
 
   /* final String email;
   final String password;
@@ -71,31 +74,15 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(0, -1),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            'https://picsum.photos/seed/890/600',
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.none,
-                            alignment: Alignment(0, -1),
-                          ),
-                        ),
-                      ),
-                    ),
                     Text(
-                      'Full name',
+                      widget.recruiter.getFullname,
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.white,
                       ),
                     ),
                     Text(
-                      'Job reqruiter',
+                      'Job recruiter',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
