@@ -80,4 +80,45 @@ class Validator {
 
     return null; // Return null if the input is valid
   }
+
+  static String? validateUTMEmail(String email) {
+    RegExp emailRegex = RegExp(
+      r'^[\w-]+(\.[\w-]+)*@(?:utm\.my|graduate\.utm\.my)$',
+    );
+
+    if (email.isEmpty) {
+      return 'Please enter your email';
+    } else if (!emailRegex.hasMatch(email)) {
+      return 'Please enter a valid email';
+    }
+    return null;
+  }
+
+  static String? validateFaculty(String faculty){
+    if (faculty.isEmpty){
+      return "Please enter your faculty";
+    }
+    return null;
+  }
+
+  static String? validateClubAndOrg(String clubOrg){
+    if (clubOrg.isEmpty){
+      return "Please enter your faculty";
+    }
+    return null;
+  }
+
+  static String? validatePhoneNumber(String phoneNumber) {
+  RegExp phoneRegex = RegExp(
+    r'^[0-9+]{1,}[0-9\-]{3,15}$',
+  );
+
+  if (phoneNumber.isEmpty) {
+    return 'Please enter your phone number';
+  } else if (!phoneRegex.hasMatch(phoneNumber)) {
+    return 'Please enter a valid phone number';
+  }
+  return null;
+}
+
 }
