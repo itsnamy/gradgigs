@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/view/authentication/rec_signup.dart';
-import 'package:gradgigs/view/user_profile/rec_create_profile/rec_contact_details.dart';
+import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_contact_details.dart';
+import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_role_info.dart';
+
 
 import 'rec_view_profile/rec_view_basic_info.dart';
 
@@ -90,7 +92,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     ),
                     const SizedBox(height: 30),
                     TextButton(
-                      onPressed: () => recruiterBasicInformation(context),
+                        onPressed: () => recruiterBasicInformation(context, widget.recruiter),
                       child: const Text(
                         'Basic Information',
                         style: TextStyle(
@@ -101,7 +103,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     ),
                     Divider(),
                     TextButton(
-                      onPressed: () => recruiterRoleInformation(context),
+                      onPressed: () => recruiterRoleInformation(context, widget.recruiter),
                       child: const Text(
                         'Role Information',
                         style: TextStyle(
@@ -112,7 +114,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                     ),
                     Divider(),
                     TextButton(
-                      onPressed: () => recruiterContactDetails(context),
+                      onPressed: () => recruiterContactDetails(context, widget.recruiter),
                       child: const Text(
                         'Contact Details',
                         style: TextStyle(
@@ -205,24 +207,32 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
   }
 }
 
-void recruiterBasicInformation(BuildContext context) {
+void recruiterBasicInformation(BuildContext context, ReqruiterProfile recruiter) {
   Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) =>
-              RecruiterViewBasicInformation())); //navigate to view basic info page
+              RecruiterViewBasicInformation(recruiter: recruiter))); //navigate to view basic info page
 }
 
-void recruiterRoleInformation(BuildContext context) {
+
+void recruiterRoleInformation(BuildContext context, ReqruiterProfile recruiter) {
   //change to view page
-  //Navigator.push(
-  //    context, MaterialPageRoute(builder: (context) => RecruiterRoleInfo()));
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              RecruiterViewRoleInfo(recruiter: recruiter)));
 }
 
-void recruiterContactDetails(BuildContext context) {
+
+void recruiterContactDetails(BuildContext context, ReqruiterProfile recruiter) {
   //change to view page
-  //Navigator.push(context,
-  //    MaterialPageRoute(builder: (context) => RecruiterContactDetails()));
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              RecruiterViewContactDetails(recruiter: recruiter)));
 }
 
 void loginPage(BuildContext context) {
