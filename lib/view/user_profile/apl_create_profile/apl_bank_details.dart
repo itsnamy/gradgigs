@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantBankDetails extends StatefulWidget {

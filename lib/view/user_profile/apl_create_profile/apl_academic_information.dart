@@ -3,7 +3,7 @@ import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_supporting_documents.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_contact_details.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantAcademicInformation extends StatefulWidget {
@@ -40,7 +40,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
         context,
         MaterialPageRoute(
             builder: (context) =>
-                ApplicantSupportingDocuments(recruiter: widget.recruiter)));
+                ApplicantContactDetails(recruiter: widget.recruiter)));
 
   }
 
@@ -68,12 +68,7 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ApplicantProfilePage(),
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
       ),
