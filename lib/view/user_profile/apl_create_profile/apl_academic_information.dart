@@ -9,22 +9,22 @@ import 'package:gradgigs/view/user_profile/apl_create_profile/apl_contact_detail
 class ApplicantAcademicInformation extends StatefulWidget {
   final ApplicantProfile applicant;
   const ApplicantAcademicInformation({super.key, required this.applicant});
-  
+
   @override
   State<ApplicantAcademicInformation> createState() =>
       _ApplicantAcademicInformationState();
 }
 
-class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformation> {
-
+class _ApplicantAcademicInformationState
+    extends State<ApplicantAcademicInformation> {
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController utmMailController = TextEditingController();
-  final TextEditingController yearProgramController = TextEditingController(); 
+  final TextEditingController yearProgramController = TextEditingController();
   final TextEditingController facultyController = TextEditingController();
   final TextEditingController collegeController = TextEditingController();
 
-  applicantAcademicInfo(){
+  applicantAcademicInfo() {
     String utmMail = utmMailController.text;
     String yearProgram = yearProgramController.text;
     String faculty = facultyController.text;
@@ -178,22 +178,24 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                               child: TextFormField(
-                                  controller: yearProgramController,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 0),
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
+                                controller: yearProgramController,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                validator: (value) =>
+                                    Validator.validateYearProgramme(value!),
+                              ),
                             ),
                           ),
                         ),
@@ -224,22 +226,24 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                               child: TextFormField(
-                                  controller: facultyController,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 0),
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
+                                controller: facultyController,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                validator: (value) =>
+                                    Validator.validateFaculty(value!),
+                              ),
                             ),
                           ),
                         ),
@@ -270,22 +274,24 @@ class _ApplicantAcademicInformationState extends State<ApplicantAcademicInformat
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                               child: TextFormField(
-                                  controller: collegeController,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 0),
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
+                                controller: collegeController,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                validator: (value) =>
+                                    Validator.validateCollege(value!),
+                              ),
                             ),
                           ),
                         ),

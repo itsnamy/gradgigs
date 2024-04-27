@@ -94,31 +94,50 @@ class Validator {
     return null;
   }
 
-  static String? validateFaculty(String faculty){
-    if (faculty.isEmpty){
+  static String? validateFaculty(String faculty) {
+    if (faculty.isEmpty) {
       return "Please enter your faculty";
     }
     return null;
   }
 
-  static String? validateClubAndOrg(String clubOrg){
-    if (clubOrg.isEmpty){
+  static String? validateClubAndOrg(String clubOrg) {
+    if (clubOrg.isEmpty) {
       return "Please enter your club/organisation";
     }
     return null;
   }
 
   static String? validatePhoneNumber(String phoneNumber) {
-  RegExp phoneRegex = RegExp(
-    r'^[0-9+]{1,}[0-9\-]{3,15}$',
-  );
+    RegExp phoneRegex = RegExp(
+      r'^[0-9+]{1,}[0-9\-]{3,15}$',
+    );
 
-  if (phoneNumber.isEmpty) {
-    return 'Please enter your phone number';
-  } else if (!phoneRegex.hasMatch(phoneNumber)) {
-    return 'Please enter a valid phone number';
+    if (phoneNumber.isEmpty) {
+      return 'Please enter your phone number';
+    } else if (!phoneRegex.hasMatch(phoneNumber)) {
+      return 'Please enter a valid phone number';
+    }
+    return null;
   }
-  return null;
-}
 
+  static String? validateCollege(String college) {
+    if (college.isEmpty) {
+      return "Please enter your faculty";
+    }
+    return null;
+  }
+
+  static String? validateYearProgramme(String input) {
+    RegExp regex = RegExp(
+      r'^[1-5]/[A-Za-z]{4,5}$',
+    );
+
+    if (input.isEmpty) {
+      return 'Please enter your year/programme';
+    } else if (!regex.hasMatch(input)) {
+      return 'Please enter a valid year/programme format (e.g., 3/SECJH)';
+    }
+    return null;
+  }
 }
