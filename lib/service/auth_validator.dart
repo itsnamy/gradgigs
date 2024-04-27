@@ -103,7 +103,7 @@ class Validator {
 
   static String? validateClubAndOrg(String clubOrg){
     if (clubOrg.isEmpty){
-      return "Please enter your faculty";
+      return "Please enter your club/organisation";
     }
     return null;
   }

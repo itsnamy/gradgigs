@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/user_profile/rec_profile.dart';
+// ignore_for_file: prefer_const_constructors
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -19,9 +21,31 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    MaterialPageRoute route =
+        MaterialPageRoute(builder: (context) => RoleSignUp());
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign In"),
+        title: Center(
+          child: Text(
+            'Sign in',
+            textAlign: TextAlign.center, // Center the text
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+        ),
+        toolbarHeight: 90,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 15,
+        centerTitle: false,
       ),
       body: Form(
         key: _formkey,
@@ -77,24 +101,63 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    //action on press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 0.9),
-                      fontWeight: FontWeight.bold,
-                    ),
-                    backgroundColor: const Color.fromRGBO(22, 184, 184, 1),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                    ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            //   child: Center(
+            //     child: SizedBox(
+            //       width: 374, // Same width as the TextFormField
+            //       height: 52, // Same height as the TextFormField
+            //       child: ElevatedButton(
+            //         onPressed: () {
+            //           Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => const ApplicantProfilePage()),
+            //           );
+            //         },
+            //         style: ElevatedButton.styleFrom(
+            //           textStyle: const TextStyle(
+            //             color: Color.fromRGBO(255, 255, 255, 0.9),
+            //             fontWeight: FontWeight.bold,
+            //           ),
+            //           backgroundColor: const Color.fromRGBO(22, 184, 184, 1),
+            //           shape: const RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.all(Radius.circular(25)),
+            //           ),
+            //         ),
+            //         child: const Text('Log in'),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: 400,
+              child: ElevatedButton(
+                onPressed: () {
+                  applicantProfilePage(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color:Color(0xFF5C001F),width:1),
                   ),
-                  child: const Text('Sign up'),
+                  backgroundColor: Color(0xFF5C001F),
+                ),
+                child: const Column(
+                  children: [
+                    Text(
+                      'Log In',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Contrail One',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -148,4 +211,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+void applicantProfilePage(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
 }

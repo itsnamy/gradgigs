@@ -85,22 +85,7 @@ class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(0, -1),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            'https://picsum.photos/seed/890/600',
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.none,
-                            alignment: Alignment(0, -1),
-                          ),
-                        ),
-                      ),
-                    ),
+                    
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +94,7 @@ class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
-                            'Full Name',
+                            widget.recruiter.getFullname,
                             style:
                                 FlutterFlowTheme.of(context).titleLarge.override(
                                       fontFamily: 'Outfit',
