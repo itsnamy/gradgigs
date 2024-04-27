@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
-class RecruiterContactDetails extends StatefulWidget {
-  //const ApplicantAcademicInformation({super.key});
-  RecruiterContactDetails();
+class ApplicantSupportingDocuments extends StatefulWidget {
+  //const ApplicantSupportingDocuments({super.key});
+  ApplicantSupportingDocuments();
 
   final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
@@ -17,12 +16,6 @@ class RecruiterContactDetails extends StatefulWidget {
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue1;
-  FormFieldController<String>? dropDownValueController1;
-  // State field(s) for DropDown widget.
-  String? dropDownValue2;
-  FormFieldController<String>? dropDownValueController2;
 
   @override
   void initState(BuildContext context) {}
@@ -38,12 +31,13 @@ class RecruiterContactDetails extends StatefulWidget {
   }
 
   @override
-  State<RecruiterContactDetails> createState() =>
-      _RecruiterContactDetailsState();
+  State<ApplicantSupportingDocuments> createState() =>
+      _ApplicantSupportingDocumentsState();
 }
 
-class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
-  late RecruiterContactDetails _model;
+class _ApplicantSupportingDocumentsState
+    extends State<ApplicantSupportingDocuments> {
+  late ApplicantSupportingDocuments _model;
 
   String? selectedNationality;
 
@@ -51,7 +45,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
   void initState() {
     super.initState();
 
-    _model = RecruiterContactDetails();
+    _model = ApplicantSupportingDocuments();
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -72,7 +66,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Contact Details',
+          'Supporting Documents',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
@@ -94,7 +88,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const RecruiterProfilePage(),
+                builder: (context) => const ApplicantProfilePage(),
               ),
             );
           },
@@ -105,7 +99,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
           padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
           child: Center(
             child: Container(
-              height: 715,
+              height: 600,
               width: 450,
               decoration: BoxDecoration(
                 color: Color(0xFF5C001F),
@@ -150,7 +144,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                     ],
                   ),
 
-                  //----------------------------MOBILE NUMBER----------------------------------//
+                  //----------------------------RESUME ----------------------------------//
 
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -160,7 +154,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                         child: Text(
-                          'Mobile Number',
+                          'Resume',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -187,6 +181,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                               autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(
+                                labelText: 'Upload Resume',
                                 //labelStyle: TextStyle(color: Colors.white),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
@@ -233,8 +228,6 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 16, 16, 0),
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -251,7 +244,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                     ],
                   ),
 
-                  //----------------------------EMAIL----------------------------------//
+                  //----------------------------CERTIFICATIONS----------------------------------//
 
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -259,7 +252,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                         child: Text(
-                          'Email',
+                          'Certifications',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -270,7 +263,6 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                       ),
                     ],
                   ),
-
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -286,6 +278,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                               autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(
+                                labelText: 'Upload Certifications',
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -351,7 +344,6 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
 
                   //------------------------------BUTTONS---------------------------------//
 
-                  // Generated code for this Row Widget...
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -422,6 +414,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                       ),
                     ],
                   ),
+
                   SizedBox(height: 10),
 
                   //---------------------------------END---------------------------------//
