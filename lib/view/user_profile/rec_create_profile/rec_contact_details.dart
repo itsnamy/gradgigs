@@ -63,11 +63,9 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Center(
             child: Container(
-              height: 715,
-              width: 450,
               decoration: BoxDecoration(
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
@@ -112,9 +110,8 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                           child: Text(
                             'Mobile Number',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -155,47 +152,54 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                     //----------------------------EMAIL----------------------------------//
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Email',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Container(
-                                
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 12),
-                                width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Text(
-                                  widget.recruiter.getEmail,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Email',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: Text(
+                                        widget.recruiter.getEmail,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
