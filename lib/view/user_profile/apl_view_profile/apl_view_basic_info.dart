@@ -15,8 +15,8 @@ class ApplicantViewBasicInformation extends StatefulWidget {
       _ApplicantViewBasicInformationState();
 }
 
-class _ApplicantViewBasicInformationState extends State<ApplicantViewBasicInformation> {
-
+class _ApplicantViewBasicInformationState
+    extends State<ApplicantViewBasicInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,245 +55,291 @@ class _ApplicantViewBasicInformationState extends State<ApplicantViewBasicInform
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-              
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    //----------------------------FULLNAME DISPLAY----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            widget.applicant.getFullname,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                    //----------------------------USERNAME----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            'Username',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                    Row(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  //----------------------------FULLNAME DISPLAY----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                           width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
-                                ),
-                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.applicant.getUsername,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                    //----------------------------DATE OF BIRTH----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            'Date of Birth',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                    Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                           width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
-                                ),
-                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.applicant.getDOB,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                    //----------------------------NATIONALITY----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                          child: Text(
-                            'Nationality',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
-                                ),
-                            decoration: BoxDecoration(
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                        child: Text(
+                          widget.applicant.getFullname,
+                          style: TextStyle(
                               color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.applicant.getNationality,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          ),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
                   ),
-
-                    //----------------------------GENDER----------------------------------//
-
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                          child: Text(
-                            'Gender',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Row(
+                  //----------------------------USERNAME----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Username',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getUsername,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          child: Text(
-                            widget.applicant.getgender,
-                            style: TextStyle(color: Colors.black),
-                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  //----------------------------DATE OF BIRTH----------------------------------//
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Date of Birth',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getDOB,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
 
-                    //------------------------------BUTTONS---------------------------------//
+                  //----------------------------NATIONALITY----------------------------------//
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Nationality',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getNationality,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 
-                    // Container(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 20, vertical: 16),
-                    //   child: Center(
-                    //     child: SizedBox(
-                    //       height: 50,
-                    //       width: 250,
-                    //       child: ElevatedButton(
-                    //         onPressed: () {
-                    //           Navigator.pop(context);
-                    //         },
-                    //         style: ElevatedButton.styleFrom(
-                    //           textStyle: const TextStyle(
-                    //             fontWeight: FontWeight.bold,
-                    //           ),
-                    //           foregroundColor: Colors.black,
-                    //           backgroundColor:
-                    //               const Color.fromARGB(255, 228, 185, 112),
-                    //           shape: const RoundedRectangleBorder(
-                    //             borderRadius:
-                    //                 BorderRadius.all(Radius.circular(10)),
-                    //           ),
-                    //         ),
-                    //         child: const Text('Next'),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                  //----------------------------GENDER----------------------------------//
 
-                    SizedBox(height: 30),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Gender',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getgender,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 
-                    //---------------------------------END---------------------------------//
-                  ],
-                ),
+                  //------------------------------BUTTONS---------------------------------//
+
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       horizontal: 20, vertical: 16),
+                  //   child: Center(
+                  //     child: SizedBox(
+                  //       height: 50,
+                  //       width: 250,
+                  //       child: ElevatedButton(
+                  //         onPressed: () {
+                  //           Navigator.pop(context);
+                  //         },
+                  //         style: ElevatedButton.styleFrom(
+                  //           textStyle: const TextStyle(
+                  //             fontWeight: FontWeight.bold,
+                  //           ),
+                  //           foregroundColor: Colors.black,
+                  //           backgroundColor:
+                  //               const Color.fromARGB(255, 228, 185, 112),
+                  //           shape: const RoundedRectangleBorder(
+                  //             borderRadius:
+                  //                 BorderRadius.all(Radius.circular(10)),
+                  //           ),
+                  //         ),
+                  //         child: const Text('Next'),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+
+                  SizedBox(height: 30),
+
+                  //---------------------------------END---------------------------------//
+                ],
               ),
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
