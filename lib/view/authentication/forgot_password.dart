@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
+import 'package:gradgigs/service/auth_validator.dart';
 
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -11,6 +12,9 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
+
+  final _formkey = GlobalKey<FormState>();
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -26,15 +30,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               child: TextFormField(
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: "Please enter your email"),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null; //if input
-                },
+                validator: (value) =>
+                    Validator.validateEmail(value!),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SizedBox(
               width: 400,
               child: ElevatedButton(
@@ -51,7 +51,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color:Color(0xFF5C001F),width:1),
+                     side: const BorderSide(color:Color(0xFF5C001F),width:1),
                   ),
                   backgroundColor: Color(0xFF5C001F),
                 ),

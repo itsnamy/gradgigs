@@ -4,6 +4,7 @@ import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/user_profile/rec_profile.dart';
+import 'package:gradgigs/service/auth_validator.dart';
 // ignore_for_file: prefer_const_constructors
 
 class LoginPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool passToggle = true;
 
   @override
   Widget build(BuildContext context) {
@@ -58,30 +60,28 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 controller: emailController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Email"),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null; //if input
-                },
+                    border: OutlineInputBorder(), 
+                    labelText: "Email",
+                    prefixIcon: Icon(Icons.email),
+                    ),
+                    validator: (value) =>
+                      Validator.validateEmail(value!),                                                                
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
-              child: TextFormField(
+              child: 
+              TextFormField(
                 controller: passwordController,
-                obscureText: true,
+                obscureText: passToggle,
+                obscuringCharacter: '*',
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Password",
+                  prefixIcon: Icon(Icons.lock),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null; //if input
-                },
+                validator: (value) =>
+                      Validator.validatePassword(value!),               
               ),
             ),
             TextButton(
@@ -134,9 +134,47 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               width: 400,
               child: ElevatedButton(
-                onPressed: () {
-                  applicantProfilePage(context);
-                },
+               onPressed: () {
+                // Define the valid email and password combinations
+                List<Map<String, String>> validCredentials = [
+                  {'email': 'ahmad@graduate.utm.my', 'password': '123456'},
+                  {'email': 'amir@utm.my', 'password': '654321'},
+                ];
+
+                // Check if entered email and password match any valid combination
+                bool isValidCredentials = false;
+                for (var credentials in validCredentials) {
+                  if (emailController.text == credentials['email'] &&
+                      passwordController.text == credentials['password']) {
+                    isValidCredentials = true;
+                    break;
+                  }
+                }
+
+              if (isValidCredentials) {
+                // Navigate to the next page (applicant profile page)
+                applicantProfilePage(context);
+              } else {
+                // Show error message or handle invalid login attempt
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Invalid Credentials'),
+                      content: Text('Please enter valid email and password.'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -215,3 +253,7 @@ class _LoginPageState extends State<LoginPage> {
 void applicantProfilePage(BuildContext context){
   Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
 }
+
+//void recruiterProfilePage(BuildContext context){
+//  Navigator.push(context, MaterialPageRoute(builder: (context) => RecruiterProfilePage()));
+//}
