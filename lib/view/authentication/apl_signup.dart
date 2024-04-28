@@ -169,7 +169,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                 ),
                               ),
                               validator: (value) =>
-                                  Validator.validateUTMEmail(value!),
+                                  Validator.validatePassword(value!),
                             ),
                           ),
                           //-------------------------------------CONFIRM PASSWORD INPUT---------------------------------//

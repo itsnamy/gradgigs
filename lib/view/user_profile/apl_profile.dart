@@ -69,22 +69,6 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Align(
-                    alignment: AlignmentDirectional(0, -1),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          'https://picsum.photos/seed/890/600',
-                          width: 150,
-                          height: 150,
-                          fit: BoxFit.none,
-                          alignment: Alignment(0, -1),
-                        ),
-                      ),
-                    ),
-                  ),
                   Text(
                     'Full name',
                     style: TextStyle(
@@ -209,23 +193,23 @@ void applicantBasicInformation(BuildContext context, ApplicantProfile applicant)
 }
 
 void applicantAcademicInformation(BuildContext context, ApplicantProfile applicant) {
-  // Navigator.push(context,
-  //     MaterialPageRoute(builder: (context) => ApplicantAcademicInformation(applicant: applicant)));
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => ApplicantViewAcademicInformation(applicant: applicant)));
 }
 
 void applicantContactDetails(BuildContext context, ApplicantProfile applicant) {
-  // Navigator.push(context,
-  //     MaterialPageRoute(builder: (context) => ApplicantContactDetails(applicant: applicant)));
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => ApplicantViewContactDetails(applicant: applicant)));
 }
 
 void applicantBankDetails(BuildContext context, ApplicantProfile applicant) {
-  // Navigator.push(
-  //     context, MaterialPageRoute(builder: (context) => ApplicantBankDetails(applicant: applicant)));
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => ApplicantViewBankDetails(applicant: applicant)));
 }
 
 void applicantSupportingDocuments(BuildContext context, ApplicantProfile applicant) {
-  // Navigator.push(context,
-  //     MaterialPageRoute(builder: (context) => ApplicantSupportingDocuments(applicant: applicant)));
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => ApplicantViewSupportingDocuments(applicant: applicant)));
 }
 
 void loginPage(BuildContext context, ApplicantProfile applicant) {
