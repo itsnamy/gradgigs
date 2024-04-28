@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/apl_profile_model.dart';
+
 
 
 class ForgotPasswordPage extends StatefulWidget {
+
+  // final ApplicantProfile? applicant;
+  // final ReqruiterProfile? recruiter;
+
   const ForgotPasswordPage({super.key});
+
+    // const ForgotPasswordPage.forRecruiter({super.key, required this.applicant}) : recruiter = null;
+
+    // const ForgotPasswordPage.forApplicant({super.key, required this.recruiter}) : applicant = null;
+
 
   @override
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
@@ -18,9 +31,33 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forget Password"),
+        title: const Text(
+          'Forgot Password',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        toolbarHeight: 70,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 5,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(
+                context); //change to navigator.pop(). go to previous page
+          },
+        ),
       ),
       body: Form(
+        key: _formkey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +75,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             SizedBox(
               width: 400,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () { 
+
+                  // if (_formkey.currentState!.validate()) {
+                  //               loginPage(context);
+                  //             } else {
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                   const SnackBar(
+                  //                       content: Text('Please fill input')));
+                  //             }
+
                   Navigator.push(
                   context,
                   MaterialPageRoute(
