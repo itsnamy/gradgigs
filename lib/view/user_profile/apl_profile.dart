@@ -214,5 +214,5 @@ void applicantSupportingDocuments(BuildContext context, ApplicantProfile applica
 
 void loginPage(BuildContext context, ApplicantProfile applicant) {
   Navigator.push(context,
-      MaterialPageRoute(builder: (context) => LoginPage(title: 'Sign In')));
+      MaterialPageRoute(builder: (context) => LoginPage.forApplicant(title: 'Sign In', applicant : applicant)));
 }

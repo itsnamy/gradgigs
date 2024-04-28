@@ -31,8 +31,10 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
     String email = emailController.text;
     //String password = passwordController.text;
     String fullname = fullnameController.text;
+    String password = passwordController.text;
 
     //save data to class
+    applicant.setPassword = password;
     applicant.setEmail = email;
     applicant.setFullname = fullname;
 

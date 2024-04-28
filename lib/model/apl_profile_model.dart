@@ -1,8 +1,9 @@
-class ApplicantProfile{
+class ApplicantProfile {
   String role = "applicant";
 
   late String email; // - sign up page
   late String phone; // - contact details page
+  late String password;
 
   late String category; // tukar faculty -sign up page
   late String username; // - sign up page
@@ -20,9 +21,28 @@ class ApplicantProfile{
   late String bankHolderName; // - bank details page
   late String bankNumber; // - bank details page
 
-  // tiada lagi 
+  // tiada lagi
   // resume - supporting documents page
   // certificates - supporting documents page
+
+  ApplicantProfile() {
+    setEmail = "example@utm.my";
+    setPhone = "123456789";
+    setPassword = "password";
+    setCategory = "Academician"; // or "Non-Academician"
+    setUsername = "username";
+    setFullname = "Ali bin Abu";
+    setDOB = "01/01/2000";
+    setGender = "Male";
+    setNationality = "Nationality";
+    setUtmMail = "mail@utm.my";
+    setFaculty = "Faculty";
+    setyearProgram = "Program";
+    setCollege = "College";
+    setBankName = "Bank";
+    setBankHolderName = "Holder";
+    setBankNumber = "1234567890";
+  }
 
   //-------------------email---------------------//
   set setEmail(String email) {
@@ -30,6 +50,13 @@ class ApplicantProfile{
   }
 
   String get getEmail => email;
+
+  //-------------------email---------------------//
+  set setPassword(String password) {
+    this.password = password;
+  }
+
+  String get getPassword => password;
 
   //-------------------email---------------------//
   set setPhone(String phone) {
@@ -147,5 +174,4 @@ class ApplicantProfile{
   }
 
   String get getBankNumber => bankNumber;
-
 }
