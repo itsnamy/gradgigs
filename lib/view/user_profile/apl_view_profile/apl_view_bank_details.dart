@@ -76,44 +76,54 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                     ),
                     //----------------------------BANK NAME----------------------------------//
                     Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: const [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            'Bank Name',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                           width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Bank Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.applicant.getBankName,
-                            style: TextStyle(color: Colors.black),
-                          ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getBankName,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -121,42 +131,54 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                   ),
                     //----------------------------BANK ACCOUNT HOLDER NAME----------------------------------//
                     Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            'Bank Account Holder Name',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                           width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Bank Account Holder Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.applicant.getBankHolderName,
-                            style: TextStyle(color: Colors.black),
-                          ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getBankHolderName,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -165,41 +187,54 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
 
                     //----------------------------BANK ACCOUNT NUMBER----------------------------------//
                     Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                          child: Text(
-                            'Bank Account Number',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: Align(
-                          alignment: AlignmentDirectional(0, -1),
-                          child: Container(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            width: double.infinity,
-                                //width: MediaQuery.of(context).size.width-64,
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Bank Account Number',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.applicant.getBankNumber,
-                            style: TextStyle(color: Colors.black),
-                          ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getBankNumber,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
