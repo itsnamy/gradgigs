@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 // ignore_for_file: prefer_const_constructors
 
@@ -23,15 +21,14 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    MaterialPageRoute route =
-        MaterialPageRoute(builder: (context) => RoleSignUp());
+    //MaterialPageRoute route =
+    //    MaterialPageRoute(builder: (context) => RoleSignUp());
 
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text(
             'Sign in',
-            textAlign: TextAlign.center, // Center the text
             style: TextStyle(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.bold,
@@ -39,15 +36,16 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-        toolbarHeight: 90,
+        toolbarHeight: 80,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(25),
             bottomLeft: Radius.circular(25),
           ),
         ),
-        elevation: 15,
-        centerTitle: false,
+        elevation: 5,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Form(
         key: _formkey,
@@ -55,23 +53,29 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              child: Image(
+                image: AssetImage('assets/gradgigs_logo.png'),
+                width: 244,
+                height: 68,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               child: TextFormField(
                 controller: emailController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), 
-                    labelText: "Email",
-                    prefixIcon: Icon(Icons.email),
-                    ),
-                    validator: (value) =>
-                      Validator.validateEmail(value!),                                                                
+                  border: OutlineInputBorder(),
+                  labelText: "Email",
+                  prefixIcon: Icon(Icons.email),
+                ),
+                validator: (value) => Validator.validateEmail(value!),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
-              child: 
-              TextFormField(
+              child: TextFormField(
                 controller: passwordController,
                 obscureText: passToggle,
                 obscuringCharacter: '*',
@@ -80,8 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: "Password",
                   prefixIcon: Icon(Icons.lock),
                 ),
-                validator: (value) =>
-                      Validator.validatePassword(value!),               
+                validator: (value) => Validator.validatePassword(value!),
               ),
             ),
             TextButton(
@@ -96,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text(
                 'Forgot Password?',
                 style: TextStyle(
-                  color: Color.fromRGBO(48, 63, 159, 1),
+                  color: Color.fromARGB(255, 91, 0, 30),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -131,74 +134,86 @@ class _LoginPageState extends State<LoginPage> {
             //   ),
             // ),
             SizedBox(height: 10),
-            SizedBox(
-              width: 400,
-              child: ElevatedButton(
-               onPressed: () {
-                // Define the valid email and password combinations
-                List<Map<String, String>> validCredentials = [
-                  {'email': 'ahmad@graduate.utm.my', 'password': '123456'},
-                  {'email': 'amir@utm.my', 'password': '654321'},
-                ];
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 400,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Define the valid email and password combinations
+                      List<Map<String, String>> validCredentials = [
+                        {
+                          'email': 'ahmad@graduate.utm.my',
+                          'password': '123456'
+                        },
+                        {'email': 'amir@utm.my', 'password': '654321'},
+                      ];
 
-                // Check if entered email and password match any valid combination
-                bool isValidCredentials = false;
-                for (var credentials in validCredentials) {
-                  if (emailController.text == credentials['email'] &&
-                      passwordController.text == credentials['password']) {
-                    isValidCredentials = true;
-                    break;
-                  }
-                }
+                      // Check if entered email and password match any valid combination
+                      bool isValidCredentials = false;
+                      for (var credentials in validCredentials) {
+                        if (emailController.text == credentials['email'] &&
+                            passwordController.text ==
+                                credentials['password']) {
+                          isValidCredentials = true;
+                          break;
+                        }
+                      }
 
-              if (isValidCredentials) {
-                // Navigate to the next page (applicant profile page)
-                applicantProfilePage(context);
-              } else {
-                // Show error message or handle invalid login attempt
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Invalid Credentials'),
-                      content: Text('Please enter valid email and password.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
+                      if (isValidCredentials) {
+                        // Navigate to the next page (applicant profile page)
+                        applicantProfilePage(context);
+                      } else {
+                        // Show error message or handle invalid login attempt
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Invalid Credentials'),
+                              content: Text(
+                                  'Please enter valid email and password.'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
                           },
-                          child: Text('OK'),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      //padding:
+                      //    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Color(0xFF5C001F), width: 1),
+                      ),
+                      backgroundColor: Color(0xFF5C001F),
+                    ),
+                    child: const Column(
+                      children: [
+                        Text(
+                          'Log In',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Contrail One',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ],
-                    );
-                  },
-                );
-              }
-            },
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color:Color(0xFF5C001F),width:1),
-                  ),
-                  backgroundColor: Color(0xFF5C001F),
-                ),
-                child: const Column(
-                  children: [
-                    Text(
-                      'Log In',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Contrail One',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
               child: Row(
@@ -237,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         "Sign up",
                         style: TextStyle(
-                          color: Color.fromRGBO(22, 184, 184, 11),
+                          color: Color.fromARGB(255, 91, 0, 30),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -250,7 +265,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-void applicantProfilePage(BuildContext context){
+
+void applicantProfilePage(BuildContext context) {
   // Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
 }
 

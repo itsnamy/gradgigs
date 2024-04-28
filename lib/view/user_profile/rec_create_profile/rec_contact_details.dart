@@ -174,13 +174,13 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                               ),
                               SizedBox(height: 8),
                               Container(
-                                
                                 padding: EdgeInsets.symmetric(
                                     vertical: 8, horizontal: 12),
                                 width: double.infinity,
                                 //width: MediaQuery.of(context).size.width-64,
                                 constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                                  maxWidth: MediaQuery.of(context).size.width -
+                                      50, // Width of the screen minus padding
                                 ),
                                 decoration: BoxDecoration(
                                   color: Colors.white,

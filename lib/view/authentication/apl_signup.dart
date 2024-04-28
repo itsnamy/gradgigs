@@ -3,7 +3,6 @@ import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_basic_information.dart';
 import '../../service/auth_validator.dart';
-import '../user_profile/apl_profile.dart';
 
 class ApplicantSignupPage extends StatefulWidget {
   final String role;
