@@ -60,7 +60,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
           child: Center(
               child: Column(children: [
             Container(
-              height: 550,
+              height: 450,
               width: 400,
               decoration: BoxDecoration(
                 color: Color(0xFF5C001F),
@@ -70,7 +70,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Full name',
+                    widget.applicant.fullname,
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,

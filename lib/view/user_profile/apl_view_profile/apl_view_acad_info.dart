@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
-import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantViewAcademicInformation extends StatefulWidget {
@@ -11,15 +8,14 @@ class ApplicantViewAcademicInformation extends StatefulWidget {
   const ApplicantViewAcademicInformation({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewAcademicInformation> createState() =>
-      _ApplicantViewAcademicInformationState();
+  State<ApplicantViewAcademicInformation> createState() => _ApplicantViewAcademicInformationState();
 }
 
 class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademicInformation> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: const Text(
           'Academic information',
@@ -46,7 +42,8 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
           },
         ),
       ),
-      body: SingleChildScrollView(
+
+       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Center(
@@ -174,7 +171,7 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
                           child: Text(
-                            'Nationality',
+                            'Faculty',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -218,7 +215,7 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
                           child: Text(
-                            'Gender',
+                            'Collegge',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -256,36 +253,36 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
 
                     //------------------------------BUTTONS---------------------------------//
 
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 16),
-                      child: Center(
-                        child: SizedBox(
-                          height: 50,
-                          width: 250,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                              foregroundColor: Colors.black,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 228, 185, 112),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                            ),
-                            child: const Text('Next'),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 20, vertical: 16),
+                    //   child: Center(
+                    //     child: SizedBox(
+                    //       height: 50,
+                    //       width: 250,
+                    //       child: ElevatedButton(
+                    //         onPressed: () {
+                    //           Navigator.pop(context);
+                    //         },
+                    //         style: ElevatedButton.styleFrom(
+                    //           textStyle: const TextStyle(
+                    //             fontWeight: FontWeight.bold,
+                    //           ),
+                    //           foregroundColor: Colors.black,
+                    //           backgroundColor:
+                    //               const Color.fromARGB(255, 228, 185, 112),
+                    //           shape: const RoundedRectangleBorder(
+                    //             borderRadius:
+                    //                 BorderRadius.all(Radius.circular(10)),
+                    //           ),
+                    //         ),
+                    //         child: const Text('Next'),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
 
-                    SizedBox(height: 10),
+                    SizedBox(height: 30),
 
                     //---------------------------------END---------------------------------//
                   ],
@@ -293,7 +290,10 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
               ),
             ),
           ),
-        ),
-      );
+        ),      
+
+    );
   }
+
+  
 }

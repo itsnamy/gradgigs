@@ -59,7 +59,7 @@ class _ApplicantSupportingDocumentsState
           padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
           child: Center(
             child: Container(
-              height: 715,
+              height: 500,
               width: 450,
               decoration: BoxDecoration(
                 color: Color(0xFF5C001F),
@@ -70,6 +70,8 @@ class _ApplicantSupportingDocumentsState
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    //----------------------------FULLNAME DISPLAY----------------------------------//
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -80,13 +82,10 @@ class _ApplicantSupportingDocumentsState
                               EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
                             widget.applicant.getFullname,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0,
-                                  color: Colors.white,
-                                ),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
