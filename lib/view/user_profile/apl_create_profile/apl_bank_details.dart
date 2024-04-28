@@ -28,7 +28,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
 
     widget.applicant.setBankName = bankName;
     widget.applicant.setBankHolderName = bankHolderName;
-    widget.applicant.bankName = bankNumber;
+    widget.applicant.bankNumber = bankNumber;
 
     Navigator.push(
         context,

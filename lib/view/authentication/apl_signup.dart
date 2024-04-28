@@ -30,8 +30,10 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
     String email = emailController.text;
     //String password = passwordController.text;
     String fullname = fullnameController.text;
+    String password = passwordController.text;
 
     //save data to class
+    applicant.setPassword = password;
     applicant.setEmail = email;
     applicant.setFullname = fullname;
 
@@ -168,7 +170,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                 ),
                               ),
                               validator: (value) =>
-                                  Validator.validateUTMEmail(value!),
+                                  Validator.validatePassword(value!),
                             ),
                           ),
                           //-------------------------------------CONFIRM PASSWORD INPUT---------------------------------//

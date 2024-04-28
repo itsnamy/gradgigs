@@ -112,15 +112,11 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                               EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
                             'Mobile Number',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ],
                     ),
-
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -145,60 +141,71 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                                   fillColor: Colors.white,
                                 ),
                                 validator: (value) =>
-                                    Validator.validatePhoneNumber(value!),
+                                    Validator.validateName(value!),
+                                //    textController1Validator.asValidator(context),
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-
-                    //----------------------------EMAIL----------------------------------//
+                    
+                    //----------------------------VIEW EMAIL----------------------------------//
+                   
                     Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Email',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 8, horizontal: 12),
-                                constraints: BoxConstraints(
-                                  maxWidth: MediaQuery.of(context).size.width -
-                                      52, // Width of the screen minus padding
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Text(
-                                  widget.applicant.getEmail,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Email',
                                   style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                                    color: Colors.white,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                            ],
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: Text(
+                                      widget.applicant.getEmail,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
 
                     //------------------------------BUTTONS---------------------------------//
 

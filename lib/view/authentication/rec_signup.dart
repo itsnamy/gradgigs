@@ -31,11 +31,13 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
     String email = emailController.text;
     //String password = passwordController.text;
     String fullname = fullnameController.text;
+    String password = passwordController.text;
 
     // create account in firebase
 
     // save data to class
     recruiter.setEmail = email;
+    recruiter.setPassword = password;
     recruiter.setFullname = fullname;
     recruiter.setCategory = selectedCategory!;
     Navigator.push(

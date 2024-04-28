@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/model/req_profile_model.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
@@ -7,7 +10,26 @@ import 'package:gradgigs/service/auth_validator.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
-  const LoginPage({super.key, required this.title});
+  final ApplicantProfile? applicant;
+  final ReqruiterProfile? recruiter;
+
+  // Constructor for neither
+  const LoginPage({Key? key, required this.title})
+      : applicant = null,
+        recruiter = null,
+        super(key: key);
+
+  // Constructor for Applicant
+  const LoginPage.forApplicant(
+      {Key? key, required this.title, required this.applicant})
+      : recruiter = null,
+        super(key: key);
+
+  // Constructor for Applicant
+  const LoginPage.forRecruiter(
+      {Key? key, required this.title, required this.recruiter})
+      : applicant = null,
+        super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,6 +41,9 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   bool passToggle = true;
 
+  ApplicantProfile applicantDefault = ApplicantProfile();
+  ReqruiterProfile recruiterDefault = ReqruiterProfile();
+
   @override
   Widget build(BuildContext context) {
     //MaterialPageRoute route =
@@ -26,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(
           child: Text(
             'Sign in',
@@ -61,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 68,
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               child: TextFormField(
@@ -134,86 +161,95 @@ class _LoginPageState extends State<LoginPage> {
             //   ),
             // ),
             SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Center(
-                child: SizedBox(
-                  height: 50,
-                  width: 400,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Define the valid email and password combinations
-                      List<Map<String, String>> validCredentials = [
-                        {
-                          'email': 'ahmad@graduate.utm.my',
-                          'password': '123456'
-                        },
-                        {'email': 'amir@utm.my', 'password': '654321'},
-                      ];
+            SizedBox(
+              width:
+                  //width: MediaQuery.of(context).size.width-64,
+                  MediaQuery.of(context).size.width -
+                      50, // Width of the screen minus padding
 
-                      // Check if entered email and password match any valid combination
-                      bool isValidCredentials = false;
-                      for (var credentials in validCredentials) {
-                        if (emailController.text == credentials['email'] &&
-                            passwordController.text ==
-                                credentials['password']) {
-                          isValidCredentials = true;
-                          break;
-                        }
-                      }
+              child: ElevatedButton(
+                onPressed: () {
+                  bool signedUp = false;
 
-                      if (isValidCredentials) {
-                        // Navigate to the next page (applicant profile page)
-                        applicantProfilePage(context);
-                      } else {
-                        // Show error message or handle invalid login attempt
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Invalid Credentials'),
-                              content: Text(
-                                  'Please enter valid email and password.'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      //padding:
-                      //    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(color: Color(0xFF5C001F), width: 1),
-                      ),
-                      backgroundColor: Color(0xFF5C001F),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          'Log In',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Contrail One',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
+                  if (widget.applicant != null) {
+                    if (widget.applicant!.getEmail == emailController.text &&
+                        widget.applicant!.getPassword ==
+                            passwordController.text) {
+                      ApplicantProfile applicantNotNull = widget.applicant!;
+                      signedUp = true;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ApplicantProfilePage(applicant: applicantNotNull),
                         ),
-                      ],
-                    ),
+                      );
+                    }
+                  }
+
+                  if (widget.recruiter != null) {
+                    if (widget.recruiter!.getEmail == emailController.text &&
+                        widget.recruiter!.getPassword ==
+                            passwordController.text) {
+                      ReqruiterProfile recruiterNotNull = widget.recruiter!;
+                      signedUp = true;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              RecruiterProfilePage(recruiter: recruiterNotNull),
+                        ),
+                      );
+                    }
+                  }
+
+                  if (signedUp == false) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Invalid Credentials'),
+                          content:
+                              Text('Please enter valid email and password.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: Color(0xFF5C001F), width: 1),
                   ),
+                  backgroundColor: Color(0xFF5C001F),
+                ),
+                child: const Column(
+                  children: [
+                    Text(
+                      'Log In',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Contrail One',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 25),
               child: Row(
@@ -266,8 +302,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-void applicantProfilePage(BuildContext context) {
-  // Navigator.push(context, MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
+void applicantProfilePage(BuildContext context, ApplicantProfile applicant) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ApplicantProfilePage(applicant: applicant)));
 }
 
 //void recruiterProfilePage(BuildContext context){

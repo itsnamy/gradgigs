@@ -1,7 +1,10 @@
+import 'package:gradgigs/model/apl_profile_model.dart';
+
 class ReqruiterProfile {
   String role = "recruiter";
   late String email;
   late String phone;
+  late String password;
 
   late String category;
   late String username;
@@ -15,6 +18,22 @@ class ReqruiterProfile {
   late String orgName;
   late String position;
 
+  ReqruiterProfile(){
+    email = "recruiter@utm.my";
+    phone = "0131013131";
+    password = "password";
+    category = 'Academician';
+    username = 'Umar123';
+    fullname = 'Umar bin Ali';
+    dob = '03/02/2000';
+    gender = 'Male';
+    nationality = 'Malaysia';
+    utmMail = 'recruiterUTM@utm.my';
+    faculty = 'Faculty of Computing';
+    orgName = 'Organization';
+    position = 'Position';
+  }
+
   //-------------------email---------------------//
   set setEmail(String email) {
     this.email = email;
@@ -23,6 +42,13 @@ class ReqruiterProfile {
   String get getEmail => email;
 
   //-------------------email---------------------//
+  set setPassword(String password) {
+    this.password = password;
+  }
+
+  String get getPassword => password;
+
+  //-------------------phone---------------------//
   set setPhone(String phone) {
     this.phone = phone;
   }
