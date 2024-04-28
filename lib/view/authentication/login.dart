@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
 class LoginPage extends StatefulWidget {
@@ -14,22 +15,19 @@ class LoginPage extends StatefulWidget {
   final ReqruiterProfile? recruiter;
 
   // Constructor for neither
-  const LoginPage({Key? key, required this.title})
+  const LoginPage({super.key, required this.title})
       : applicant = null,
-        recruiter = null,
-        super(key: key);
+        recruiter = null;
 
   // Constructor for Applicant
   const LoginPage.forApplicant(
-      {Key? key, required this.title, required this.applicant})
-      : recruiter = null,
-        super(key: key);
+      {super.key, required this.title, required this.applicant})
+      : recruiter = null;
 
   // Constructor for Applicant
   const LoginPage.forRecruiter(
-      {Key? key, required this.title, required this.recruiter})
-      : applicant = null,
-        super(key: key);
+      {super.key, required this.title, required this.recruiter})
+      : applicant = null;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -71,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
         elevation: 5,
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Form(
         key: _formkey,
