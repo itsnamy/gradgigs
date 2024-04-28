@@ -172,26 +172,46 @@ class _LoginPageState extends State<LoginPage> {
 
               child: ElevatedButton(
                 onPressed: () {
-                  if (applicantDefault.getEmail == emailController.text &&
-                      applicantDefault.getPassword == passwordController.text) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ApplicantProfilePage(applicant: applicantDefault),
-                      ),
-                    );
-                  } else if (recruiterDefault.getEmail ==
-                          emailController.text &&
-                      recruiterDefault.getPassword == passwordController.text) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            RecruiterProfilePage(recruiter: recruiterDefault),
-                      ),
-                    );
-                  } else {
+
+                  bool signedUp = false;
+
+                  if (widget.applicant != null) {
+                    if (widget.applicant!.getEmail == emailController.text &&
+                        widget.applicant!.getPassword ==
+                            passwordController.text) {
+                      ApplicantProfile applicantNotNull = widget.applicant!;
+                      signedUp = true;
+              
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ApplicantProfilePage(applicant: applicantNotNull),
+                        ),
+                      );
+                    }
+                  }
+
+                  if (widget.recruiter != null) {
+                    if (widget.recruiter!.getEmail == emailController.text &&
+                        widget.recruiter!.getPassword ==
+                            passwordController.text) {
+                      ReqruiterProfile recruiterNotNull = widget.recruiter!;
+                      signedUp = true;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              RecruiterProfilePage(recruiter: recruiterNotNull),
+                        ),
+                      );
+                    }
+                  } 
+                  
+                  
+                  if (signedUp == false) {
                     showDialog(
                       context: context,
                       builder: (context) {

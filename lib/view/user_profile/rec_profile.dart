@@ -236,7 +236,7 @@ void recruiterContactDetails(BuildContext context, ReqruiterProfile recruiter) {
 }
 
 void loginPage(BuildContext context, ReqruiterProfile recruiter) {
-  Navigator.push(
+  Navigator.pushReplacement(
       context,
       MaterialPageRoute(
           builder: (context) => LoginPage.forRecruiter(

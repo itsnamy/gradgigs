@@ -78,7 +78,7 @@ class _RecruiterViewContactDetailsState
                     ],
                   ),
 
-                  if (widget.recruiter.checkIfAcademician())
+                 
                     Column(
                       children: [
                         //----------------------------MOBILE NUMBER----------------------------------//
