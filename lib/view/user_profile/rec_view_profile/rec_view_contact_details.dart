@@ -1,38 +1,23 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_supporting_documents.dart';
-import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantContactDetails extends StatefulWidget {
-  
-  final ApplicantProfile applicant;
-  const ApplicantContactDetails({super.key, required this.applicant});
+class RecruiterViewContactDetails extends StatefulWidget {
+  final ReqruiterProfile recruiter;
+  RecruiterViewContactDetails({super.key, required this.recruiter});
 
   @override
-  State<ApplicantContactDetails> createState() =>
-      _ApplicantContactDetailsState();
+  State<RecruiterViewContactDetails> createState() =>
+      _RecruiterViewContactDetailsState();
 }
 
-class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
-
-  final _formkey = GlobalKey<FormState>();
-
-  final TextEditingController phoneController = TextEditingController();
-
-  applicantContactInfo() {
-    String phone = phoneController.text;
-
-    widget.applicant.setPhone = phone;
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-              ApplicantSupportingDocuments(applicant: widget.applicant)));
-  }
+class _RecruiterViewContactDetailsState extends State<RecruiterViewContactDetails> {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +58,7 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Form(
-                key: _formkey,
+              
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -87,7 +71,7 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
-                            widget.applicant.getFullname,
+                            widget.recruiter.getFullname,
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
@@ -122,36 +106,37 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                     ),
 
                     Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional(0, -1),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                              child: TextFormField(
-                                controller: phoneController,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 0),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, -1),
+                          child: Container(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                           width: double.infinity,
+                                //width: MediaQuery.of(context).size.width-64,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
                                 ),
-                                validator: (value) =>
-                                    Validator.validatePhoneNumber(value!),
-                              ),
-                            ),
+                           decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.white,),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            widget.recruiter.getPhone,
+                            style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                          ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
 
                     //----------------------------EMAIL----------------------------------//
                     Row(
@@ -175,18 +160,20 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                               ),
                               SizedBox(height: 8),
                               Container(
+                                width: 350,
                                 padding: EdgeInsets.symmetric(
                                     vertical: 8, horizontal: 12),
                                 constraints: BoxConstraints(
                                   maxWidth: MediaQuery.of(context).size.width -
                                       52, // Width of the screen minus padding
                                 ),
+                                
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Text(
-                                  widget.applicant.getEmail,
+                                  widget.recruiter.getEmail,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
@@ -211,13 +198,7 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
                           width: 250,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (_formkey.currentState!.validate()) {
-                                applicantContactInfo();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Please fill input')));
-                              }
+                              Navigator.pop(context);
                             },
                             style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(
@@ -245,7 +226,6 @@ class _ApplicantContactDetailsState extends State<ApplicantContactDetails> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

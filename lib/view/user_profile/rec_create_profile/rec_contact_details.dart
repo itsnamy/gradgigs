@@ -17,7 +17,6 @@ class RecruiterContactDetails extends StatefulWidget {
 }
 
 class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
-
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController phoneController = TextEditingController();
@@ -84,29 +83,32 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
                             widget.recruiter.getFullname,
-                            style:
-                                FlutterFlowTheme.of(context).titleLarge.override(
-                                      fontFamily: 'Outfit',
-                                      letterSpacing: 0,
-                                      color: Colors.white,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0,
+                                  color: Colors.white,
+                                ),
                           ),
                         ),
                       ],
                     ),
-                
+
                     //----------------------------MOBILE NUMBER----------------------------------//
-                
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: const [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
                             'Mobile Number',
                             style: TextStyle(
@@ -117,117 +119,126 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                         ),
                       ],
                     ),
-                
-                    Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0, -1),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 16, 16, 0),
-                                    child: TextFormField(
-                                      controller: phoneController,
-                                      autofocus: true,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 0),
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                      ),
-                                      validator: (value) =>
-                                          Validator.validatePhoneNumber(value!),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                
-                    //----------------------------EMAIL----------------------------------//
-                    //change to display. user have input previously. take data from class (widget.recruiter.getEmail)
+
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            'Email',
-                            style:
-                                FlutterFlowTheme.of(context).bodyMedium.override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                      color: Colors.white,
-                                    ),
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(0, -1),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: TextFormField(
+                                controller: phoneController,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 0),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                validator: (value) =>
+                                    Validator.validatePhoneNumber(value!),
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
+
+                    //----------------------------EMAIL----------------------------------//
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          //betulkan border to display email
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Text(
-                            widget.recruiter.getEmail,
-                            style: TextStyle(color: Colors.white),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Email',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Container(
+                                
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
+                                width: double.infinity,
+                                //width: MediaQuery.of(context).size.width-64,
+                                constraints: BoxConstraints(
+                                  maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Text(
+                                  widget.recruiter.getEmail,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                
+
                     //------------------------------BUTTONS---------------------------------//
-                
+
                     Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                        child: Center(
-                          child: SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formkey.currentState!.validate()) {
-                                  recruiterContactInfo();
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text('Please fill input')));
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                foregroundColor: Colors.black,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 228, 185, 112),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
+                      child: Center(
+                        child: SizedBox(
+                          height: 50,
+                          width: 250,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formkey.currentState!.validate()) {
+                                recruiterContactInfo();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Please fill input')));
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
-                              child: const Text('Next'),
+                              foregroundColor: Colors.black,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 228, 185, 112),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
                             ),
+                            child: const Text('Next'),
                           ),
                         ),
                       ),
+                    ),
                     SizedBox(height: 10),
-                
+
                     //---------------------------------END---------------------------------//
                   ],
                 ),

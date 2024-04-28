@@ -217,7 +217,7 @@ class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
                         ],
                       ),
                 
-                    if (widget.recruiter.checkIfAcademician())
+                    if (widget.recruiter.checkIfNonAcademician())
                       Column(
                         children: [
                           //----------------------------CLUBS AND ORGANISATION----------------------------------//

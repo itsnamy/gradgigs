@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
-
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
 // ignore_for_file: prefer_const_constructors
 
-class RecruiterViewBasicInformation  extends StatefulWidget {
-  final ReqruiterProfile recruiter;
-  const RecruiterViewBasicInformation ({super.key, required this.recruiter});
+class ApplicantViewBasicInformation extends StatefulWidget {
+  final ApplicantProfile applicant;
+  const ApplicantViewBasicInformation({super.key, required this.applicant});
 
   @override
-  State<RecruiterViewBasicInformation > createState() =>
-      _RecruiterViewBasicInformationState();
+  State<ApplicantViewBasicInformation> createState() =>
+      _ApplicantViewBasicInformationState();
 }
 
-class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInformation> {
+class _ApplicantViewBasicInformationState extends State<ApplicantViewBasicInformation> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: const Text(
           'Basic information',
           style: TextStyle(
@@ -55,46 +55,47 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-            
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  //----------------------------FULLNAME DISPLAY----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                        child: Text(
-                          widget.recruiter.getFullname,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+              
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    //----------------------------FULLNAME DISPLAY----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Text(
+                            widget.applicant.getFullname,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  //----------------------------USERNAME----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                        child: Text(
-                          'Username',
-                          style: TextStyle(color: Colors.white),
+                      ],
+                    ),
+                    //----------------------------USERNAME----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: const [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Text(
+                            'Username',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
+                      ],
+                    ),
+                    
+                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -114,7 +115,7 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
-                            widget.recruiter.getUsername,
+                            widget.applicant.getUsername,
                             style: TextStyle(color: Colors.black),
                           ),
                           ),
@@ -122,22 +123,22 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                       ),
                     ],
                   ),
-
-                  //----------------------------DATE OF BIRTH----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: const [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                        child: Text(
-                          'Date of Birth',
-                          style: TextStyle(color: Colors.white),
+                    //----------------------------DATE OF BIRTH----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Text(
+                            'Date of Birth',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
+                      ],
+                    ),
+                    
+                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -146,18 +147,18 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                           child: Container(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            width: double.infinity,
+                           width: double.infinity,
                                 //width: MediaQuery.of(context).size.width-64,
                                 constraints: BoxConstraints(
                                   maxWidth: MediaQuery.of(context).size.width-100, // Width of the screen minus padding
                                 ),
-                            decoration: BoxDecoration(
+                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
-                            widget.recruiter.getDOB,
+                            widget.applicant.getDOB,
                             style: TextStyle(color: Colors.black),
                           ),
                           ),
@@ -166,21 +167,21 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                     ],
                   ),
 
-                  //----------------------------NATIONALITY----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                        child: Text(
-                          'Nationality',
-                          style: TextStyle(color: Colors.white),
+                    //----------------------------NATIONALITY----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
+                          child: Text(
+                            'Nationality',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  Row(
+                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -200,7 +201,7 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
-                            widget.recruiter.getNationality,
+                            widget.applicant.getNationality,
                             style: TextStyle(color: Colors.black),
                           ),
                           ),
@@ -209,23 +210,22 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                     ],
                   ),
 
-                  
-                  //----------------------------GENDER----------------------------------//
+                    //----------------------------GENDER----------------------------------//
 
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                        child: Text(
-                          'Gender',
-                          style: TextStyle(color: Colors.white),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
+                          child: Text(
+                            'Gender',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  Row(
+                    Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -245,7 +245,7 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
-                            widget.recruiter.getgender,
+                            widget.applicant.getgender,
                             style: TextStyle(color: Colors.black),
                           ),
                           ),
@@ -254,48 +254,46 @@ class _RecruiterViewBasicInformationState extends State<RecruiterViewBasicInform
                     ],
                   ),
 
-                  //------------------------------BUTTONS---------------------------------//
+                    //------------------------------BUTTONS---------------------------------//
 
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                    child: Center(
-                      child: SizedBox(
-                        height: 50,
-                        width: 250,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
+                      child: Center(
+                        child: SizedBox(
+                          height: 50,
+                          width: 250,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              foregroundColor: Colors.black,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 228, 185, 112),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
                             ),
-                            foregroundColor: Colors.black,
-                            backgroundColor:
-                                const Color.fromARGB(255, 228, 185, 112),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
+                            child: const Text('Next'),
                           ),
-                          child: const Text('Next'),
                         ),
                       ),
                     ),
-                  ),
 
-                  SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                  //---------------------------------END---------------------------------//
-                ],
+                    //---------------------------------END---------------------------------//
+                  ],
+                ),
               ),
-            
             ),
           ),
         ),
-      ),
-    );
-      
+      );
   }
 }

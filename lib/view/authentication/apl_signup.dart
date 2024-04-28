@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/authentication/login.dart';
-
+import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/view/user_profile/apl_create_profile/apl_basic_information.dart';
 import '../../service/auth_validator.dart';
 import '../user_profile/apl_profile.dart';
 
@@ -13,6 +14,7 @@ class ApplicantSignupPage extends StatefulWidget {
 }
 
 class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
+  ApplicantProfile applicant = ApplicantProfile();
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
@@ -27,23 +29,18 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
   void applicantSignUp() {
     //get details recruiter
     String email = emailController.text;
-    String password = passwordController.text;
+    //String password = passwordController.text;
     String fullname = fullnameController.text;
-    String username = usernameController.text;
+
+    //save data to class
+    applicant.setEmail = email;
+    applicant.setFullname = fullname;
 
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ApplicantProfilePage(
-            /* role,
-                email: email,
-                password: password,
-                fullName: fullname,
-                username: username,
-                selectedRole: selectedCategory*/
-            ),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ApplicantBasicInformation(applicant: applicant)));
   }
 
   @override
@@ -58,7 +55,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
             fontSize: 24,
           ),
         ),
-        toolbarHeight: 80,
+        toolbarHeight: 70,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(25),
@@ -93,7 +90,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 20),
                             child: Text(
-                              'Job Recruiter',
+                              'Job Applicant',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Contrail One',
@@ -172,7 +169,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                 ),
                               ),
                               validator: (value) =>
-                                  Validator.validatePassword(value!),
+                                  Validator.validateUTMEmail(value!),
                             ),
                           ),
                           //-------------------------------------CONFIRM PASSWORD INPUT---------------------------------//
@@ -249,11 +246,11 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                   Validator.validateName(value!),
                             ),
                           ),
-                          //-------------------------------------USERNAME INPUT---------------------------------//
+                          /* //-------------------------------------CATEGORY INPUT---------------------------------//
                           const SizedBox(
                             width: 300,
                             child: Text(
-                              "Username",
+                              "Catergory",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -263,8 +260,8 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                           Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
-                            child: TextFormField(
-                              controller: usernameController,
+                            child: DropdownButtonFormField<String>(
+                              value: selectedCategory,
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 0),
@@ -274,63 +271,29 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                                 ),
                                 filled: true,
                                 fillColor: Colors.white,
+                                hintText: "Please Choose a Category",
                               ),
-                              validator: (value) =>
-                                  Validator.validateName(value!),
+                              items: ["Academician", "Non-Academician"]
+                                  .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedCategory = newValue;
+                                });
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please select a role';
+                                }
+                                return null; //if input
+                              },
                             ),
                           ),
-                          //-------------------------------------ROLE INPUT---------------------------------//
-                          const SizedBox(
-                            width: 300,
-                            child: Text(
-                              "Faculty",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              child: DropdownButtonFormField<String>(
-                                value: selectedCategory,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 0),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  hintText: "Please Choose a faculty",
-                                ),
-                                items: [
-                                  "Faculty of Computing",
-                                  "Faculty of Civil Engineering",
-                                  "Faculty of Mechanical Engineering",
-                                  "Faculty of Electrical Engineering",
-                                  "Faculty of Chemical & Energy Engineering",
-                                  "Faculty of Science",
-                                ].map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedCategory = newValue;
-                                  });
-                                },
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please select a faculty';
-                                  }
-                                  return null; //if input
-                                },
-                              )),
+                           */
                           //-------------------------------------SIGN UP BUTTON---------------------------------//
                           Container(
                             padding: const EdgeInsets.symmetric(
