@@ -41,11 +41,12 @@ class _ApplicantAcademicInformationState
         MaterialPageRoute(
             builder: (context) =>
                 ApplicantContactDetails(applicant: widget.applicant)));
-
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+      BuildContext context) //ViewModel class uses the BuildContext context
+  {
     return Scaffold(
       appBar: AppBar(
         title: const Text(

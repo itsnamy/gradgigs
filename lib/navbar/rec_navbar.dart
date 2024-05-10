@@ -1,54 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/view/home/rec_home.dart';
 
-/// Flutter code sample for [BottomNavigationBar].
+void main() => runApp(const BottomNavigationBarApp());
 
-void main() => runApp(const BottomNavigationBarExampleApp());
-
-class BottomNavigationBarExampleApp extends StatelessWidget {
-  const BottomNavigationBarExampleApp({super.key});
+class BottomNavigationBarApp extends StatelessWidget {
+  const BottomNavigationBarApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: BottomNavigationBarExample(),
+      home: CustomBottomNavigationBar(),
     );
   }
 }
 
-class BottomNavigationBarExample extends StatefulWidget {
-  const BottomNavigationBarExample({super.key});
+class CustomBottomNavigationBar extends StatefulWidget {
+  const CustomBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<BottomNavigationBarExample> createState() =>
-      _BottomNavigationBarExampleState();
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
 }
 
-class _BottomNavigationBarExampleState
-    extends State<BottomNavigationBarExample> {
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Search',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Jobs',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Upload',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Message',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 4: Profile',
-      style: optionStyle,
-    ),
+  final List<Widget> _widgetOptions = <Widget>[
+    SearchPage(),
+    JobsPage(),
+    UploadPage(),
+    MessagePage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -63,9 +44,7 @@ class _BottomNavigationBarExampleState
       appBar: AppBar(
         title: const Text('BottomNavigationBar Sample'),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -93,6 +72,49 @@ class _BottomNavigationBarExampleState
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
+    );
+  }
+}
+
+class SearchPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text('Search Page')),
+    );
+  }
+}
+
+class JobsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RecruiterJobUploadView();
+  }
+}
+
+class UploadPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text('Upload Page')),
+    );
+  }
+}
+
+class MessagePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text('Message Page')),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text('Profile Page')),
     );
   }
 }
