@@ -1,7 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gradgigs/navbar/rec_navbar.dart';
+import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
@@ -26,6 +28,9 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
     String phone = phoneController.text;
 
     widget.recruiter.setPhone = phone;
+
+    final jobRepo = Get.put(RecruiterProfileRepository());
+    jobRepo.createRecruiter(widget.recruiter);
 
     Navigator.push(
         context,
