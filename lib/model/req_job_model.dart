@@ -71,4 +71,16 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
   }
 
   String get getJobEnd => jobEnd;
+
+  toJson() {
+    return {
+      "jobTitle": jobTitle,
+      "jobDesc": jobDesc,
+      "jobCategory": jobCategory,
+      "jobLocation": jobLocation,
+      "jobSalary": jobSalary,
+      "jobStart": jobStart,
+      "jobEnd": jobEnd,
+    };
+  }
 }

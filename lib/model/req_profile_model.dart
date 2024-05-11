@@ -143,4 +143,23 @@ class ReqruiterProfile {
   }
 
   String get getPosition => position;
+
+
+  toJson(){
+    return{
+      "email": email,
+    "phone": phone,
+    "password": password,
+    "category": category,
+    "username": username,
+    "fullname": fullname,
+    "dob": dob,
+    "gender": gender,
+    "nationality": nationality,
+    "utmMail": utmMail,
+    "faculty": faculty,
+    "orgName": orgName,
+    "position": position,
+    };
+  }
 }

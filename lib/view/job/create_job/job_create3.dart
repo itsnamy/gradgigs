@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gradgigs/model/req_job_model.dart';
+import 'package:gradgigs/repository/job_repository.dart';
 // import 'package:gradgigs/service/auth_validator.dart';
 // import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
@@ -311,9 +313,8 @@ class _CreateJob3State
                         width: 250,
                         child: ElevatedButton(
                           onPressed: () {
-
-
-
+                            final jobRepo = Get.put(JobRepository());
+                            jobRepo.createJob(widget.job);
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
