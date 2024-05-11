@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/model/req_profile_model.dart';
 import 'package:gradgigs/view/home/rec_home.dart';
+import 'package:gradgigs/view/job/create_job/job_create1.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
 
 void main() => runApp(const BottomNavigationBarApp());
 
@@ -41,9 +44,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -95,9 +95,7 @@ class JobsPage extends StatelessWidget {
 class UploadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Upload Page')),
-    );
+    return CreateJob1();
   }
 }
 
@@ -113,8 +111,6 @@ class MessagePage extends StatelessWidget {
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Profile Page')),
-    );
+    return RecruiterProfilePage(recruiter: ReqruiterProfile());
   }
 }

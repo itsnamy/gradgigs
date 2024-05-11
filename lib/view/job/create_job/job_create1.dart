@@ -1,42 +1,42 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:gradgigs/navbar/rec_navbar.dart';
-import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
+import 'package:gradgigs/model/req_job_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
+import 'package:gradgigs/view/job/create_job/job_create2.dart';
+
 // ignore_for_file: prefer_const_constructors
 
-class RecruiterContactDetails extends StatefulWidget {
-  final ReqruiterProfile recruiter;
-  RecruiterContactDetails({super.key, required this.recruiter});
+class CreateJob1 extends StatefulWidget {
+  const CreateJob1({super.key});
 
   @override
-  State<RecruiterContactDetails> createState() =>
-      _RecruiterContactDetailsState();
+  State<CreateJob1> createState() =>
+      _CreateJob1State();
 }
 
-class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
+class _CreateJob1State extends State<CreateJob1> {
+
   final _formkey = GlobalKey<FormState>();
 
-  final TextEditingController phoneController = TextEditingController();
+  RecruiterJobUploadModel job = RecruiterJobUploadModel();
+  
+  //declare controller
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
-  recruiterContactInfo() {
-    String phone = phoneController.text;
+  void createJobNextStep() {
+    String title = titleController.text;
+    String description = descriptionController.text;
 
-    widget.recruiter.setPhone = phone;
+    job.setJobTitle = title;
+    job.setJobDesc = description;
 
-    final jobRepo = Get.put(RecruiterProfileRepository());
-    jobRepo.createRecruiter(widget.recruiter);
+    job = job;
 
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                CustomBottomNavigationBar()));
+                CreateJob2(job: job)));
   }
 
   @override
@@ -44,7 +44,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Contact Details',
+          'Enter Job Details',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
@@ -59,11 +59,12 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
           ),
         ),
         elevation: 5,
-        centerTitle: false,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(
+                context); //change to navigator.pop(). go to previous page
           },
         ),
       ),
@@ -81,30 +82,8 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            widget.recruiter.getFullname,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    //----------------------------MOBILE NUMBER----------------------------------//
-
+                  
+                    //----------------------------TITLE----------------------------------//
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -114,15 +93,12 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                           child: Text(
-                            'Mobile Number',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                            'Title',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ],
                     ),
-
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -133,7 +109,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                               child: TextFormField(
-                                controller: phoneController,
+                                controller: titleController,
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -147,7 +123,8 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                                   fillColor: Colors.white,
                                 ),
                                 validator: (value) =>
-                                    Validator.validatePhoneNumber(value!),
+                                    Validator.validateName(value!),
+                                //    textController1Validator.asValidator(context),
                               ),
                             ),
                           ),
@@ -155,62 +132,54 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                       ],
                     ),
 
-                    //----------------------------EMAIL----------------------------------//
+                    //----------------------------DESCRIPTION----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Text(
+                            'Description',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
                           child: Align(
-                            alignment: AlignmentDirectional(-1, 0),
+                            alignment: AlignmentDirectional(0, -1),
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Email',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 12),
-                                    height: 48,
-                                    width: double.infinity,
-                                    //width: MediaQuery.of(context).size.width-64,
-                                    constraints: BoxConstraints(
-                                      maxWidth: MediaQuery.of(context)
-                                              .size
-                                              .width -
-                                          50, // Width of the screen minus padding
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
+                              child: TextFormField(
+                                  controller: descriptionController,
+                                  autofocus: true,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    hintStyle: TextStyle(color: Colors.white),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 0),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(-1, 0),
-                                      child: Text(
-                                        widget.recruiter.getEmail,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
                                   ),
-                                ],
-                              ),
+                                  validator: (value) =>
+                                      Validator.validateName(value!)),
                             ),
                           ),
                         ),
                       ],
                     ),
 
+                  
                     //------------------------------BUTTONS---------------------------------//
 
                     Container(
@@ -223,7 +192,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                           child: ElevatedButton(
                             onPressed: () {
                               if (_formkey.currentState!.validate()) {
-                                recruiterContactInfo();
+                                createJobNextStep();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -247,6 +216,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
                         ),
                       ),
                     ),
+
                     SizedBox(height: 10),
 
                     //---------------------------------END---------------------------------//

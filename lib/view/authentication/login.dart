@@ -5,6 +5,7 @@ import 'package:gradgigs/model/req_profile_model.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:gradgigs/view/job/create_job/job_create1.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // ignore_for_file: prefer_const_constructors
@@ -116,7 +117,8 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ForgotPasswordPage(),
+                    // builder: (context) => const ForgotPasswordPage(),
+                    builder: (context) => const CreateJob1(),
                   ),
                 );
               },
