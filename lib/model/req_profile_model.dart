@@ -18,7 +18,7 @@ class ReqruiterProfile {
   late String orgName;
   late String position;
 
-  ReqruiterProfile(){
+  ReqruiterProfile() {
     email = "recruiter@utm.my";
     phone = "0131013131";
     password = "password";
