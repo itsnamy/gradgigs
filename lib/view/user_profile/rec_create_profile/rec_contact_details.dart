@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
@@ -30,7 +31,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                RecruiterProfilePage(recruiter: widget.recruiter)));
+                CustomBottomNavigationBar()));
   }
 
   @override
