@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -9,7 +10,10 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  //final _formkey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService();
+
+  final _formkey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +22,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         title: const Text("Forget Password"),
       ),
       body: Form(
+        key: _formkey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,6 +38,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               child: TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Please enter your email"),
@@ -43,13 +49,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             SizedBox(
               width: 400,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ForgotPasswordPage(),
-                    ),
-                  );
+                onPressed: () async {
+                  if (_formkey.currentState!.validate()) {
+                    String email = emailController.text;
+                    try {
+                      await _authService.changePassword(email);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Password Reset Email Sent')));
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    } catch (e) {
+                      print(e);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Invalid Email')));
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please fill input')));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   padding:

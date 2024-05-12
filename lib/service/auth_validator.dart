@@ -89,7 +89,7 @@ class Validator {
     if (email.isEmpty) {
       return 'Please enter your email';
     } else if (!emailRegex.hasMatch(email)) {
-      return 'Please enter a valid email';
+      return 'Please enter a UTM email';
     }
     return null;
   }

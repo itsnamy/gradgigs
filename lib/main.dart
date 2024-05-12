@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         backgroundColor: Color.fromARGB(255, 228, 185, 112), //change later
         splash: const Center(
-            child: Image(
+          child: Image(
             image: AssetImage('assets/gradgigs_logo.png'),
             width: 244,
             height: 68,

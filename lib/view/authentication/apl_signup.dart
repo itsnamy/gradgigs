@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_basic_information.dart';
@@ -14,6 +15,7 @@ class ApplicantSignupPage extends StatefulWidget {
 
 class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
   ApplicantProfile applicant = ApplicantProfile();
+  final AuthService _authService = AuthService();
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
@@ -25,12 +27,20 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
   bool _obscurePassword = true;
   String? selectedCategory;
 
-  void applicantSignUp() {
+  Future<void> applicantSignUp() async {
     //get details recruiter
     String email = emailController.text;
     //String password = passwordController.text;
     String fullname = fullnameController.text;
     String password = passwordController.text;
+    String selectedCategory = "";
+
+    //Firabase auth
+    const CircularProgressIndicator();
+    String message = await _authService.signUp(
+        email, password, fullname, widget.role, selectedCategory);
+
+    showMessage(context, message);
 
     //save data to class
     applicant.setPassword = password;
@@ -42,6 +52,14 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
         MaterialPageRoute(
             builder: (context) =>
                 ApplicantBasicInformation(applicant: applicant)));
+  }
+
+  void showMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   @override
