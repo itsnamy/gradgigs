@@ -54,8 +54,8 @@ class JobDetailsPage extends StatelessWidget {
                   SizedBox(height: 8),
                   _buildDetailItem("Description:", job.getJobDesc),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
                     child: Center(
                       child: SizedBox(
                         height: 50,
@@ -74,9 +74,11 @@ class JobDetailsPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                             foregroundColor: Colors.white,
-                            backgroundColor: const Color.fromARGB(255, 91, 0, 30),
+                            backgroundColor:
+                                const Color.fromARGB(255, 91, 0, 30),
                             shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                           ),
                           child: const Text('Update Job'),
@@ -85,18 +87,17 @@ class JobDetailsPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
                     child: Center(
                       child: SizedBox(
                         height: 50,
                         width: 250,
                         child: ElevatedButton(
                           onPressed: () {
-                              //delete function
-                              JobRepository.instance.deleteJob(job.id);
-                              Navigator.pop(context);
-
+                            //delete function
+                            JobRepository.instance.deleteJob(job.getJobId);
+                            Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(
@@ -105,15 +106,14 @@ class JobDetailsPage extends StatelessWidget {
                             foregroundColor: Colors.white,
                             backgroundColor: Color.fromARGB(255, 248, 66, 66),
                             shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                           ),
                           child: const Text('Delete Job'),
                         ),
                       ),
-                      
                     ),
-                    
                   ),
                 ],
               ),
