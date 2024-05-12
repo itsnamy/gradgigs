@@ -5,6 +5,7 @@ import 'package:gradgigs/model/req_profile_model.dart';
 
 // ignore_for_file: prefer_const_constructors
 
+
 class RecruiterViewBasicInformation extends StatefulWidget {
   final ReqruiterProfile recruiter;
   const RecruiterViewBasicInformation({super.key, required this.recruiter});
