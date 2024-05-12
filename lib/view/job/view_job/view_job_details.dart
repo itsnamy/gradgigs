@@ -7,7 +7,7 @@ import 'package:gradgigs/repository/job_repository.dart';
 class JobDetailsPage extends StatelessWidget {
   final RecruiterJobUploadModel job;
 
-  const JobDetailsPage({Key? key, required this.job}) : super(key: key);
+  const JobDetailsPage({super.key, required this.job});
 
   @override
   Widget build(BuildContext context) {

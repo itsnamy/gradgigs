@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/req_job_model.dart';
 import 'package:gradgigs/repository/job_repository.dart';
+import 'package:gradgigs/view/job/view_job/view_job_details.dart';
 // import 'package:gradgigs/service/auth_validator.dart';
 // import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
@@ -314,8 +315,15 @@ class _UpdateJob3State extends State<UpdateJob3> {
                         child: ElevatedButton(
                           onPressed: () {
                             final jobRepo = Get.put(JobRepository());
-                            jobRepo.createJob(widget.job);
-                            Navigator.pop(context);
+                            jobRepo.updateJob(
+                                widget.job.getJobId,
+                                widget
+                                    .job); // Access the jobId field of the job object
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        JobDetailsPage(job: widget.job)));
                           },
                           style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(

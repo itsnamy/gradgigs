@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/material/tab_controller.dart';
+//import 'package:flutter/src/material/tab_controller.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
 
 class RecruiterJobUploadModel extends ReqruiterProfile {
@@ -14,7 +14,7 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
   late String jobEnd; //end date
 
   //ReqruiterProfile recruiterProfile = ReqruiterProfile();
-  //class RecruiterJobUploadModel extends ReqruiterProfile {
+/*   //class RecruiterJobUploadModel extends ReqruiterProfile {
   RecruiterJobUploadModel() {
     jobTitle = "Job Title";
     jobDesc = "Job Description";
@@ -23,12 +23,11 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
     jobSalary = "Job Salary";
     jobStart = "Job Start";
     jobEnd = "Job End";
-  } //super(email) untuk test je, nanti kena tukar
-
+  } //super(email) untuk test je, nanti kena tukar */
+  RecruiterJobUploadModel();
   RecruiterJobUploadModel.dataHandling(
-      {
-        required this.id,
-        required this.jobTitle,
+      {required this.id,
+      required this.jobTitle,
       required this.jobDesc,
       required this.jobCategory,
       required this.jobLocation,
@@ -36,6 +35,8 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
       required this.jobStart,
       required this.jobEnd});
 
+  //-------------------id---------------------//
+  String get getJobId => id;
   //-------------------jobTitle---------------------//
   set setJobTitle(String jobTitle) {
     this.jobTitle = jobTitle;
@@ -97,10 +98,11 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
     };
   }
 
-  factory RecruiterJobUploadModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory RecruiterJobUploadModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return RecruiterJobUploadModel.dataHandling(
-      id : document.id,
+      id: document.id,
       jobTitle: data["jobTitle"],
       jobDesc: data["jobDesc"],
       jobCategory: data["jobCategory"],
