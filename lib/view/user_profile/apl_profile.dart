@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_view_profile/apl_view_acad_info.dart';
@@ -19,6 +20,7 @@ class ApplicantProfilePage extends StatefulWidget {
 }
 
 class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
+  final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +44,8 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
         centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
+          onPressed: () async {
+            String message = await _authService.logOut();
             Navigator.push(
               context,
               MaterialPageRoute(

@@ -8,14 +8,22 @@ import 'package:gradgigs/view/authentication/role.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/job/create_job/job_create1.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
+import 'package:gradgigs/view/home/apl_viewjoboffer.dart';
 // ignore_for_file: prefer_const_constructors
 
 class LoginPage extends StatefulWidget {
   final String title;
-  late ApplicantProfile? applicant;
-  late ReqruiterProfile? recruiter;
+  final ApplicantProfile? applicant;
+  final ReqruiterProfile? recruiter;
+  
+  
 
-  LoginPage({super.key, required this.title});
+  // Constructor for neither
+  const LoginPage({super.key, required this.title})
+      : applicant = null,
+        recruiter = null;
+        
 
 /*
   // Constructor for Applicant
@@ -27,6 +35,8 @@ class LoginPage extends StatefulWidget {
   const LoginPage.forRecruiter(
       {super.key, required this.title, required this.recruiter})
       : applicant = null; */
+
+
 
   @override
   State<LoginPage> createState() {
@@ -107,6 +117,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    //MaterialPageRoute route =
+    //    MaterialPageRoute(builder: (context) => RoleSignUp());
+    
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -203,10 +216,53 @@ class _LoginPageState extends State<LoginPage> {
                     String email = emailController.text;
                     String password = passwordController.text;
 
-                    SignIn(context, email, password, signedUp);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please fill input')));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                                JobOfferPage(),
+                              //ApplicantProfilePage(applicant: applicantNotNull),
+                        ),
+                      );
+                    }
+                  }
+
+                 if (widget.recruiter != null) {
+                    if (widget.recruiter!.getEmail == emailController.text &&
+                        widget.recruiter!.getPassword ==
+                            passwordController.text) {
+                      ReqruiterProfile recruiterNotNull = widget.recruiter!;
+                      signedUp = true;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              JobOfferPage(),
+                        ),
+                      );
+                    }
+                  }
+
+                  if (signedUp == false) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Invalid Credentials'),
+                          content:
+                              Text('Please enter valid email and password.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -265,7 +321,9 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RoleSignUp()),
+                              // builder: (context) => const RoleSignUp()),
+                              builder: (context) => JobOfferPage()),
+
                         );
                       },
                       child: const Text(

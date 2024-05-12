@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_contact_details.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_role_info.dart';
@@ -24,6 +25,7 @@ class RecruiterProfilePage extends StatefulWidget {
 }
 
 class _RecruiterProfileState extends State<RecruiterProfilePage> {
+  final AuthService _authService = AuthService();
   ReqruiterProfile recruiter = ReqruiterProfile();
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,14 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
         centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
+          onPressed: () async {
+            String message = await _authService.logOut();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(message),
+              ),
+            );
+
             Navigator.push(
               context,
               MaterialPageRoute(
