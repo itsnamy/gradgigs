@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
-import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/view/authentication/login.dart';
-import 'package:gradgigs/view/authentication/rec_signup.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_contact_details.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_role_info.dart';
 
@@ -54,7 +52,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginPage(title: 'Sign In'),
+                builder: (context) => LoginPage(title: 'Sign In'),
               ),
             );
           },
@@ -205,7 +203,6 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
           ),
         ),
       ),
-
     );
   }
 }
@@ -241,8 +238,7 @@ void loginPage(BuildContext context, ReqruiterProfile recruiter) {
   Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-          builder: (context) => LoginPage.forRecruiter(
+          builder: (context) => LoginPage(
                 title: 'Sign In',
-                recruiter: recruiter,
               )));
 }

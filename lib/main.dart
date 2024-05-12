@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:gradgigs/firebase_options.dart';
 import 'view/authentication/login.dart';
-import 'view/home/rec_home.dart';
+//import 'view/home/rec_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,8 +44,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         //RecruiterJobUploadView
-        nextScreen: RecruiterJobUploadView(),
-        //nextScreen: const LoginPage(title: 'Sign In'), //login page
+        //nextScreen: RecruiterJobUploadView(),
+        nextScreen: LoginPage(title: 'Sign In'), //login page
         splashTransition: SplashTransition.fadeTransition,
       ),
     );

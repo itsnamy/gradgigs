@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -41,7 +40,21 @@ class AuthService {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      return "Sign In Successfull";
+
+      DocumentSnapshot userDoc;
+      final userCollection = FirebaseFirestore.instance.collection('recruiter');
+      userDoc = await userCollection.doc(userCredential.user!.uid).get();
+
+      if (!userDoc.exists) {
+        final userCollection =
+            FirebaseFirestore.instance.collection('applicant');
+        userDoc = await userCollection.doc(userCredential.user!.uid).get();
+      }
+
+      if (userDoc.exists) {
+        return userDoc['role'];
+      }
+      return "";
     } catch (e) {
       return "Invalid email or password";
     }
@@ -63,5 +76,19 @@ class AuthService {
     } catch (e) {
       return "Failed to send email";
     }
+  }
+
+  getApplicant(String email) {
+    return FirebaseFirestore.instance
+        .collection('applicant')
+        .where('email', isEqualTo: email)
+        .get();
+  }
+
+  getRecruiter(String email) {
+    return FirebaseFirestore.instance
+        .collection('recruiter')
+        .where('email', isEqualTo: email)
+        .get();
   }
 }

@@ -372,7 +372,7 @@ class _ApplicantSignupPageState extends State<ApplicantSignupPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginPage(
+                              builder: (context) => LoginPage(
                                 title: 'Sign in',
                               ),
                             ),
