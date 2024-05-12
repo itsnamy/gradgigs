@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:gradgigs/firebase_options.dart';
 import 'view/authentication/login.dart';
+import 'view/home/rec_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,13 +37,15 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         backgroundColor: Color.fromARGB(255, 228, 185, 112), //change later
         splash: const Center(
-            child: Image(
+          child: Image(
             image: AssetImage('assets/gradgigs_logo.png'),
             width: 244,
             height: 68,
           ),
         ),
-        nextScreen: const LoginPage(title: 'Sign In'), //login page
+        //RecruiterJobUploadView
+        nextScreen: RecruiterJobUploadView(),
+        //nextScreen: const LoginPage(title: 'Sign In'), //login page
         splashTransition: SplashTransition.fadeTransition,
       ),
     );
