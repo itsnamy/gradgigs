@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/req_job_model.dart';
 import 'package:gradgigs/repository/job_repository.dart';
+import 'package:gradgigs/view/job/view_job/view_job_details.dart';
 
 class RecruiterJobUploadView extends StatefulWidget {
   RecruiterJobUploadView({Key? key}) : super(key: key);
@@ -84,14 +84,14 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
         borderRadius: BorderRadius.circular(12),
       ),
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      color: Color.fromARGB(255, 92, 0, 16),
+      color: const Color.fromARGB(255, 92, 0, 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: Image.network(
-               'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80',
+              'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80',
               height: 200,
               fit: BoxFit.cover,
             ),
@@ -104,25 +104,18 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
                 Text(
                   job.jobTitle,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 255, 255, 255)
-                  ),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 255, 255, 255)),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   "RM " + job.getJobSalary + " per hour",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
-
-
-    
-
-
-
               ],
             ),
           ),
@@ -142,7 +135,12 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
                 ),
                 IconButton(
                   onPressed: () {
-                    // Handle tap event
+                     Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => JobDetailsPage(job: job),
+                    ),
+                  );
                   },
                   icon: Icon(Icons.keyboard_arrow_right),
                 ),
