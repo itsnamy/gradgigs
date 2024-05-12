@@ -6,7 +6,8 @@ import 'package:gradgigs/view/job/update_job/job_update2.dart';
 // ignore_for_file: prefer_const_constructors
 
 class UpdateJob1 extends StatefulWidget {
-  const UpdateJob1({super.key, required RecruiterJobUploadModel job});
+  final RecruiterJobUploadModel job;
+  const UpdateJob1({super.key, required this.job});
 
   @override
   State<UpdateJob1> createState() => _UpdateJob1State();
@@ -14,8 +15,6 @@ class UpdateJob1 extends StatefulWidget {
 
 class _UpdateJob1State extends State<UpdateJob1> {
   final _formkey = GlobalKey<FormState>();
-
-  RecruiterJobUploadModel job = RecruiterJobUploadModel();
 
   //declare controller
   final TextEditingController titleController = TextEditingController();
@@ -25,21 +24,19 @@ class _UpdateJob1State extends State<UpdateJob1> {
   void initState() {
     super.initState();
     // Set the initial value through the controller
-    titleController.text = job.getJobTitle;
-    descriptionController.text = job.getJobDesc;
+    titleController.text = widget.job.getJobTitle;
+    descriptionController.text = widget.job.getJobDesc;
   }
 
   void updateJobNextStep() {
     String title = titleController.text;
     String description = descriptionController.text;
 
-    job.setJobTitle = title;
-    job.setJobDesc = description;
+    widget.job.setJobTitle = title;
+    widget.job.setJobDesc = description;
 
-    job = job;
-
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => UpdateJob2(job: job)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => UpdateJob2(job: widget.job)));
   }
 
   @override
