@@ -14,7 +14,7 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
   late String jobEnd; //end date
 
   //ReqruiterProfile recruiterProfile = ReqruiterProfile();
-/*   //class RecruiterJobUploadModel extends ReqruiterProfile {
+  //class RecruiterJobUploadModel extends ReqruiterProfile {
   RecruiterJobUploadModel() {
     jobTitle = "Job Title";
     jobDesc = "Job Description";
@@ -23,8 +23,8 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
     jobSalary = "Job Salary";
     jobStart = "Job Start";
     jobEnd = "Job End";
-  } //super(email) untuk test je, nanti kena tukar */
-  RecruiterJobUploadModel();
+  } //super(email) untuk test je, nanti kena tukar
+
   RecruiterJobUploadModel.dataHandling(
       {required this.id,
       required this.jobTitle,

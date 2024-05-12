@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/req_job_model.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/job_repository.dart';
-// import 'package:gradgigs/service/auth_validator.dart';
-// import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -12,12 +11,10 @@ class CreateJob3 extends StatefulWidget {
   const CreateJob3({super.key, required this.job});
 
   @override
-  State<CreateJob3> createState() =>
-      _CreateJob3State();
+  State<CreateJob3> createState() => _CreateJob3State();
 }
 
-class _CreateJob3State
-    extends State<CreateJob3> {
+class _CreateJob3State extends State<CreateJob3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +113,9 @@ class _CreateJob3State
                                   child: Align(
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: Text(
-                                      widget.job.getJobStart + " - " + widget.job.getJobEnd,
+                                      widget.job.getJobStart +
+                                          " - " +
+                                          widget.job.getJobEnd,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
@@ -315,7 +314,11 @@ class _CreateJob3State
                           onPressed: () {
                             final jobRepo = Get.put(JobRepository());
                             jobRepo.createJob(widget.job);
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CustomBottomNavigationBar()));
                           },
                           style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(
