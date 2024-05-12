@@ -40,4 +40,13 @@ class JobRepository extends GetxController {
         .update(job.toJson())
         .whenComplete(() => Get.snackbar("Success", "Job has been updated"));
   }
+
+  Future<void> deleteJob(String jobId) async {
+    try {
+      await _db.collection("jobs").doc(jobId).delete();
+      // Get.snackbar("Success", "Job has been deleted");
+    } catch (error) {
+      // Get.snackbar("Error", "Failed to delete job: $error");
+    }
+  }
 }
