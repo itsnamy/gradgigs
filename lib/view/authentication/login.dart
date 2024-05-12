@@ -54,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
       applicant = await _authService.getApplicant(email);
       applicantPage(applicant);
     } else if (role == "recruiter") {
-      showMessage(role);
       signedUp = true;
       recruiterPage();
     }
