@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/material/tab_controller.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
 
 class RecruiterJobUploadModel extends ReqruiterProfile {
+  late String id;
   late String jobTitle;
   late String
       jobDesc; //responsibility, requirement, qualification, experience, skills, benefit
@@ -22,6 +24,17 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
     jobStart = "Job Start";
     jobEnd = "Job End";
   } //super(email) untuk test je, nanti kena tukar
+
+  RecruiterJobUploadModel.dataHandling(
+      {
+        required this.id,
+        required this.jobTitle,
+      required this.jobDesc,
+      required this.jobCategory,
+      required this.jobLocation,
+      required this.jobSalary,
+      required this.jobStart,
+      required this.jobEnd});
 
   //-------------------jobTitle---------------------//
   set setJobTitle(String jobTitle) {
@@ -82,5 +95,19 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
       "jobStart": jobStart,
       "jobEnd": jobEnd,
     };
+  }
+
+  factory RecruiterJobUploadModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+    return RecruiterJobUploadModel.dataHandling(
+      id : document.id,
+      jobTitle: data["jobTitle"],
+      jobDesc: data["jobDesc"],
+      jobCategory: data["jobCategory"],
+      jobLocation: data["jobLocation"],
+      jobSalary: data["jobSalary"],
+      jobStart: data["jobStart"],
+      jobEnd: data["jobEnd"],
+    );
   }
 }
