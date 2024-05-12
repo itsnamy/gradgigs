@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/req_job_model.dart';
 import 'package:gradgigs/view/job/update_job/job_update1.dart';
+import 'package:gradgigs/repository/job_repository.dart';
 // ignore_for_file: prefer_const_constructors
 
 class JobDetailsPage extends StatelessWidget {
@@ -82,6 +83,37 @@ class JobDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    child: Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 250,
+                        child: ElevatedButton(
+                          onPressed: () {
+                              //delete function
+                              JobRepository.instance.deleteJob(job.id);
+                              Navigator.pop(context);
+
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            foregroundColor: Colors.white,
+                            backgroundColor: Color.fromARGB(255, 248, 66, 66),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                          ),
+                          child: const Text('Delete Job'),
+                        ),
+                      ),
+                      
+                    ),
+                    
                   ),
                 ],
               ),

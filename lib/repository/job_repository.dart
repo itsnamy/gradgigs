@@ -24,4 +24,13 @@ class JobRepository extends GetxController{
     return jobData;
   }
 
+  Future<void> deleteJob(String jobId) async {
+    try {
+      await _db.collection("jobs").doc(jobId).delete();
+      // Get.snackbar("Success", "Job has been deleted");
+    } catch (error) {
+      // Get.snackbar("Error", "Failed to delete job: $error");
+    }
+  }
+
 }
