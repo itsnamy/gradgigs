@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/req_job_model.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/job_repository.dart';
-import 'package:gradgigs/view/job/view_job/view_job_details.dart';
-// import 'package:gradgigs/service/auth_validator.dart';
-// import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -323,7 +321,7 @@ class _UpdateJob3State extends State<UpdateJob3> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        JobDetailsPage(job: widget.job)));
+                                        CustomBottomNavigationBar()));
                           },
                           style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(
