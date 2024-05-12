@@ -11,4 +11,17 @@ class JobRepository extends GetxController{
   createJob(RecruiterJobUploadModel job) async{
     await _db.collection("jobs").add(job.toJson()).whenComplete(() => Get.snackbar("Success", "Job has been added"));
   }
+
+  Future<RecruiterJobUploadModel> getJobDetails(String jobTitle) async{
+    final snapshot = await _db.collection("jobs").where("jobTtitle", isEqualTo: jobTitle).get();
+    final jobData = snapshot.docs.map((e) => RecruiterJobUploadModel.fromSnapshot(e)).single;
+    return jobData;
+  }
+
+  Future<List<RecruiterJobUploadModel>> getAllJobDetails() async{
+    final snapshot = await _db.collection("jobs").get();
+    final jobData = snapshot.docs.map((e) => RecruiterJobUploadModel.fromSnapshot(e)).toList();
+    return jobData;
+  }
+
 }
