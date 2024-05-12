@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/req_job_model.dart';
+import 'package:gradgigs/view/job/update_job/job_update1.dart';
 // ignore_for_file: prefer_const_constructors
-
 
 class JobDetailsPage extends StatelessWidget {
   final RecruiterJobUploadModel job;
@@ -41,13 +41,45 @@ class JobDetailsPage extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 SizedBox(height: 16),
-                _buildDetailItem("Working Hours:", "${job.getJobStart} - ${job.getJobEnd}"),
+                _buildDetailItem(
+                    "Working Hours:", "${job.getJobStart} - ${job.getJobEnd}"),
                 SizedBox(height: 8),
                 _buildDetailItem("Pay Per Hour (RM):", job.getJobSalary),
                 SizedBox(height: 8),
                 _buildDetailItem("Location:", job.getJobLocation),
                 SizedBox(height: 8),
                 _buildDetailItem("Description:", job.getJobDesc),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  child: Center(
+                    child: SizedBox(
+                      height: 50,
+                      width: 250,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateJob1(job: job),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          foregroundColor: Colors.white,
+                          backgroundColor: const Color.fromARGB(255, 91, 0, 30),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        ),
+                        child: const Text('Update Job'),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
