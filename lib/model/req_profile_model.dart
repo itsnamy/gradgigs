@@ -147,7 +147,7 @@ class ReqruiterProfile {
 
   toJson(){
     return{
-      "email": email,
+    "email": email,
     "phone": phone,
     "password": password,
     "category": category,

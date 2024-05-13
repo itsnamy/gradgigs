@@ -174,4 +174,25 @@ class ApplicantProfile {
   }
 
   String get getBankNumber => bankNumber;
+
+  toJson() {
+  return {
+    'email': email,
+    'phone': phone,
+    'password': password,
+    'category': category,
+    'username': username,
+    'fullname': fullname,
+    'dob': dob,
+    'gender': gender,
+    'nationality': nationality,
+    'utmMail': utmMail,
+    'faculty': faculty,
+    'yearProgram': yearProgram,
+    'college': college,
+    'bankName': bankName,
+    'bankHolderName': bankHolderName,
+    'bankNumber': bankNumber,
+  };
+  }
 }

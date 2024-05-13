@@ -25,6 +25,7 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Home Page',
           style: TextStyle(
@@ -42,12 +43,12 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
         ),
         elevation: 5,
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: Center(
         child: Container(

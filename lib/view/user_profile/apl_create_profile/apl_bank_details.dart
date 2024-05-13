@@ -4,6 +4,8 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:get/get.dart';
+import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantBankDetails extends StatefulWidget {
@@ -29,6 +31,9 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
     widget.applicant.setBankName = bankName;
     widget.applicant.setBankHolderName = bankHolderName;
     widget.applicant.bankNumber = bankNumber;
+
+    final aplRepo = Get.put(ApplicantProfileRepository());
+    aplRepo.createApplicant(widget.applicant);
 
     Navigator.push(
         context,
