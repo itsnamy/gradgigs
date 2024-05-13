@@ -19,7 +19,29 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forget Password"),
+        title: const Text(
+          'Forgot password',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        toolbarHeight: 70,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 5,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Form(
         key: _formkey,
@@ -35,13 +57,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 height: 68,
               ),
             ),
-            Padding(
+           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               child: TextFormField(
                 controller: emailController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Please enter your email"),
+                  border: OutlineInputBorder(),
+                  labelText: "Please enter your email",
+                  prefixIcon: Icon(Icons.email),
+                ),
                 validator: (value) => Validator.validateEmail(value!),
               ),
             ),
