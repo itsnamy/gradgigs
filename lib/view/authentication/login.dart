@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/model/req_profile_model.dart';
 import 'package:gradgigs/navbar/rec_navbar.dart';
+import 'package:gradgigs/navbar/apl_navbar.dart';
 import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
@@ -51,9 +52,10 @@ class _LoginPageState extends State<LoginPage> {
 
     if (role == "applicant") {
       signedUp = true;
-      showMessage("Welcome, Applicant");
+      // showMessage("Welcome, Applicant");
       //applicant = await _authService.getApplicant(email);
       //applicantPage(applicant);
+      applicantPage();
     } else if (role == "recruiter") {
       signedUp = true;
       recruiterPage();
@@ -64,11 +66,14 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void applicantPage(ApplicantProfile applicant) {
+  void applicantPage() {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ApplicantProfilePage(applicant: applicant)));
+      context,
+      MaterialPageRoute(builder: (context) => AplCustomBottomNavigationBar()),
+      // MaterialPageRoute(
+      //     builder: (context) => ApplicantProfilePage(applicant: applicant))
+    );
+        
   }
 
   void recruiterPage() {
