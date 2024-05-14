@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/home/apl_viewjoboffer.dart';
+import 'package:gradgigs/view/job/apl_job_status/apl_job_status.dart';
 
 void main() => runApp(const AplBottomNavigationBarApp());
 
@@ -96,9 +97,11 @@ class JobsPage extends StatelessWidget {
 class MessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Message Page')),
-    );
+    // return Container(
+    //   child: Center(child: Text('Message Page')),
+    // );
+
+    return AplJobStatus();
   }
 }
 
