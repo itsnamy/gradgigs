@@ -1,135 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:gradgigs/model/job_status_model.dart';
+import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 
-class CartItem extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  final String description;
-  final String initialStatus;
-  final VoidCallback onCancel;
 
-  const CartItem({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-    required this.initialStatus,
-    required this.onCancel,
-  }) : super(key: key);
+class AplJobStatus extends StatefulWidget {
+  AplJobStatus({Key? key}) : super(key: key);
 
   @override
-  _CartItemState createState() => _CartItemState();
+  State<AplJobStatus> createState() =>
+      _AplJobStatusWidgetState();
 }
 
-class _CartItemState extends State<CartItem> {
-  late String status;
+class _AplJobStatusWidgetState extends State<AplJobStatus>
+    with TickerProviderStateMixin {
+  final JobStatusRepository _JobStatusRepository = Get.put(JobStatusRepository());
 
   @override
   void initState() {
     super.initState();
-    status = widget.initialStatus;
-  }
-
-  void updateStatus(String newStatus) {
-    setState(() {
-      status = newStatus;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    Color statusColor;
-    switch (status) {
-      case 'pending':
-        statusColor = const Color(0xFFE4BA70);
-        break;
-      case 'accepted':
-        statusColor = Colors.green;
-        break;
-      case 'rejected':
-        statusColor = Colors.red;
-        break;
-      default:
-        statusColor = Colors.black;
-    }
-    return Card(
-      margin: const EdgeInsets.all(8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            ClipOval(
-              child: Container(
-                width: 80,
-                height: 80,
-                child: Image.network(widget.imageUrl, fit: BoxFit.cover),
-              ),
-            ),
-            const SizedBox(width: 10),
-
-            // Second Section: Text
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    widget.description,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Third Section: Cancel Button
-            IconButton(
-              icon: const Icon(Icons.cancel),
-              color: Colors.red,
-              onPressed: widget.onCancel,
-            ),
-
-            // Fourth Section: Status Container
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: statusColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Text(
-                status,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-void main() {
-  runApp(const AplJobStatus());
-}
-
-class AplJobStatus extends StatelessWidget {
-  const AplJobStatus({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text(
             'Job Applied',
             style: TextStyle(
@@ -155,27 +51,110 @@ class AplJobStatus extends StatelessWidget {
           //   },
           // ),
         ),
-        body: ListView(
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: FutureBuilder<List<ApplicantJobStatus>>(
+            future: _JobStatusRepository.getAllJobDetails(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                final List<ApplicantJobStatus> jobDetails = snapshot.data!;
+                return ListView.builder(
+                  itemCount: jobDetails.length,
+                  itemBuilder: (context, index) {
+                    return _buildJobCard(jobDetails[index]);
+                  },
+                );
+              } else {
+                return Text('No Data Available');
+              }
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildJobCard(ApplicantJobStatus job) {
+    Color statusColor;
+    switch (job.jobStatus) {
+      case 'pending':
+        statusColor = const Color(0xFFE4BA70);
+        break;
+      case 'accepted':
+        statusColor = Colors.green;
+        break;
+      case 'rejected':
+        statusColor = Colors.red;
+        break;
+      default:
+        statusColor = Colors.black;
+    }
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
           children: [
-            CartItem(
-              imageUrl:
-                  'https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-              title: 'Pak Atong',
-              description: 'RM9 per hour',
-              initialStatus: 'pending',
-              onCancel: () {
-                // Handle cancel action
+            ClipOval(
+              child: Container(
+                width: 80,
+                height: 80,
+                child: Image.network('https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', fit: BoxFit.cover),
+              ),
+            ),
+            const SizedBox(width: 10),
+
+            // Second Section: Text
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    job.jobTitle,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    'RM ${job.jobSalary}',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Third Section: Cancel Button
+            IconButton(
+              icon: const Icon(Icons.cancel),
+              color: Colors.red,
+              onPressed: (){
+                JobStatusRepository.instance.deleteJob(job.statusId);
               },
             ),
-            CartItem(
-              imageUrl:
-                  'https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-              title: 'Cengal cashier',
-              description: 'RM7 per hour',
-              initialStatus: 'accepted',
-              onCancel: () {
-                // Handle cancel action
-              },
+
+            // Fourth Section: Status Container
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: statusColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text(
+                job.jobStatus,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
