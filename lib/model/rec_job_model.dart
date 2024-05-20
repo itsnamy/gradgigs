@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:flutter/src/material/tab_controller.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 
-class RecruiterJobUploadModel extends ReqruiterProfile {
+class RecruiterJobUploadModel extends RecruiterProfile {
   late String id;
   late String jobTitle;
   late String
@@ -13,8 +13,8 @@ class RecruiterJobUploadModel extends ReqruiterProfile {
   late String jobStart; //start date
   late String jobEnd; //end date
 
-  //ReqruiterProfile recruiterProfile = ReqruiterProfile();
-  //class RecruiterJobUploadModel extends ReqruiterProfile {
+  //RecruiterProfile recruiterProfile = RecruiterProfile();
+  //class RecruiterJobUploadModel extends RecruiterProfile {
   RecruiterJobUploadModel() {
     jobTitle = "Job Title";
     jobDesc = "Job Description";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gradgigs/model/req_job_model.dart';
+import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/job_repository.dart';
 

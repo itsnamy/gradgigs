@@ -1,6 +1,6 @@
 import 'package:gradgigs/model/apl_profile_model.dart';
 
-class ReqruiterProfile {
+class RecruiterProfile {
   String role = "recruiter";
   late String email;
   late String phone;
@@ -18,7 +18,7 @@ class ReqruiterProfile {
   late String orgName;
   late String position;
 
-  ReqruiterProfile() {
+  RecruiterProfile() {
     email = "recruiter@utm.my";
     phone = "0131013131";
     password = "password";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/navbar/apl_navbar.dart';
 import 'package:gradgigs/service/auth_service.dart';
@@ -14,7 +14,7 @@ import 'package:gradgigs/view/user_profile/apl_profile.dart';
 class LoginPage extends StatefulWidget {
   final String title;
   late ApplicantProfile? applicant;
-  late ReqruiterProfile? recruiter;
+  late RecruiterProfile? recruiter;
 
   LoginPage({super.key, required this.title});
 
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   bool passToggle = true;
 
   late ApplicantProfile applicant;
-  late ReqruiterProfile recruiter;
+  late RecruiterProfile recruiter;
 
   Future<void> SignIn(BuildContext context, String email, String password,
       bool signedUp) async {

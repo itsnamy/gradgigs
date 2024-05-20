@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/req_job_model.dart';
+import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/job/create_job/job_create2.dart';
 

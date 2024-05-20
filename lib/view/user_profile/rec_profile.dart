@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_contact_details.dart';
@@ -10,7 +10,7 @@ import 'rec_view_profile/rec_view_basic_info.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterProfilePage extends StatefulWidget {
-  final ReqruiterProfile recruiter;
+  final RecruiterProfile recruiter;
 
   const RecruiterProfilePage({super.key, required this.recruiter});
 
@@ -26,7 +26,7 @@ class RecruiterProfilePage extends StatefulWidget {
 
 class _RecruiterProfileState extends State<RecruiterProfilePage> {
   final AuthService _authService = AuthService();
-  ReqruiterProfile recruiter = ReqruiterProfile();
+  RecruiterProfile recruiter = RecruiterProfile();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -217,7 +217,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
 }
 
 void recruiterBasicInformation(
-    BuildContext context, ReqruiterProfile recruiter) {
+    BuildContext context, RecruiterProfile recruiter) {
   Navigator.push(
       context,
       MaterialPageRoute(
@@ -226,7 +226,7 @@ void recruiterBasicInformation(
 }
 
 void recruiterRoleInformation(
-    BuildContext context, ReqruiterProfile recruiter) {
+    BuildContext context, RecruiterProfile recruiter) {
   //change to view page
   Navigator.push(
       context,
@@ -234,7 +234,7 @@ void recruiterRoleInformation(
           builder: (context) => RecruiterViewRoleInfo(recruiter: recruiter)));
 }
 
-void recruiterContactDetails(BuildContext context, ReqruiterProfile recruiter) {
+void recruiterContactDetails(BuildContext context, RecruiterProfile recruiter) {
   //change to view page
   Navigator.push(
       context,
@@ -243,7 +243,7 @@ void recruiterContactDetails(BuildContext context, ReqruiterProfile recruiter) {
               RecruiterViewContactDetails(recruiter: recruiter)));
 }
 
-void loginPage(BuildContext context, ReqruiterProfile recruiter) {
+void loginPage(BuildContext context, RecruiterProfile recruiter) {
   Navigator.pushReplacement(
       context,
       MaterialPageRoute(
