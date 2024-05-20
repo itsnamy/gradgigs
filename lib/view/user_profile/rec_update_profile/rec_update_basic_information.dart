@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
+// import 'package:gradgigs/service/auth_validator.dart';
+// import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
+
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewBankDetails extends StatefulWidget {
-  final ApplicantProfile applicant;
-  const ApplicantViewBankDetails({super.key, required this.applicant});
+class RecruiterViewBasicInformation extends StatefulWidget {
+  final RecruiterProfile recruiter;
+  const RecruiterViewBasicInformation({super.key, required this.recruiter});
 
   @override
-  State<ApplicantViewBankDetails> createState() =>
-      _ApplicantViewBankDetailsState();
+  State<RecruiterViewBasicInformation> createState() =>
+      _RecruiterViewBasicInformationState();
 }
 
-class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
+class _RecruiterViewBasicInformationState
+    extends State<RecruiterViewBasicInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Bank details',
+          'Basic information',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
@@ -63,7 +67,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                         padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
                         child: TextField(
                           controller: TextEditingController(
-                              text: widget.applicant.getFullname),
+                              text: widget.recruiter.getFullname),
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -78,13 +82,13 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                           onChanged: (value) {
-                            widget.applicant.setFullname = value;
+                            widget.recruiter.setFullname = value;
                           },
                         ),
                       ),
                     ],
                   ),
-                  //----------------------------BANK NAME----------------------------------//
+                  //----------------------------USERNAME----------------------------------//
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -98,7 +102,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Bank Name',
+                                  'Username',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -124,7 +128,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: TextField(
                                       controller: TextEditingController(
-                                          text: widget.applicant.getBankName),
+                                          text: widget.recruiter.getUsername),
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
@@ -140,77 +144,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                         fontSize: 16,
                                       ),
                                       onChanged: (value) {
-                                        widget.applicant.setBankName = value;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  //----------------------------BANK ACCOUNT HOLDER NAME----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Bank Account Holder Name',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget
-                                              .applicant.getBankHolderName),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setBankHolderName =
-                                            value;
+                                        widget.recruiter.setUsername = value;
                                       },
                                     ),
                                   ),
@@ -223,7 +157,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                     ],
                   ),
 
-                  //----------------------------BANK ACCOUNT NUMBER----------------------------------//
+                  //----------------------------DATE OF BIRTH----------------------------------//
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -237,7 +171,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Bank Account Number',
+                                  'Date of Birth',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -263,7 +197,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: TextField(
                                       controller: TextEditingController(
-                                          text: widget.applicant.getBankNumber),
+                                          text: widget.recruiter.getDOB),
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
@@ -279,7 +213,147 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                         fontSize: 16,
                                       ),
                                       onChanged: (value) {
-                                        widget.applicant.setBankNumber = value;
+                                        widget.recruiter.setDOB = value;
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //----------------------------NATIONALITY----------------------------------//
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Nationality',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: TextField(
+                                      controller: TextEditingController(
+                                          text:
+                                              widget.recruiter.getNationality),
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 12),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                      ),
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      onChanged: (value) {
+                                        widget.recruiter.setNationality = value;
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //----------------------------GENDER----------------------------------//
+
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Gender',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  height: 48,
+                                  width: double.infinity,
+                                  //width: MediaQuery.of(context).size.width-64,
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        50, // Width of the screen minus padding
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 0),
+                                    child: TextField(
+                                      controller: TextEditingController(
+                                          text: widget.recruiter.getgender),
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 12),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                      ),
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
+                                      onChanged: (value) {
+                                        widget.recruiter.setGender = value;
                                       },
                                     ),
                                   ),
@@ -317,7 +391,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                   //                 BorderRadius.all(Radius.circular(10)),
                   //           ),
                   //         ),
-                  //         child: const Text('Next'),
+                  //         child: const Text('Confirm'),
                   //       ),
                   //     ),
                   //   ),

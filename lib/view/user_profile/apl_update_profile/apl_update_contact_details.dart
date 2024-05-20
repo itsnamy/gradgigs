@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/view/user_profile/apl_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewBankDetails extends StatefulWidget {
+class ApplicantViewContactDetails extends StatefulWidget {
   final ApplicantProfile applicant;
-  const ApplicantViewBankDetails({super.key, required this.applicant});
+  const ApplicantViewContactDetails({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewBankDetails> createState() =>
-      _ApplicantViewBankDetailsState();
+  State<ApplicantViewContactDetails> createState() =>
+      _ApplicantViewContactDetailsState();
 }
 
-class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
+class _ApplicantViewContactDetailsState
+    extends State<ApplicantViewContactDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Bank details',
+          'Contact Details',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
@@ -32,20 +34,21 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
           ),
         ),
         elevation: 5,
-        centerTitle: true,
+        centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(
-                context); //change to navigator.pop(). go to previous page
+            Navigator.pop(context);
           },
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
           child: Center(
             child: Container(
+              height: 270,
+              width: 450,
               decoration: BoxDecoration(
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
@@ -54,6 +57,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   //----------------------------FULLNAME DISPLAY----------------------------------//
+
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +88,9 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                       ),
                     ],
                   ),
-                  //----------------------------BANK NAME----------------------------------//
+
+                  //----------------------------MOBILE NUMBER----------------------------------//
+
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -98,7 +104,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Bank Name',
+                                  'Mobile Number',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -124,7 +130,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: TextField(
                                       controller: TextEditingController(
-                                          text: widget.applicant.getBankName),
+                                          text: widget.applicant.getPhone),
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
@@ -140,77 +146,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                         fontSize: 16,
                                       ),
                                       onChanged: (value) {
-                                        widget.applicant.setBankName = value;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  //----------------------------BANK ACCOUNT HOLDER NAME----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Bank Account Holder Name',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget
-                                              .applicant.getBankHolderName),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setBankHolderName =
-                                            value;
+                                        widget.applicant.setPhone = value;
                                       },
                                     ),
                                   ),
@@ -223,7 +159,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                     ],
                   ),
 
-                  //----------------------------BANK ACCOUNT NUMBER----------------------------------//
+                  //----------------------------EMAIL----------------------------------//
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -237,7 +173,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Bank Account Number',
+                                  'Email',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -263,7 +199,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: TextField(
                                       controller: TextEditingController(
-                                          text: widget.applicant.getBankNumber),
+                                          text: widget.applicant.getEmail),
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
@@ -279,7 +215,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                                         fontSize: 16,
                                       ),
                                       onChanged: (value) {
-                                        widget.applicant.setBankNumber = value;
+                                        widget.applicant.setEmail = value;
                                       },
                                     ),
                                   ),
@@ -322,7 +258,6 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                   //     ),
                   //   ),
                   // ),
-
                   SizedBox(height: 30),
 
                   //---------------------------------END---------------------------------//
