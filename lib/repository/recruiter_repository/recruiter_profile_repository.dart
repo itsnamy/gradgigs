@@ -2,12 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
 
-class RecruiterProfileRepository extends GetxController{
+class RecruiterProfileRepository extends GetxController {
   static RecruiterProfileRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
 
-  createRecruiter(RecruiterProfile recruiter) async{
-    await _db.collection("recruiter").add(recruiter.toJson()).whenComplete(() => Get.snackbar("Success", "Account has been added"));
+  createRecruiter(RecruiterProfile recruiter) async {
+    await _db
+        .collection("recruiter")
+        .add(recruiter.toJson())
+        .whenComplete(() => Get.snackbar("Success", "Account has been added"));
+  }
+
+  Future<RecruiterProfile> getRecruiter(String recruiterEmail) async {
+    final snapshot = await _db
+        .collection("recruiter")
+        .where("recruiterEmail", isEqualTo: recruiterEmail)
+        .get();
+    final recruiterProfileData =
+        snapshot.docs.map((e) => RecruiterProfile.fromSnapshot(e)).single;
+    return recruiterProfileData;
   }
 }
