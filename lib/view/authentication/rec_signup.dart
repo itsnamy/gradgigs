@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/authentication/login.dart';
@@ -15,7 +15,7 @@ class RecruiterSignupPage extends StatefulWidget {
 }
 
 class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
-  ReqruiterProfile recruiter = ReqruiterProfile();
+  RecruiterProfile recruiter = RecruiterProfile();
   final AuthService _authService = AuthService();
   final _formkey = GlobalKey<FormState>();
 

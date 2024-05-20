@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 
-class ReqruiterProfile {
+class RecruiterProfile {
   String role = "recruiter";
+  late String id;
   late String email;
   late String phone;
   late String password;
@@ -18,7 +20,7 @@ class ReqruiterProfile {
   late String orgName;
   late String position;
 
-  ReqruiterProfile() {
+  RecruiterProfile() {
     email = "recruiter@utm.my";
     phone = "0131013131";
     password = "password";
@@ -144,22 +146,58 @@ class ReqruiterProfile {
 
   String get getPosition => position;
 
-
-  toJson(){
-    return{
-    "email": email,
-    "phone": phone,
-    "password": password,
-    "category": category,
-    "username": username,
-    "fullname": fullname,
-    "dob": dob,
-    "gender": gender,
-    "nationality": nationality,
-    "utmMail": utmMail,
-    "faculty": faculty,
-    "orgName": orgName,
-    "position": position,
+  toJson() {
+    return {
+      "recruiterEmail": email,
+      "phone": phone,
+      "password": password,
+      "category": category,
+      "username": username,
+      "fullname": fullname,
+      "dob": dob,
+      "gender": gender,
+      "nationality": nationality,
+      "utmMail": utmMail,
+      "faculty": faculty,
+      "orgName": orgName,
+      "position": position,
     };
   }
+
+  factory RecruiterProfile.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+    return RecruiterProfile.dataHandling(
+      id: document.id,
+      email: data["recruiterEmail"],
+      phone: data["phone"],
+      password: data["password"],
+      category: data["category"],
+      username: data["username"],
+      fullname: data["fullname"],
+      dob: data["dob"],
+      gender: data["gender"],
+      nationality: data["nationality"],
+      utmMail: data["utmMail"],
+      faculty: data["faculty"],
+      orgName: data["orgName"],
+      position: data["position"],
+    );
+  }
+
+  RecruiterProfile.dataHandling({
+    required this.id,
+    required this.email,
+    required this.phone,
+    required this.password,
+    required this.category,
+    required this.username,
+    required this.fullname,
+    required this.dob,
+    required this.gender,
+    required this.nationality,
+    required this.utmMail,
+    required this.faculty,
+    required this.orgName,
+    required this.position,
+  });
 }

@@ -6,12 +6,12 @@ import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterContactDetails extends StatefulWidget {
-  final ReqruiterProfile recruiter;
+  final RecruiterProfile recruiter;
   RecruiterContactDetails({super.key, required this.recruiter});
 
   @override
