@@ -54,7 +54,7 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
         child: Container(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder<List<RecruiterJobUploadModel>>(
-            future: _jobRepository.getAllJobDetails(),
+            future: _jobRepository.getAllRecruiterJobs("ammar@graduate.utm.my"),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();

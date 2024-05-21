@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/login.dart';
@@ -13,15 +12,7 @@ import 'rec_view_profile/rec_view_basic_info.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterProfilePage extends StatefulWidget {
-  final RecruiterProfile recruiter;
-
-  const RecruiterProfilePage({super.key, required this.recruiter});
-
-  /* final String email;
-  final String password;
-  final String fullName;
-  final String username;
-  final String? selectedRole; */
+  const RecruiterProfilePage({super.key});
 
   @override
   State<RecruiterProfilePage> createState() => _RecruiterProfileState();
@@ -29,11 +20,8 @@ class RecruiterProfilePage extends StatefulWidget {
 
 class _RecruiterProfileState extends State<RecruiterProfilePage> {
   final AuthService _authService = AuthService();
-  RecruiterProfile recruiter = RecruiterProfile();
 
   late Future<RecruiterProfile> recruiter2;
-
-  final RecruiterProfileRepository _recruiterProfileRepository = Get.put(RecruiterProfileRepository());
 
   @override
   void initState() {
@@ -190,7 +178,8 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                                 horizontal: 15, vertical: 10),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Color(0xFF5C001F), width: 1),
+                              side: BorderSide(
+                                  color: Color(0xFF5C001F), width: 1),
                             ),
                             backgroundColor: Color(0xFFF5F5F5),
                           ),

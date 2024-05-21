@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
 
@@ -8,6 +9,10 @@ class JobRepository extends GetxController {
   final _db = FirebaseFirestore.instance;
 
   createJob(RecruiterJobUploadModel job) async {
+
+    String? email = FirebaseAuth.instance.currentUser?.email;
+    job.setJobUploaderEmail = email ?? "no email found";
+
     await _db
         .collection("jobs")
         .add(job.toJson())
@@ -27,6 +32,14 @@ class JobRepository extends GetxController {
 
   Future<List<RecruiterJobUploadModel>> getAllJobDetails() async {
     final snapshot = await _db.collection("jobs").get();
+    final jobData = snapshot.docs
+        .map((e) => RecruiterJobUploadModel.fromSnapshot(e))
+        .toList();
+    return jobData;
+  }
+
+  Future<List<RecruiterJobUploadModel>> getAllRecruiterJobs(String recruiterEmail) async {
+    final snapshot = await _db.collection("jobs").where("jobUploaderEmail", isEqualTo: recruiterEmail).get();
     final jobData = snapshot.docs
         .map((e) => RecruiterJobUploadModel.fromSnapshot(e))
         .toList();
