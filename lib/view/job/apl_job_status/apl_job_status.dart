@@ -3,59 +3,58 @@ import 'package:get/get.dart';
 import 'package:gradgigs/model/job_status_model.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 
-
 class AplJobStatus extends StatefulWidget {
   AplJobStatus({Key? key}) : super(key: key);
 
   @override
-  State<AplJobStatus> createState() =>
-      _AplJobStatusWidgetState();
+  State<AplJobStatus> createState() => _AplJobStatusWidgetState();
 }
 
-class _AplJobStatusWidgetState extends State<AplJobStatus>
-    with TickerProviderStateMixin {
-  final JobStatusRepository _JobStatusRepository = Get.put(JobStatusRepository());
+class _AplJobStatusWidgetState extends State<AplJobStatus> with TickerProviderStateMixin {
+  final JobStatusRepository _jobStatusRepository = Get.put(JobStatusRepository());
+  late Future<List<ApplicantJobStatus>> _jobDetailsFuture;
 
   @override
   void initState() {
     super.initState();
+    _fetchJobDetails();
+  }
+
+  void _fetchJobDetails() {
+    setState(() {
+      _jobDetailsFuture = _jobStatusRepository.getAllJobDetails();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text(
-            'Job Applied',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Job Applied',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
           ),
-          toolbarHeight: 70,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(25),
-              bottomLeft: Radius.circular(25),
-            ),
-          ),
-          elevation: 5,
-          centerTitle: true,
-          backgroundColor: Color(0xFFE4BA70),
-          // leading: IconButton(
-          //   icon: const Icon(Icons.arrow_back),
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          // ),
         ),
+        toolbarHeight: 70,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 5,
+        centerTitle: true,
+        backgroundColor: Color(0xFFE4BA70),
+      ),
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder<List<ApplicantJobStatus>>(
-            future: _JobStatusRepository.getAllJobDetails(),
+            future: _jobDetailsFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
@@ -104,12 +103,13 @@ class _AplJobStatusWidgetState extends State<AplJobStatus>
               child: Container(
                 width: 80,
                 height: 80,
-                child: Image.network('https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', fit: BoxFit.cover),
+                child: Image.network(
+                  'https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(width: 10),
-
-            // Second Section: Text
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,17 +131,14 @@ class _AplJobStatusWidgetState extends State<AplJobStatus>
                 ],
               ),
             ),
-
-            // Third Section: Cancel Button
             IconButton(
               icon: const Icon(Icons.cancel),
               color: Colors.red,
-              onPressed: (){
-                JobStatusRepository.instance.deleteJob(job.statusId);
+              onPressed: () async {
+                await _jobStatusRepository.deleteJob(job.statusId);
+                _fetchJobDetails();
               },
             ),
-
-            // Fourth Section: Status Container
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
