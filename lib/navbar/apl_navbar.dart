@@ -57,8 +57,8 @@ class _AplCustomBottomNavigationBarState extends State<AplCustomBottomNavigation
             label: 'Jobs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Message',
+            icon: Icon(Icons.work),
+            label: 'Job Applied',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
