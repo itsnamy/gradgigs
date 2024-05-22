@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
@@ -54,7 +55,7 @@ class _RecruiterJobUploadViewWidgetState extends State<RecruiterJobUploadView>
         child: Container(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder<List<RecruiterJobUploadModel>>(
-            future: _jobRepository.getAllRecruiterJobs("ammar@graduate.utm.my"),
+            future: _jobRepository.getAllRecruiterJobs(FirebaseAuth.instance.currentUser!.email.toString()),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
