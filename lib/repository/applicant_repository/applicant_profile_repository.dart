@@ -14,13 +14,35 @@ class ApplicantProfileRepository extends GetxController {
         .whenComplete(() => Get.snackbar("Success", "Account has been added"));
   }
 
-  Future<ApplicantProfile> getRecruiter(String applicantEmail) async {
+  Future<ApplicantProfile> getApplicant(String applicantEmail) async {
     final snapshot = await _db
         .collection("applicant")
         .where("applicantEmail", isEqualTo: applicantEmail)
         .get();
-    final applicantProfileData =
-        snapshot.docs.map((e) => ApplicantProfile.fromSnapshot(e)).single;
-    return applicantProfileData;
+    if (snapshot.docs.isNotEmpty) {
+      final applicantProfileData =
+          snapshot.docs.map((e) => ApplicantProfile.fromSnapshot(e)).single;
+      return applicantProfileData;
+    } else {
+      print('No documents found for applicantEmail: $applicantEmail');
+      return ApplicantProfile.dataHandling(
+          id: '',
+          email: '',
+          phone: '',
+          password: '',
+          category: '',
+          username: '',
+          fullname: '',
+          dob: '',
+          gender: '',
+          nationality: '',
+          utmMail: '',
+          faculty: '',
+          yearProgram: '',
+          college: '',
+          bankName: '',
+          bankHolderName: '',
+          bankNumber: '');
+    }
   }
 }

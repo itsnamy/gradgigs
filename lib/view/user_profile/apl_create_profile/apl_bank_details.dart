@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/navbar/apl_navbar.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
@@ -20,10 +21,11 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController bankNameController = TextEditingController();
-  final TextEditingController bankHolderNameController = TextEditingController();
+  final TextEditingController bankHolderNameController =
+      TextEditingController();
   final TextEditingController bankNumberController = TextEditingController();
 
-  applicantBankDetails(){
+  applicantBankDetails() {
     String bankName = bankHolderNameController.text;
     String bankHolderName = bankHolderNameController.text;
     String bankNumber = bankNumberController.text;
@@ -38,9 +40,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                ApplicantProfilePage(applicant: widget.applicant)));
-
+            builder: (context) => AplCustomBottomNavigationBar()));
   }
 
   @override
@@ -248,7 +248,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
                         ),
                       ],
                     ),
-                    
+
                     //------------------------------BUTTONS---------------------------------//
 
                     Container(
@@ -280,7 +280,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
                                     BorderRadius.all(Radius.circular(10)),
                               ),
                             ),
-                            child: const Text('Next'),
+                            child: const Text('Done'),
                           ),
                         ),
                       ),

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gradgigs/model/apl_profile_model.dart';
 
 class RecruiterProfile {
   String role = "recruiter";
@@ -164,7 +163,8 @@ class RecruiterProfile {
     };
   }
 
-  factory RecruiterProfile.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory RecruiterProfile.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return RecruiterProfile.dataHandling(
       id: document.id,

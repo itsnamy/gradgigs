@@ -25,7 +25,8 @@ class AplCustomBottomNavigationBar extends StatefulWidget {
       _AplCustomBottomNavigationBarState();
 }
 
-class _AplCustomBottomNavigationBarState extends State<AplCustomBottomNavigationBar> {
+class _AplCustomBottomNavigationBarState
+    extends State<AplCustomBottomNavigationBar> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     SearchPage(),
@@ -108,6 +109,6 @@ class MessagePage extends StatelessWidget {
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ApplicantProfilePage(applicant: ApplicantProfile());
+    return ApplicantProfilePage();
   }
 }

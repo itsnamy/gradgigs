@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:gradgigs/service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/view/authentication/login.dart';
@@ -14,9 +13,7 @@ import 'package:gradgigs/repository/applicant_repository/applicant_profile_repos
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantProfilePage extends StatefulWidget {
-  final ApplicantProfile applicant;
-
-  const ApplicantProfilePage({super.key, required this.applicant});
+  const ApplicantProfilePage({super.key});
 
   @override
   State<ApplicantProfilePage> createState() => _ApplicantProfilePageState();
@@ -24,12 +21,8 @@ class ApplicantProfilePage extends StatefulWidget {
 
 class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
   final AuthService _authService = AuthService();
-  ApplicantProfile applicant = ApplicantProfile();
 
   late Future<ApplicantProfile> applicant2;
-
-  final ApplicantProfileRepository _applicantProfileRepository =
-      Get.put(ApplicantProfileRepository());
 
   @override
   void initState() {
@@ -40,7 +33,22 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
   Future<ApplicantProfile> fetchApplicantProfile() async {
     final userEmail = FirebaseAuth.instance.currentUser?.email;
     if (userEmail != null) {
-      return await ApplicantProfileRepository().getRecruiter(userEmail);
+      print('User email: $userEmail'); // Log the user email
+      print('Fetching profile...');
+      try {
+        ApplicantProfile profile =
+            await ApplicantProfileRepository().getApplicant(userEmail);
+        if (profile == null) {
+          print('Fetched profile: is null');
+        } else {
+          print(
+              'Fetched profile: ${profile.getUsername}'); // Log the fetched profile
+        }
+        return profile;
+      } catch (e) {
+        print('Error fetching profile: $e');
+        return ApplicantProfile();
+      }
     } else {
       throw Exception("User is not logged in or email is null.");
     }
@@ -69,14 +77,8 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
         centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () async {
-            String message = await _authService.logOut();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LoginPage(title: 'Sign In'),
-              ),
-            );
+          onPressed: () {
+            Navigator.pop(context);
           },
         ),
       ),
@@ -107,7 +109,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.applicant.fullname,
+                          applicant.fullname,
                           style: TextStyle(
                             fontSize: 24,
                             color: Colors.white,
@@ -122,8 +124,8 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                         ),
                         const SizedBox(height: 30),
                         TextButton(
-                          onPressed: () => applicantBasicInformation(
-                              context, widget.applicant),
+                          onPressed: () =>
+                              applicantBasicInformation(context, applicant),
                           child: const Text(
                             'Basic Information',
                             style: TextStyle(
@@ -134,8 +136,8 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                         ),
                         Divider(),
                         TextButton(
-                          onPressed: () => applicantAcademicInformation(
-                              context, widget.applicant),
+                          onPressed: () =>
+                              applicantAcademicInformation(context, applicant),
                           child: const Text(
                             'Academic Information',
                             style: TextStyle(
@@ -146,8 +148,8 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                         ),
                         Divider(),
                         TextButton(
-                          onPressed: () => applicantContactDetails(
-                              context, widget.applicant),
+                          onPressed: () =>
+                              applicantContactDetails(context, applicant),
                           child: const Text(
                             'Contact Details',
                             style: TextStyle(
@@ -159,7 +161,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                         Divider(),
                         TextButton(
                           onPressed: () =>
-                              applicantBankDetails(context, widget.applicant),
+                              applicantBankDetails(context, applicant),
                           child: const Text(
                             'Bank Details',
                             style: TextStyle(
@@ -170,8 +172,8 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                         ),
                         Divider(),
                         TextButton(
-                          onPressed: () => applicantSupportingDocuments(
-                              context, widget.applicant),
+                          onPressed: () =>
+                              applicantSupportingDocuments(context, applicant),
                           child: const Text(
                             'Supporting Documents',
                             style: TextStyle(
@@ -196,7 +198,7 @@ class _ApplicantProfilePageState extends State<ApplicantProfilePage> {
                     width: 400,
                     child: ElevatedButton(
                       onPressed: () {
-                        loginPage(context, widget.applicant);
+                        loginPage(context, _authService);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
@@ -275,7 +277,21 @@ void applicantSupportingDocuments(
               ApplicantViewSupportingDocuments(applicant: applicant)));
 }
 
-void loginPage(BuildContext context, ApplicantProfile applicant) {
-  Navigator.push(context,
-      MaterialPageRoute(builder: (context) => LoginPage(title: 'Sign In')));
+Future<void> loginPage(
+  BuildContext context,
+  AuthService authService,
+) async {
+  String message = await authService.logOut();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+    ),
+  );
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => LoginPage(title: 'Sign In'),
+    ),
+  );
 }

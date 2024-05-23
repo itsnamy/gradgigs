@@ -1,17 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_supporting_documents.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewBankDetails extends StatefulWidget {
+class ApplicantUpdateBankDetails extends StatefulWidget {
   final ApplicantProfile applicant;
-  const ApplicantViewBankDetails({super.key, required this.applicant});
+  const ApplicantUpdateBankDetails({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewBankDetails> createState() =>
-      _ApplicantViewBankDetailsState();
+  State<ApplicantUpdateBankDetails> createState() =>
+      _ApplicantUpdateBankDetailsState();
 }
 
-class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
+class _ApplicantUpdateBankDetailsState
+    extends State<ApplicantUpdateBankDetails> {
+//declare controller
+  final TextEditingController bankNameController = TextEditingController();
+  final TextEditingController bankHolderNameController =
+      TextEditingController();
+  final TextEditingController bankNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Set the initial value through the controller
+    bankNameController.text = widget.applicant.getBankName;
+    bankHolderNameController.text = widget.applicant.getBankHolderName;
+    bankNumberController.text = widget.applicant.getBankNumber;
+  }
+
+  void updateBankDetailsNextStep() {
+    String bankName = bankNameController.text;
+    String bankHolderName = bankHolderNameController.text;
+    String bankNumber = bankNumberController.text;
+
+    widget.applicant.setBankName = bankName;
+    widget.applicant.setBankHolderName = bankHolderName;
+    widget.applicant.setBankNumber = bankNumber;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ApplicantUpdateSupportingDocuments(
+                applicant: widget.applicant)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

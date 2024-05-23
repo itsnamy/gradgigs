@@ -4,19 +4,52 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
+import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_acad_info.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewBasicInformation extends StatefulWidget {
+class ApplicantUpdateBasicInformation extends StatefulWidget {
   final ApplicantProfile applicant;
-  const ApplicantViewBasicInformation({super.key, required this.applicant});
+  const ApplicantUpdateBasicInformation({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewBasicInformation> createState() =>
-      _ApplicantViewBasicInformationState();
+  State<ApplicantUpdateBasicInformation> createState() =>
+      _ApplicantUpdateBasicInformationState();
 }
 
-class _ApplicantViewBasicInformationState
-    extends State<ApplicantViewBasicInformation> {
+class _ApplicantUpdateBasicInformationState
+    extends State<ApplicantUpdateBasicInformation> {
+  //declare controller
+  final TextEditingController fullnameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final TextEditingController nationalityController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    //set initial value through controller
+    fullnameController.text = widget.applicant.getFullname;
+    usernameController.text = widget.applicant.getUsername;
+    dobController.text = widget.applicant.getDOB;
+  }
+
+  void updateBasicInfoNextStep() {
+    String fullname = fullnameController.text;
+    String username = usernameController.text;
+    String dob = dobController.text;
+
+    widget.applicant.setFullname = fullname;
+    widget.applicant.setUsername = username;
+    widget.applicant.setDOB = dob;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ApplicantUpdateAcademicInformation(
+                applicant: widget.applicant)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

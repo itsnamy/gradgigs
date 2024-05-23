@@ -1,19 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_contact_details.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewAcademicInformation extends StatefulWidget {
+class ApplicantUpdateAcademicInformation extends StatefulWidget {
   final ApplicantProfile applicant;
-  const ApplicantViewAcademicInformation({super.key, required this.applicant});
+  const ApplicantUpdateAcademicInformation(
+      {super.key, required this.applicant});
 
   @override
-  State<ApplicantViewAcademicInformation> createState() =>
-      _ApplicantViewAcademicInformationState();
+  State<ApplicantUpdateAcademicInformation> createState() =>
+      _ApplicantUpdateAcademicInformationState();
 }
 
-class _ApplicantViewAcademicInformationState
-    extends State<ApplicantViewAcademicInformation> {
+class _ApplicantUpdateAcademicInformationState
+    extends State<ApplicantUpdateAcademicInformation> {
+  //declare controller
+  final TextEditingController fullnameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController facultyController = TextEditingController();
+  final TextEditingController collegeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Set the initial value through the controller
+    fullnameController.text = widget.applicant.getFullname;
+    emailController.text = widget.applicant.getEmail;
+    facultyController.text = widget.applicant.getFaculty;
+    collegeController.text = widget.applicant.getCollege;
+  }
+
+  void updateAcademicInfoNextStep() {
+    String fullname = fullnameController.text;
+    String email = emailController.text;
+    String faculty = facultyController.text;
+    String college = collegeController.text;
+
+    widget.applicant.setFullname = fullname;
+    widget.applicant.setEmail = email;
+    widget.applicant.setFaculty = faculty;
+    widget.applicant.setCollege = college;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ApplicantUpdateContactDetails(applicant: widget.applicant)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

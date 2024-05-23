@@ -73,7 +73,6 @@ class _LoginPageState extends State<LoginPage> {
       // MaterialPageRoute(
       //     builder: (context) => ApplicantProfilePage(applicant: applicant))
     );
-        
   }
 
   void recruiterPage() {

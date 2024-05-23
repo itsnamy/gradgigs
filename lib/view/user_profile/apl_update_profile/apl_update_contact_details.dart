@@ -1,19 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_bank_details.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewContactDetails extends StatefulWidget {
+class ApplicantUpdateContactDetails extends StatefulWidget {
   final ApplicantProfile applicant;
-  const ApplicantViewContactDetails({super.key, required this.applicant});
+  const ApplicantUpdateContactDetails({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewContactDetails> createState() =>
-      _ApplicantViewContactDetailsState();
+  State<ApplicantUpdateContactDetails> createState() =>
+      _ApplicantUpdateContactDetailsState();
 }
 
-class _ApplicantViewContactDetailsState
-    extends State<ApplicantViewContactDetails> {
+class _ApplicantUpdateContactDetailsState
+    extends State<ApplicantUpdateContactDetails> {
+//declare controller
+  final TextEditingController fullnameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Set the initial value through the controller
+    fullnameController.text = widget.applicant.getFullname;
+    phoneController.text = widget.applicant.getPhone;
+    emailController.text = widget.applicant.getEmail;
+  }
+
+  void updateContactDetails() {
+    String fullname = fullnameController.text;
+    String phone = phoneController.text;
+    String email = emailController.text;
+
+    widget.applicant.setFullname = fullname;
+    widget.applicant.setPhone = phone;
+    widget.applicant.setEmail = email;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ApplicantUpdateBankDetails(applicant: widget.applicant)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -180,7 +180,7 @@ class ApplicantProfile {
 
   toJson() {
     return {
-      'email': email,
+      'applicantEmail': email,
       'phone': phone,
       'password': password,
       'category': category,

@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/service/auth_service.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_contact_details.dart';
 import 'package:gradgigs/view/user_profile/rec_view_profile/rec_view_role_info.dart';
@@ -61,20 +61,8 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
         centerTitle: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () async {
-            String message = await _authService.logOut();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(message),
-              ),
-            );
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LoginPage(title: 'Sign In'),
-              ),
-            );
+          onPressed: () {
+            Navigator.pop(context);
           },
         ),
       ),
@@ -171,7 +159,7 @@ class _RecruiterProfileState extends State<RecruiterProfilePage> {
                         width: 400,
                         child: ElevatedButton(
                           onPressed: () {
-                            loginPage(context, recruiter);
+                            loginPage(context, _authService);
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -237,11 +225,21 @@ void recruiterContactDetails(BuildContext context, RecruiterProfile recruiter) {
               RecruiterViewContactDetails(recruiter: recruiter)));
 }
 
-void loginPage(BuildContext context, RecruiterProfile recruiter) {
-  Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-          builder: (context) => LoginPage(
-                title: 'Sign In',
-              )));
+Future<void> loginPage(
+  BuildContext context,
+  AuthService authService,
+) async {
+  String message = await authService.logOut();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+    ),
+  );
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => LoginPage(title: 'Sign In'),
+    ),
+  );
 }

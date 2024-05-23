@@ -4,26 +4,26 @@ import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantViewSupportingDocuments extends StatefulWidget {
+class ApplicantUpdateSupportingDocuments extends StatefulWidget {
   final ApplicantProfile applicant;
-  ApplicantViewSupportingDocuments({super.key, required this.applicant});
+  ApplicantUpdateSupportingDocuments({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewSupportingDocuments> createState() =>
-      _ApplicantViewSupportingDocumentsState();
+  State<ApplicantUpdateSupportingDocuments> createState() =>
+      _ApplicantUpdateSupportingDocumentsState();
 }
 
-class _ApplicantViewSupportingDocumentsState
-    extends State<ApplicantViewSupportingDocuments> {
+class _ApplicantUpdateSupportingDocumentsState
+    extends State<ApplicantUpdateSupportingDocuments> {
   final _formkey = GlobalKey<FormState>();
 
-  applicantSupportingDocuments() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                ApplicantBankDetails(applicant: widget.applicant)));
-  }
+  // applicantSupportingDocuments() {
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) =>
+  //               ApplicantBankDetails(applicant: widget.applicant)));
+  // }
 
   @override
   Widget build(BuildContext context) {
