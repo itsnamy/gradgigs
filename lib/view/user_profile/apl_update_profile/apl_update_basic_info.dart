@@ -95,18 +95,65 @@ class _ApplicantUpdateBasicInformationState
                     //----------------------------FULLNAME DISPLAY----------------------------------//
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: TextFormField(
-                            controller: fullnameController,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Full Name',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: TextFormField(
+                                        controller: fullnameController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                        validator: (value) =>
+                                            Validator.validateName(value!),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ],
