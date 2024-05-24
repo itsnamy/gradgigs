@@ -18,6 +18,7 @@ class ApplicantUpdateBasicInformation extends StatefulWidget {
 
 class _ApplicantUpdateBasicInformationState
     extends State<ApplicantUpdateBasicInformation> {
+  final _formkey = GlobalKey<FormState>();
   //declare controller
   final TextEditingController fullnameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
@@ -28,6 +29,7 @@ class _ApplicantUpdateBasicInformationState
   @override
   void initState() {
     super.initState();
+
     //set initial value through controller
     fullnameController.text = widget.applicant.getFullname;
     usernameController.text = widget.applicant.getUsername;
@@ -43,11 +45,8 @@ class _ApplicantUpdateBasicInformationState
     widget.applicant.setUsername = username;
     widget.applicant.setDOB = dob;
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ApplicantUpdateAcademicInformation(
-                applicant: widget.applicant)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
   }
 
   @override
@@ -88,352 +87,372 @@ class _ApplicantUpdateBasicInformationState
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  //----------------------------FULLNAME DISPLAY----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                        child: TextField(
-                          controller: TextEditingController(
-                              text: widget.applicant.getFullname),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 12),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    //----------------------------FULLNAME DISPLAY----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: TextFormField(
+                            controller: fullnameController,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                          onChanged: (value) {
-                            widget.applicant.setFullname = value;
-                          },
                         ),
-                      ),
-                    ],
-                  ),
-                  //----------------------------USERNAME----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Username',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.applicant.getUsername),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setUsername = value;
-                                      },
+                      ],
+                    ),
+                    //----------------------------USERNAME----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Username',
+                                    style: TextStyle(
+                                      color: Colors.white,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  //----------------------------DATE OF BIRTH----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Date of Birth',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.applicant.getDOB),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: TextFormField(
+                                        controller: usernameController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
                                         ),
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                        validator: (value) =>
+                                            Validator.validateName(value!),
                                       ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setDOB = value;
-                                      },
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-
-                  //----------------------------NATIONALITY----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Nationality',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text:
-                                              widget.applicant.getNationality),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setNationality = value;
-                                      },
+                      ],
+                    ),
+                    //----------------------------DATE OF BIRTH----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Date of Birth',
+                                    style: TextStyle(
+                                      color: Colors.white,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  //----------------------------GENDER----------------------------------//
-
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Gender',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.applicant.getgender),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setGender = value;
-                                      },
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: TextFormField(
+                                          controller: dobController,
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 8,
+                                                    horizontal: 12),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                          ),
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                          validator: (value) =>
+                                              Validator.validateDateOfBirth(
+                                                  value!)),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
+                      ],
+                    ),
+
+                    //----------------------------NATIONALITY----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Nationality',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    constraints: BoxConstraints(
+                                      maxWidth:
+                                          MediaQuery.of(context).size.width -
+                                              50,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: DropdownButtonFormField<String>(
+                                        value: widget.applicant.getNationality,
+                                        decoration: InputDecoration(
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 0),
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText:
+                                              "Please Choose a nationality",
+                                        ),
+                                        items: ["Malaysia", "International"]
+                                            .map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            widget.applicant.setNationality =
+                                                newValue!;
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please select a nationality';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    //----------------------------GENDER----------------------------------//
+
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Gender',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    constraints: BoxConstraints(
+                                      maxWidth:
+                                          MediaQuery.of(context).size.width -
+                                              50,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: DropdownButtonFormField<String>(
+                                        value: widget.applicant.getgender,
+                                        decoration: InputDecoration(
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 0),
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText: "Please Choose a gender",
+                                        ),
+                                        items: ["Male", "Female"]
+                                            .map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            widget.applicant.setGender =
+                                                newValue!;
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please select a gender';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    //------------------------------BUTTONS---------------------------------//
+
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
+                      child: Center(
+                        child: SizedBox(
+                          height: 50,
+                          width: 250,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formkey.currentState!.validate()) {
+                                updateBasicInfoNextStep();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Please fill input')));
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              foregroundColor: Colors.black,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 228, 185, 112),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                            ),
+                            child: const Text('Next'),
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
 
-                  //------------------------------BUTTONS---------------------------------//
+                    SizedBox(height: 30),
 
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20, vertical: 16),
-                  //   child: Center(
-                  //     child: SizedBox(
-                  //       height: 50,
-                  //       width: 250,
-                  //       child: ElevatedButton(
-                  //         onPressed: () {
-                  //           Navigator.pop(context);
-                  //         },
-                  //         style: ElevatedButton.styleFrom(
-                  //           textStyle: const TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //           foregroundColor: Colors.black,
-                  //           backgroundColor:
-                  //               const Color.fromARGB(255, 228, 185, 112),
-                  //           shape: const RoundedRectangleBorder(
-                  //             borderRadius:
-                  //                 BorderRadius.all(Radius.circular(10)),
-                  //           ),
-                  //         ),
-                  //         child: const Text('Next'),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  SizedBox(height: 30),
-
-                  //---------------------------------END---------------------------------//
-                ],
+                    //---------------------------------END---------------------------------//
+                  ],
+                ),
               ),
             ),
           ),
