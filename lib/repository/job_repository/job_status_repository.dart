@@ -14,6 +14,14 @@ class JobStatusRepository extends GetxController {
     return jobData;
   }
 
+  Future<List<ApplicantJobStatus>> getAllRecruiterJobs(String aplEmail) async {
+    final snapshot = await _db.collection("jobApplication").where("aplEmail", isEqualTo: aplEmail).get();
+    final jobData = snapshot.docs
+        .map((e) => ApplicantJobStatus.fromSnapshot(e))
+        .toList();
+    return jobData;
+  }
+
   Future<List<ApplicantJobStatus>> getJobDetailsByJobTitle(
       String jobTitle) async {
     final snapshot = await _db

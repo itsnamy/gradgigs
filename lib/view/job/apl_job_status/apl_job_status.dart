@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/job_status_model.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AplJobStatus extends StatefulWidget {
   AplJobStatus({Key? key}) : super(key: key);
@@ -22,7 +23,8 @@ class _AplJobStatusWidgetState extends State<AplJobStatus> with TickerProviderSt
 
   void _fetchJobDetails() {
     setState(() {
-      _jobDetailsFuture = _jobStatusRepository.getAllJobDetails();
+      // _jobDetailsFuture = _jobStatusRepository.getAllJobDetails();
+      _jobDetailsFuture = _jobStatusRepository.getAllRecruiterJobs(FirebaseAuth.instance.currentUser!.email.toString());
     });
   }
 
@@ -62,12 +64,16 @@ class _AplJobStatusWidgetState extends State<AplJobStatus> with TickerProviderSt
                 return Text('Error: ${snapshot.error}');
               } else if (snapshot.hasData) {
                 final List<ApplicantJobStatus> jobDetails = snapshot.data!;
-                return ListView.builder(
-                  itemCount: jobDetails.length,
-                  itemBuilder: (context, index) {
-                    return _buildJobCard(jobDetails[index]);
-                  },
-                );
+                if (jobDetails.isEmpty) {
+                  return Text('No Job Applied');
+                } else {
+                  return ListView.builder(
+                    itemCount: jobDetails.length,
+                    itemBuilder: (context, index) {
+                      return _buildJobCard(jobDetails[index]);
+                    },
+                  );
+                }
               } else {
                 return Text('No Data Available');
               }
@@ -81,13 +87,13 @@ class _AplJobStatusWidgetState extends State<AplJobStatus> with TickerProviderSt
   Widget _buildJobCard(ApplicantJobStatus job) {
     Color statusColor;
     switch (job.jobStatus) {
-      case 'pending':
+      case 'Pending':
         statusColor = const Color(0xFFE4BA70);
         break;
-      case 'accepted':
+      case 'Accepted':
         statusColor = Colors.green;
         break;
-      case 'rejected':
+      case 'Rejected':
         statusColor = Colors.red;
         break;
       default:
