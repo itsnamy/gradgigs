@@ -14,12 +14,23 @@ class JobStatusRepository extends GetxController {
     return jobData;
   }
 
-    Future<void> deleteJob(String statusId) async {
+  Future<void> deleteJob(String statusId) async {
     try {
       await _db.collection("jobApplication").doc(statusId).delete();
       // Get.snackbar("Success", "Job has been deleted");
     } catch (error) {
       // Get.snackbar("Error", "Failed to delete job: $error");
+    }
+  }
+
+  Future<void> updateJobStatus(String statusId, String status) async {
+    try {
+      await _db.collection("jobApplication").doc(statusId).update({
+        "status": status,
+      });
+      // Get.snackbar("Success", "Job status has been updated");
+    } catch (error) {
+      // Get.snackbar("Error", "Failed to update job status: $error");
     }
   }
 }

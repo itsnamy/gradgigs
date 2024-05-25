@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/view/home/rec_home.dart';
 import 'package:gradgigs/view/job/create_job/job_create1.dart';
+import 'package:gradgigs/view/job/rec_job_application/rec_application_list.dart';
 import 'package:gradgigs/view/user_profile/rec_profile.dart';
 
 void main() => runApp(const BottomNavigationBarApp());
@@ -30,7 +31,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     SearchPage(),
     JobsPage(),
     UploadPage(),
-    MessagePage(),
+    ApplicationPage(),
     ProfilePage(),
   ];
 
@@ -62,7 +63,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            label: 'Message',
+            label: 'Application',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
@@ -101,12 +102,10 @@ class UploadPage extends StatelessWidget {
   }
 }
 
-class MessagePage extends StatelessWidget {
+class ApplicationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Message Page')),
-    );
+    return RecruiterJobApplicationList();
   }
 }
 
