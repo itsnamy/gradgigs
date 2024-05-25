@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
-import 'package:gradgigs/view/job/update_job/job_update1.dart';
 import 'package:gradgigs/repository/job_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/model/job_status_model.dart';
@@ -24,6 +23,7 @@ class ApplicantJobDetailsPage extends StatelessWidget {
       jobStatus: pendingStatus,
       jobTitle: job.jobTitle,
       recEmail: job.getJobUploaderEmail,
+      jobId : job.getJobId,
     );
 
     final jobRepo = Get.put(JobStatusRepository());
