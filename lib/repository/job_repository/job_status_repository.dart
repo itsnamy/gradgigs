@@ -52,4 +52,11 @@ class JobStatusRepository extends GetxController {
       // Get.snackbar("Error", "Failed to update job status: $error");
     }
   }
+
+  createJobApplication(ApplicantJobStatus jobStatus) async {
+    await _db
+        .collection("jobApplication")
+        .add(jobStatus.toJson())
+        .whenComplete(() => Get.snackbar("Success", "Application has been added"));
+  }
 }
