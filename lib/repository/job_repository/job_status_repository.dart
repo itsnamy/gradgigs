@@ -33,6 +33,17 @@ class JobStatusRepository extends GetxController {
     return jobData;
   }
 
+  Future<List<ApplicantJobStatus>> getJobDetailsByJobId(
+      String jobId) async {
+    final snapshot = await _db
+        .collection("jobApplication")
+        .where("jobId", isEqualTo: jobId)
+        .get();
+    final jobData =
+        snapshot.docs.map((e) => ApplicantJobStatus.fromSnapshot(e)).toList();
+    return jobData;
+  }
+
   Future<void> deleteJob(String statusId) async {
     try {
       await _db.collection("jobApplication").doc(statusId).delete();

@@ -31,7 +31,7 @@ class _RecruiterApplicantListState extends State<RecruiterApplicantList> {
   void _fetchApplicantList() {
     setState(() {
       _applicantListFuture =
-          _jopStatus.getJobDetailsByJobTitle(widget.job.jobTitle);
+          _jopStatus.getJobDetailsByJobId(widget.job.getJobId);
     });
   }
 
