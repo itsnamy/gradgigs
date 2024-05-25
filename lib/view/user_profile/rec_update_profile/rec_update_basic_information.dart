@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // import 'package:gradgigs/service/auth_validator.dart';
 // import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
@@ -47,7 +47,7 @@ class _RecruiterUpdateBasicInformationState
     recProfileRepo.updateRecruiter(widget.recruiter.getRecId, widget.recruiter);
 
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => RecruiterProfilePage()));
+        MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()));
   }
 
   @override
@@ -139,9 +139,9 @@ class _RecruiterUpdateBasicInformationState
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 8, horizontal: 12),
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              borderSide: BorderSide.none),
                                         ),
                                         style: TextStyle(
                                           color: Colors.black,
@@ -205,9 +205,9 @@ class _RecruiterUpdateBasicInformationState
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 8, horizontal: 12),
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              borderSide: BorderSide.none),
                                         ),
                                         style: TextStyle(
                                           color: Colors.black,
@@ -276,6 +276,7 @@ class _RecruiterUpdateBasicInformationState
                                             border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(15),
+                                                  borderSide: BorderSide.none
                                             ),
                                           ),
                                           style: TextStyle(

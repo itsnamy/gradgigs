@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
-import 'package:gradgigs/view/user_profile/rec_update_profile/rec_update_contact_details.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterUpdateContactDetails extends StatefulWidget {
@@ -47,7 +46,7 @@ class _RecruiterUpdateContactDetailsState
     recProfileRepo.updateRecruiter(widget.recruiter.getRecId, widget.recruiter);
 
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => RecruiterProfilePage()));
+        MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()));
   }
 
   @override
