@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:gradgigs/navbar/apl_navbar.dart';
+import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_academic_information.dart';
-import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_acad_info.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantUpdateBasicInformation extends StatefulWidget {
@@ -43,8 +43,13 @@ class _ApplicantUpdateBasicInformationState
     widget.applicant.setUsername = username;
     widget.applicant.setDOB = dob;
 
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
+    final appProfileRepo = Get.put(ApplicantProfileRepository());
+    appProfileRepo.updateApplicant(widget.applicant.getAppId, widget.applicant);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AplCustomBottomNavigationBar()));
   }
 
   @override
@@ -136,9 +141,9 @@ class _ApplicantUpdateBasicInformationState
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 8, horizontal: 12),
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              borderSide: BorderSide.none),
                                         ),
                                         style: TextStyle(
                                           color: Colors.black,
@@ -202,9 +207,9 @@ class _ApplicantUpdateBasicInformationState
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 8, horizontal: 12),
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              borderSide: BorderSide.none),
                                         ),
                                         style: TextStyle(
                                           color: Colors.black,
@@ -270,9 +275,9 @@ class _ApplicantUpdateBasicInformationState
                                                     vertical: 8,
                                                     horizontal: 12),
                                             border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                borderSide: BorderSide.none),
                                           ),
                                           style: TextStyle(
                                             color: Colors.black,

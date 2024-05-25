@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/job_status_model.dart';
+import 'package:gradgigs/repository/job_repository.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -13,6 +14,7 @@ class AplJobStatus extends StatefulWidget {
 
 class _AplJobStatusWidgetState extends State<AplJobStatus> with TickerProviderStateMixin {
   final JobStatusRepository _jobStatusRepository = Get.put(JobStatusRepository());
+  final JobRepository _jobRepository = Get.put(JobRepository());
   late Future<List<ApplicantJobStatus>> _jobDetailsFuture;
 
   @override
@@ -142,6 +144,7 @@ class _AplJobStatusWidgetState extends State<AplJobStatus> with TickerProviderSt
               color: Colors.red,
               onPressed: () async {
                 await _jobStatusRepository.deleteJob(job.statusId);
+                await _jobRepository.decrementNumOfApplicants(job.getJobId);
                 _fetchJobDetails();
               },
             ),

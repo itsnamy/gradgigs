@@ -35,6 +35,14 @@ class RecruiterProfile {
     position = 'Position';
   }
 
+  //-------------------id---------------------//
+  String get getRecId => id;
+
+  //-------------------id---------------------//
+  set setRecId(String id) {
+    this.id = id;
+  }
+
   //-------------------email---------------------//
   set setEmail(String email) {
     this.email = email;

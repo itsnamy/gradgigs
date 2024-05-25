@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/navbar/apl_navbar.dart';
+import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_bank_details.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantUpdateContactDetails extends StatefulWidget {
@@ -40,8 +42,13 @@ class _ApplicantUpdateContactDetailsState
     widget.applicant.setPhone = phone;
     widget.applicant.setEmail = email;
 
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
+    final appProfileRepo = Get.put(ApplicantProfileRepository());
+    appProfileRepo.updateApplicant(widget.applicant.getAppId, widget.applicant);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AplCustomBottomNavigationBar()));
   }
 
   @override
@@ -153,9 +160,9 @@ class _ApplicantUpdateContactDetailsState
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 8, horizontal: 12),
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              borderSide: BorderSide.none),
                                         ),
                                         style: TextStyle(
                                           color: Colors.black,
@@ -221,9 +228,9 @@ class _ApplicantUpdateContactDetailsState
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 8, horizontal: 12),
                                           border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              borderSide: BorderSide.none),
                                         ),
                                         style: TextStyle(
                                           color: Colors.black,

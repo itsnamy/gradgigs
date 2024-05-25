@@ -8,6 +8,7 @@ class ApplicantJobStatus extends ApplicantProfile {
   late String _aplEmail;
   late String _jobStatus;
   late String _recEmail;
+  late String _jobId;
 
   ApplicantJobStatus({
     required String id,
@@ -16,6 +17,7 @@ class ApplicantJobStatus extends ApplicantProfile {
     required String aplEmail,
     required String jobStatus,
     required String recEmail,
+    required String jobId,
   }) {
     _id = id;
     _jobTitle = jobTitle;
@@ -23,6 +25,7 @@ class ApplicantJobStatus extends ApplicantProfile {
     _aplEmail = aplEmail;
     _jobStatus = jobStatus;
     _recEmail = recEmail;
+    _jobId = jobId;
   }
 
   String get statusId => _id;
@@ -43,6 +46,9 @@ class ApplicantJobStatus extends ApplicantProfile {
   String get recEmail => _recEmail;
   set recEmail(String value) => _recEmail = value;
 
+  String get getJobId => _jobId;
+  set setJobId(String value) => _jobId = value;
+
   factory ApplicantJobStatus.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return ApplicantJobStatus(
@@ -52,6 +58,7 @@ class ApplicantJobStatus extends ApplicantProfile {
       aplEmail: data["aplEmail"],
       jobStatus: data["jobStatus"],
       recEmail: data["recEmail"],
+      jobId: data["jobId"],
     );
   }
 
@@ -62,6 +69,7 @@ class ApplicantJobStatus extends ApplicantProfile {
       "aplEmail": _aplEmail,
       "jobStatus": _jobStatus,
       "recEmail": _recEmail,
+      "jobId" : _jobId
     };
   }
 }
