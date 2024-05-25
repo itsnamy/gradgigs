@@ -196,7 +196,7 @@ class _ApplicantUpdateAcademicInformationState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validateEmail(value!),
                                       ),
                                     ),
                                   ),
@@ -263,7 +263,7 @@ class _ApplicantUpdateAcademicInformationState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validateFaculty(value!),
                                       ),
                                     ),
                                   ),
@@ -331,7 +331,7 @@ class _ApplicantUpdateAcademicInformationState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validateCollege(value!),
                                       ),
                                     ),
                                   ),

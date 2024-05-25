@@ -140,4 +140,25 @@ class Validator {
     }
     return null;
   }
+
+  static String? validatebankName(String bankName) {
+    if (bankName.isEmpty) {
+      return "Please enter your bank name";
+    }
+    return null;
+  }
+
+  static String? validatebankHolderName(String bankHolderName) {
+    if (bankHolderName.isEmpty) {
+      return "Please enter your bank holder name";
+    }
+    return null;
+  }
+
+  static String? validatebankAccountNumber(String bankNumber) {
+    if (bankNumber.isEmpty) {
+      return "Please enter your bank number";
+    }
+    return null;
+  }
 }

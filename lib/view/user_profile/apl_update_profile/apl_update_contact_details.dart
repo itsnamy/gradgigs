@@ -162,7 +162,8 @@ class _ApplicantUpdateContactDetailsState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validatePhoneNumber(
+                                                value!),
                                       ),
                                     ),
                                   ),
@@ -229,7 +230,7 @@ class _ApplicantUpdateContactDetailsState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validateEmail(value!),
                                       ),
                                     ),
                                   ),

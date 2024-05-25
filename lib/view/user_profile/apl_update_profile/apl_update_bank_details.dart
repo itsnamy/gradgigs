@@ -162,7 +162,7 @@ class _ApplicantUpdateBankDetailsState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validatebankName(value!),
                                       ),
                                     ),
                                   ),
@@ -228,7 +228,8 @@ class _ApplicantUpdateBankDetailsState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validatebankHolderName(
+                                                value!),
                                       ),
                                     ),
                                   ),
@@ -295,7 +296,8 @@ class _ApplicantUpdateBankDetailsState
                                           fontSize: 16,
                                         ),
                                         validator: (value) =>
-                                            Validator.validateName(value!),
+                                            Validator.validatebankAccountNumber(
+                                                value!),
                                       ),
                                     ),
                                   ),

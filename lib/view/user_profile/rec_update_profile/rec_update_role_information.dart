@@ -1,45 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/view/user_profile/rec_create_profile/rec_contact_details.dart';
+import 'package:gradgigs/view/user_profile/rec_profile.dart';
 
 // ignore_for_file: prefer_const_constructors
 
-class RecruiterRoleInfo extends StatefulWidget {
+class RecruiterUpdateRoleInfo extends StatefulWidget {
   final RecruiterProfile recruiter;
-  RecruiterRoleInfo({super.key, required this.recruiter});
+  const RecruiterUpdateRoleInfo({super.key, required this.recruiter});
 
   @override
-  State<RecruiterRoleInfo> createState() => _RecruiterRoleInfoState();
+  State<RecruiterUpdateRoleInfo> createState() =>
+      _RecruiterUpdateRoleInfoState();
 }
 
-class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
+class _RecruiterUpdateRoleInfoState extends State<RecruiterUpdateRoleInfo> {
   final _formkey = GlobalKey<FormState>();
 
-  final TextEditingController utmMailController = TextEditingController();
-  final TextEditingController facultyController = TextEditingController();
-  final TextEditingController orgNameController = TextEditingController();
+  final TextEditingController recemailController = TextEditingController();
+  final TextEditingController recfacultyController = TextEditingController();
+  final TextEditingController recorgNameController = TextEditingController();
 
-  String? selectedPosition;
+  @override
+  void initState() {
+    super.initState();
 
-  recruiterRoleInfo() {
-    String utmMail = utmMailController.text;
-    String faculty = facultyController.text;
-    String orgName = orgNameController.text;
+    recemailController.text = widget.recruiter.getUtmMail;
+    recfacultyController.text = widget.recruiter.getFaculty;
+    recorgNameController.text = widget.recruiter.getOrgName;
+  }
 
-    //save data to class recruter profile
-    widget.recruiter.setUtmMail = utmMail;
+  void updaterecRoleInfoNextStep() {
+    String email = recemailController.text;
+    String faculty = recfacultyController.text;
+    String orgName = recorgNameController.text;
+
+    widget.recruiter.setUtmMail = email;
     widget.recruiter.setFaculty = faculty;
     widget.recruiter.setOrgName = orgName;
-    widget.recruiter.setPosition = selectedPosition!;
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                RecruiterContactDetails(recruiter: widget.recruiter)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => RecruiterProfilePage()));
   }
 
   @override
@@ -61,7 +64,7 @@ class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
             bottomLeft: Radius.circular(25),
           ),
         ),
-        elevation: 15,
+        elevation: 5,
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -84,77 +87,75 @@ class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            widget.recruiter.getFullname,
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  letterSpacing: 0,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-
                     if (widget.recruiter.checkIfAcademician())
                       Column(
                         children: [
                           //----------------------------STUDENT STAFF EMAIL----------------------------------//
                           Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 16, 16, 0),
-                                child: Text(
-                                  'Student/Staff Email',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0, -1),
+                                  alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 16, 16, 0),
-                                    child: TextFormField(
-                                      controller: utmMailController,
-                                      autofocus: true,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 0),
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Student/Staff Email',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                      ),
-                                      validator: (value) =>
-                                          Validator.validateUTMEmail(value!),
+                                        SizedBox(height: 8),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          height: 48,
+                                          width: double.infinity,
+                                          //width: MediaQuery.of(context).size.width-64,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                50, // Width of the screen minus padding
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(-1, 0),
+                                            child: TextFormField(
+                                              controller: recemailController,
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 12),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                              ),
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                              ),
+                                              validator: (value) =>
+                                                  Validator.validateEmail(
+                                                      value!),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -164,211 +165,273 @@ class _RecruiterRoleInfoState extends State<RecruiterRoleInfo> {
                           //----------------------------FACULTY----------------------------------//
                           Row(
                             mainAxisSize: MainAxisSize.max,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 16, 16, 0),
-                                child: Text(
-                                  'Faculty',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0, -1),
+                                  alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 16, 16, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.recruiter.getFaculty),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Faculty',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.recruiter.setFaculty = value;
-                                      },
+                                        SizedBox(height: 8),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          height: 48,
+                                          width: double.infinity,
+                                          //width: MediaQuery.of(context).size.width-64,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                50, // Width of the screen minus padding
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(-1, 0),
+                                            child: TextFormField(
+                                              controller: recfacultyController,
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 12),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                              ),
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                              ),
+                                              validator: (value) =>
+                                                  Validator.validateFaculty(
+                                                      value!),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
 
-                    if (widget.recruiter.checkIfNonAcademician())
-                      Column(
-                        children: [
-                          //----------------------------CLUBS AND ORGANISATION----------------------------------//
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: const [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 16, 16, 0),
-                                child: Text(
-                                  'Clubs and Organisation',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.left,
+                          if (widget.recruiter.checkIfNonAcademician())
+                            Column(
+                              children: [
+                                //----------------------------CLUBS AND ORGANISATION----------------------------------//
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20, 16, 16, 0),
+                                      child: Text(
+                                        'Clubs and Organisation',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment: AlignmentDirectional(0, -1),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 16, 16, 0),
+                                          child: TextFormField(
+                                            controller: recorgNameController,
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 8,
+                                                      horizontal: 12),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
+                                            ),
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                            validator: (value) =>
+                                                Validator.validateClubAndOrg(
+                                                    value!),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                          //----------------------------POSITION----------------------------------//
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0, -1),
+                                  alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 16, 16, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.recruiter.getOrgName),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Position',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.recruiter.setOrgName = value;
-                                      },
+                                        SizedBox(height: 8),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          height: 48,
+                                          width: double.infinity,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                50,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(-1, 0),
+                                            child:
+                                                DropdownButtonFormField<String>(
+                                              value:
+                                                  widget.recruiter.getPosition,
+                                              decoration: InputDecoration(
+                                                labelStyle: TextStyle(
+                                                    color: Colors.white),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 0),
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                hintText:
+                                                    "Please Choose a position",
+                                              ),
+                                              items: [
+                                                "Lecturer",
+                                                "Postgraduate Students",
+                                                "Club/Organisation Representative"
+                                              ].map((String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  widget.recruiter.setPosition =
+                                                      newValue!;
+                                                });
+                                              },
+                                              validator: (value) {
+                                                if (value == null ||
+                                                    value.isEmpty) {
+                                                  return 'Please select a position';
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
+
+                          //------------------------------BUTTONS---------------------------------//
+
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 16),
+                            child: Center(
+                              child: SizedBox(
+                                height: 50,
+                                width: 250,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_formkey.currentState!.validate()) {
+                                      updaterecRoleInfoNextStep();
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content:
+                                                  Text('Please fill input')));
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    foregroundColor: Colors.black,
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 228, 185, 112),
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                  ),
+                                  child: const Text('Next'),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+
+                          //---------------------------------END---------------------------------//
                         ],
                       ),
-
-                    //----------------------------POSITION----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 0, 0),
-                          child: Text(
-                            'Position',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                        child: DropdownButtonFormField<String>(
-                          value: selectedPosition,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 0),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: "Please Choose a Position",
-                          ),
-                          items: [
-                            "Lecturer",
-                            "Postgraduate Students",
-                            "Club/Organisation Representative"
-                          ].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedPosition = newValue;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Choose a Position';
-                            }
-                            return null; //if input
-                          },
-                        )),
-
-                    //------------------------------BUTTONS---------------------------------//
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 16),
-                      child: Center(
-                        child: SizedBox(
-                          height: 50,
-                          width: 250,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_formkey.currentState!.validate()) {
-                                recruiterRoleInfo();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Please fill input')));
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                              foregroundColor: Colors.black,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 228, 185, 112),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                            ),
-                            child: const Text('Next'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-
-                    //---------------------------------END---------------------------------//
                   ],
                 ),
               ),

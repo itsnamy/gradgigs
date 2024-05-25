@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:gradgigs/view/user_profile/rec_update_profile/rec_update_basic_information.dart';
 // import 'package:gradgigs/service/auth_validator.dart';
 // import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
 // ignore_for_file: prefer_const_constructors
-
 
 class RecruiterViewBasicInformation extends StatefulWidget {
   final RecruiterProfile recruiter;
@@ -243,7 +243,6 @@ class _RecruiterViewBasicInformationState
                       ),
                     ],
                   ),
-
                   //----------------------------GENDER----------------------------------//
 
                   Row(
@@ -303,34 +302,39 @@ class _RecruiterViewBasicInformationState
 
                   //------------------------------BUTTONS---------------------------------//
 
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20, vertical: 16),
-                  //   child: Center(
-                  //     child: SizedBox(
-                  //       height: 50,
-                  //       width: 250,
-                  //       child: ElevatedButton(
-                  //         onPressed: () {
-                  //           Navigator.pop(context);
-                  //         },
-                  //         style: ElevatedButton.styleFrom(
-                  //           textStyle: const TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //           foregroundColor: Colors.black,
-                  //           backgroundColor:
-                  //               const Color.fromARGB(255, 228, 185, 112),
-                  //           shape: const RoundedRectangleBorder(
-                  //             borderRadius:
-                  //                 BorderRadius.all(Radius.circular(10)),
-                  //           ),
-                  //         ),
-                  //         child: const Text('Confirm'),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
+                    child: Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 250,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        RecruiterUpdateBasicInformation(
+                                            recruiter: widget.recruiter)));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            foregroundColor: Colors.black,
+                            backgroundColor:
+                                const Color.fromARGB(255, 228, 185, 112),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                          ),
+                          child: const Text('Edit Profile'),
+                        ),
+                      ),
+                    ),
+                  ),
 
                   SizedBox(height: 30),
 
