@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/repository/job_repository.dart';
@@ -20,6 +20,21 @@ class _AplicantViewJobWidgetState extends State<AplicantViewJob>
   @override
   void initState() {
     super.initState();
+  }
+
+  // method to compare if start date of job is before current date
+  // before = true, after = false
+  bool compareDate(String dateString) {
+    DateTime currentDate = DateTime.now();
+
+    // Create a DateFormat instance with the expected format
+    DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+
+    // Parse the string to a DateTime object
+    DateTime parsedDate = dateFormat.parse(dateString);
+
+    // Compare the parsed date with the current date
+    return parsedDate.isBefore(currentDate);
   }
 
   @override
@@ -66,7 +81,11 @@ class _AplicantViewJobWidgetState extends State<AplicantViewJob>
                 return ListView.builder(
                   itemCount: jobDetails.length,
                   itemBuilder: (context, index) {
-                    return _buildJobCard(jobDetails[index]);
+                    final job = jobDetails[index];
+                    if (compareDate(job.getJobEnd)) {
+                      return SizedBox.shrink(); // Do not build the card if the job has ended
+                    }
+                    return _buildJobCard(job);
                   },
                 );
               } else {

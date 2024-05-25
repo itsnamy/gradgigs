@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/repository/job_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
