@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_bank_details.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantViewBankDetails extends StatefulWidget {
@@ -7,14 +8,14 @@ class ApplicantViewBankDetails extends StatefulWidget {
   const ApplicantViewBankDetails({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewBankDetails> createState() => _ApplicantViewBankDetailsState();
+  State<ApplicantViewBankDetails> createState() =>
+      _ApplicantViewBankDetailsState();
 }
 
 class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: const Text(
           'Bank details',
@@ -41,8 +42,7 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
           },
         ),
       ),
-
-       body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Center(
@@ -51,31 +51,29 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-              
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    //----------------------------FULLNAME DISPLAY----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            widget.applicant.getFullname,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  //----------------------------FULLNAME DISPLAY----------------------------------//
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                        child: Text(
+                          widget.applicant.getFullname,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
-                      ],
-                    ),
-                    //----------------------------BANK NAME----------------------------------//
-                    Row(
+                      ),
+                    ],
+                  ),
+                  //----------------------------BANK NAME----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -129,8 +127,8 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                       ),
                     ],
                   ),
-                    //----------------------------BANK ACCOUNT HOLDER NAME----------------------------------//
-                    Row(
+                  //----------------------------BANK ACCOUNT HOLDER NAME----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -185,8 +183,8 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                     ],
                   ),
 
-                    //----------------------------BANK ACCOUNT NUMBER----------------------------------//
-                    Row(
+                  //----------------------------BANK ACCOUNT NUMBER----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -240,48 +238,52 @@ class _ApplicantViewBankDetailsState extends State<ApplicantViewBankDetails> {
                       ),
                     ],
                   ),
-                  
-                    //------------------------------BUTTONS---------------------------------//
 
-                    // Container(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 20, vertical: 16),
-                    //   child: Center(
-                    //     child: SizedBox(
-                    //       height: 50,
-                    //       width: 250,
-                    //       child: ElevatedButton(
-                    //         onPressed: () {
-                    //           Navigator.pop(context);
-                    //         },
-                    //         style: ElevatedButton.styleFrom(
-                    //           textStyle: const TextStyle(
-                    //             fontWeight: FontWeight.bold,
-                    //           ),
-                    //           foregroundColor: Colors.black,
-                    //           backgroundColor:
-                    //               const Color.fromARGB(255, 228, 185, 112),
-                    //           shape: const RoundedRectangleBorder(
-                    //             borderRadius:
-                    //                 BorderRadius.all(Radius.circular(10)),
-                    //           ),
-                    //         ),
-                    //         child: const Text('Next'),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                  //------------------------------BUTTONS---------------------------------//
 
-                    SizedBox(height: 30),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
+                    child: Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 250,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ApplicantUpdateBankDetails(
+                                            applicant: widget.applicant)));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            foregroundColor: Colors.black,
+                            backgroundColor:
+                                const Color.fromARGB(255, 228, 185, 112),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                          ),
+                          child: const Text('Edit Profile'),
+                        ),
+                      ),
+                    ),
+                  ),
 
-                    //---------------------------------END---------------------------------//
-                  ],
-                ),
+                  SizedBox(height: 30),
+
+                  //---------------------------------END---------------------------------//
+                ],
               ),
             ),
           ),
-        ),      
-
+        ),
+      ),
     );
   }
 }

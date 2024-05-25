@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_contact_details.dart';
 // ignore_for_file: prefer_const_constructors
@@ -16,6 +17,7 @@ class ApplicantUpdateAcademicInformation extends StatefulWidget {
 
 class _ApplicantUpdateAcademicInformationState
     extends State<ApplicantUpdateAcademicInformation> {
+  final _formkey = GlobalKey<FormState>();
   //declare controller
   final TextEditingController fullnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -43,11 +45,8 @@ class _ApplicantUpdateAcademicInformationState
     widget.applicant.setFaculty = faculty;
     widget.applicant.setCollege = college;
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                ApplicantUpdateContactDetails(applicant: widget.applicant)));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ApplicantProfilePage()));
   }
 
   @override
@@ -88,283 +87,304 @@ class _ApplicantUpdateAcademicInformationState
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  //----------------------------FULLNAME DISPLAY----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                        child: TextField(
-                          controller: TextEditingController(
-                              text: widget.applicant.getFullname),
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 12),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    //----------------------------FULLNAME DISPLAY----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Text(
+                            widget.applicant.getFullname,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                          onChanged: (value) {
-                            widget.applicant.setFullname = value;
-                          },
                         ),
-                      ),
-                    ],
-                  ),
-                  //----------------------------STUDENT EMAIL----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Student Email',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.applicant.getEmail),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setEmail = value;
-                                      },
+                      ],
+                    ),
+
+                    // Row(
+                    //   mainAxisSize: MainAxisSize.max,
+                    //   children: [
+                    //     Padding(
+                    //       padding:
+                    //           EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                    //       child: TextField(
+                    //         controller: TextEditingController(
+                    //             text: widget.applicant.getFullname),
+                    //         decoration: InputDecoration(
+                    //           filled: true,
+                    //           fillColor: Colors.white,
+                    //           contentPadding: EdgeInsets.symmetric(
+                    //               vertical: 8, horizontal: 12),
+                    //           border: OutlineInputBorder(
+                    //             borderRadius: BorderRadius.circular(15),
+                    //           ),
+                    //         ),
+                    //         style: TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 20,
+                    //             fontWeight: FontWeight.bold),
+                    //         onChanged: (value) {
+                    //           widget.applicant.setFullname = value;
+                    //         },
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    //----------------------------STUDENT EMAIL----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Student Email',
+                                    style: TextStyle(
+                                      color: Colors.white,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  //----------------------------FACULTY----------------------------------//
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Faculty',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.applicant.getFaculty),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: TextFormField(
+                                        controller: emailController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
                                         ),
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                        validator: (value) =>
+                                            Validator.validateName(value!),
                                       ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setFaculty = value;
-                                      },
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  //----------------------------COLLEGE----------------------------------//
-
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(-1, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'College',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  height: 48,
-                                  width: double.infinity,
-                                  //width: MediaQuery.of(context).size.width-64,
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                        50, // Width of the screen minus padding
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(-1, 0),
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                          text: widget.applicant.getCollege),
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 12),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                      onChanged: (value) {
-                                        widget.applicant.setCollege = value;
-                                      },
+                    //----------------------------FACULTY----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Faculty',
+                                    style: TextStyle(
+                                      color: Colors.white,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: TextFormField(
+                                        controller: facultyController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                        validator: (value) =>
+                                            Validator.validateName(value!),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
+                      ],
+                    ),
+
+                    //----------------------------COLLEGE----------------------------------//
+
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: AlignmentDirectional(-1, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'College',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    height: 48,
+                                    width: double.infinity,
+                                    //width: MediaQuery.of(context).size.width-64,
+                                    constraints: BoxConstraints(
+                                      maxWidth: MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                          50, // Width of the screen minus padding
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(-1, 0),
+                                      child: TextFormField(
+                                        controller: collegeController,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 12),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                        validator: (value) =>
+                                            Validator.validateName(value!),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    //------------------------------BUTTONS---------------------------------//
+
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 16),
+                      child: Center(
+                        child: SizedBox(
+                          height: 50,
+                          width: 250,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formkey.currentState!.validate()) {
+                                updateAcademicInfoNextStep();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Please fill input')));
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              foregroundColor: Colors.black,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 228, 185, 112),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                            ),
+                            child: const Text('Next'),
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
 
-                  //------------------------------BUTTONS---------------------------------//
+                    SizedBox(height: 30),
 
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20, vertical: 16),
-                  //   child: Center(
-                  //     child: SizedBox(
-                  //       height: 50,
-                  //       width: 250,
-                  //       child: ElevatedButton(
-                  //         onPressed: () {
-                  //           Navigator.pop(context);
-                  //         },
-                  //         style: ElevatedButton.styleFrom(
-                  //           textStyle: const TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //           foregroundColor: Colors.black,
-                  //           backgroundColor:
-                  //               const Color.fromARGB(255, 228, 185, 112),
-                  //           shape: const RoundedRectangleBorder(
-                  //             borderRadius:
-                  //                 BorderRadius.all(Radius.circular(10)),
-                  //           ),
-                  //         ),
-                  //         child: const Text('Next'),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  SizedBox(height: 30),
-
-                  //---------------------------------END---------------------------------//
-                ],
+                    //---------------------------------END---------------------------------//
+                  ],
+                ),
               ),
             ),
           ),
