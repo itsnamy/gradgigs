@@ -14,6 +14,17 @@ class JobStatusRepository extends GetxController {
     return jobData;
   }
 
+  Future<List<ApplicantJobStatus>> getJobDetailsByJobTitle(
+      String jobTitle) async {
+    final snapshot = await _db
+        .collection("jobApplication")
+        .where("jobTitle", isEqualTo: jobTitle)
+        .get();
+    final jobData =
+        snapshot.docs.map((e) => ApplicantJobStatus.fromSnapshot(e)).toList();
+    return jobData;
+  }
+
   Future<void> deleteJob(String statusId) async {
     try {
       await _db.collection("jobApplication").doc(statusId).delete();
@@ -26,7 +37,7 @@ class JobStatusRepository extends GetxController {
   Future<void> updateJobStatus(String statusId, String status) async {
     try {
       await _db.collection("jobApplication").doc(statusId).update({
-        "status": status,
+        "jobStatus": status,
       });
       // Get.snackbar("Success", "Job status has been updated");
     } catch (error) {

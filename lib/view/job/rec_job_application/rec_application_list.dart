@@ -99,7 +99,7 @@ class _RecruiterJobApplicationListState
         child: Row(
           children: [
             // Second Section: Text
-            Flexible(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -120,9 +120,6 @@ class _RecruiterJobApplicationListState
                 ],
               ),
             ),
-
-            const Spacer(),
-            const Spacer(),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
