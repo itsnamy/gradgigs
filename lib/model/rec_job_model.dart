@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:flutter/src/material/tab_controller.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RecruiterJobUploadModel extends RecruiterProfile {
   late String id;
@@ -13,6 +14,8 @@ class RecruiterJobUploadModel extends RecruiterProfile {
   late String jobStart; //start date
   late String jobEnd; //end date
   late String jobUploaderEmail;
+  late XFile? jobCoverImage;
+  late String? jobCoverImageURL;
   int numOfApplicant = 0;
 
   //RecruiterProfile recruiterProfile = RecruiterProfile();
@@ -39,7 +42,8 @@ class RecruiterJobUploadModel extends RecruiterProfile {
       required this.jobStart,
       required this.jobEnd,
       required this.jobUploaderEmail,
-      required this.numOfApplicant});
+      required this.numOfApplicant,
+      required this.jobCoverImageURL});
 
   //-------------------id---------------------//
   String get getJobId => id;
@@ -106,6 +110,20 @@ class RecruiterJobUploadModel extends RecruiterProfile {
 
   int get getNumOfApplicant => numOfApplicant;
 
+  //-------------------jobCoverImage---------------------//
+  set setJobCoverImage(XFile jobCoverImage) {
+    this.jobCoverImage = jobCoverImage;
+  }
+
+  XFile get getJobCoverImage => jobCoverImage!;
+
+  //-------------------jobCoverImage---------------------//
+  set setJobCoverImageURL(String jobCoverImageURL) {
+    this.jobCoverImageURL = jobCoverImageURL;
+  }
+
+  String get getJobCoverImageURL => jobCoverImageURL!;
+
   toJson() {
     return {
       "jobTitle": jobTitle,
@@ -117,6 +135,7 @@ class RecruiterJobUploadModel extends RecruiterProfile {
       "jobEnd": jobEnd,
       "jobUploaderEmail": jobUploaderEmail,
       "numOfApplicant": numOfApplicant,
+      "jobCoverImageURL" : jobCoverImageURL
     };
   }
 
@@ -134,6 +153,7 @@ class RecruiterJobUploadModel extends RecruiterProfile {
       jobEnd: data["jobEnd"],
       jobUploaderEmail: data["jobUploaderEmail"],
       numOfApplicant: data["numOfApplicant"],
+      jobCoverImageURL: data["jobCoverImageURL"]
     );
   }
 }

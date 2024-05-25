@@ -11,6 +11,10 @@ class JobDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String imageUrl = job.getJobCoverImageURL.isEmpty
+        ? 'https://images.unsplash.com/photo-1508873699372-7aeab60b44ab?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        : job.getJobCoverImageURL;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Job Details"),
@@ -38,7 +42,7 @@ class JobDetailsPage extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Image.network(
-                    "https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    imageUrl,
                     height: 200,
                     fit: BoxFit.cover,
                   ),

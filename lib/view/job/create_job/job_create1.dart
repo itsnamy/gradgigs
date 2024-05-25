@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/job/create_job/job_create2.dart';
+import 'package:image_picker/image_picker.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -16,6 +19,8 @@ class CreateJob1 extends StatefulWidget {
 class _CreateJob1State extends State<CreateJob1> {
 
   final _formkey = GlobalKey<FormState>();
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
 
   RecruiterJobUploadModel job = RecruiterJobUploadModel();
   
@@ -23,12 +28,21 @@ class _CreateJob1State extends State<CreateJob1> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = pickedFile;
+    });
+  }
+
   void createJobNextStep() {
     String title = titleController.text;
     String description = descriptionController.text;
 
     job.setJobTitle = title;
     job.setJobDesc = description;
+
+    job.setJobCoverImage = _image!;
 
     job = job;
 
@@ -177,6 +191,47 @@ class _CreateJob1State extends State<CreateJob1> {
                           ),
                         ),
                       ],
+                    ),
+
+                    //----------------------------IMAGE UPLOAD----------------------------------//
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                          child: Text(
+                            'Cover Image',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: Container(
+                        margin: EdgeInsets.all(16),
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            Icon(Icons.file_upload, size: 40, color: Colors.grey),
+                            Text('Choose image to upload',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.grey)),
+                            if (_image != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  'Selected file: ${_image!.name}',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
 
                   
