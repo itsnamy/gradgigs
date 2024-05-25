@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/repository/job_repository.dart';
-import 'package:gradgigs/view/job/view_job/view_job_details.dart';
+import 'package:gradgigs/view/job/view_job/apl_view_job_details.dart';
 
 class AplicantViewJob extends StatefulWidget {
   AplicantViewJob({Key? key}) : super(key: key);
@@ -140,7 +140,7 @@ class _AplicantViewJobWidgetState extends State<AplicantViewJob>
                      Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => JobDetailsPage(job: job),
+                      builder: (context) => ApplicantJobDetailsPage(job: job),
                     ),
                   );
                   },

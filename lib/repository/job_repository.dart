@@ -62,4 +62,15 @@ class JobRepository extends GetxController {
       // Get.snackbar("Error", "Failed to delete job: $error");
     }
   }
+
+  Future<void> incrementNumOfApplicants(String jobId) async {
+    try {
+      await _db.collection("jobs").doc(jobId).update({
+        "numOfApplicants": FieldValue.increment(1),
+      });
+      Get.snackbar("Success", "Number of applicants has been incremented");
+    } catch (error) {
+      Get.snackbar("Error", "Failed to increment number of applicants: $error");
+    }
+  }
 }
