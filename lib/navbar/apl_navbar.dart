@@ -3,6 +3,9 @@ import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/home/apl_viewjoboffer.dart';
 import 'package:gradgigs/view/job/apl_job_status/apl_job_status.dart';
+import 'package:gradgigs/view/home/apl_home.dart';
+// import 'package:gradgigs/view/home/rec_home.dart';
+
 
 void main() => runApp(const AplBottomNavigationBarApp());
 
@@ -82,7 +85,8 @@ class SearchPage extends StatelessWidget {
     //   child: Center(child: Text('Discover Job Page')),
     // );
 
-    return JobOfferPage();
+    return AplicantViewJob();
+    // return RecruiterJobUploadView();
   }
 }
 

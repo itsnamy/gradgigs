@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gradgigs/model/apl_profile_model.dart';
 
-class ApplicantJobStatus {
+class ApplicantJobStatus extends ApplicantProfile {
   late String _id;
   late String _jobTitle;
   late String _jobSalary;
