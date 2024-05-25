@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
-import 'package:gradgigs/view/user_profile/rec_create_profile/rec_contact_details.dart';
+import 'package:gradgigs/view/user_profile/rec_update_profile/rec_update_role_information.dart';
 
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterViewRoleInfo extends StatefulWidget {
   final RecruiterProfile recruiter;
-  RecruiterViewRoleInfo({super.key, required this.recruiter});
+  const RecruiterViewRoleInfo({super.key, required this.recruiter});
 
   @override
   State<RecruiterViewRoleInfo> createState() => _RecruiterViewRoleInfoState();
@@ -35,7 +33,7 @@ class _RecruiterViewRoleInfoState extends State<RecruiterViewRoleInfo> {
             bottomLeft: Radius.circular(25),
           ),
         ),
-        elevation: 15,
+        elevation: 5,
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -56,26 +54,6 @@ class _RecruiterViewRoleInfoState extends State<RecruiterViewRoleInfo> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                        child: Text(
-                          widget.recruiter.getFullname,
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0,
-                                    color: Colors.white,
-                                  ),
-                        ),
-                      ),
-                    ],
-                  ),
-
                   if (widget.recruiter.checkIfAcademician())
                     Column(
                       children: [
@@ -121,7 +99,7 @@ class _RecruiterViewRoleInfoState extends State<RecruiterViewRoleInfo> {
                                           alignment:
                                               AlignmentDirectional(-1, 0),
                                           child: Text(
-                                            widget.recruiter.getUtmMail,
+                                            widget.recruiter.getEmail,
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 16,
@@ -320,34 +298,39 @@ class _RecruiterViewRoleInfoState extends State<RecruiterViewRoleInfo> {
 
                   //------------------------------BUTTONS---------------------------------//
 
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20, vertical: 16),
-                  //   child: Center(
-                  //     child: SizedBox(
-                  //       height: 50,
-                  //       width: 250,
-                  //       child: ElevatedButton(
-                  //         onPressed: () {
-                  //           Navigator.pop(context);
-                  //         },
-                  //         style: ElevatedButton.styleFrom(
-                  //           textStyle: const TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //           foregroundColor: Colors.black,
-                  //           backgroundColor:
-                  //               const Color.fromARGB(255, 228, 185, 112),
-                  //           shape: const RoundedRectangleBorder(
-                  //             borderRadius:
-                  //                 BorderRadius.all(Radius.circular(10)),
-                  //           ),
-                  //         ),
-                  //         child: const Text('Confirm'),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
+                    child: Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 250,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        RecruiterUpdateRoleInfo(
+                                            recruiter: widget.recruiter)));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            foregroundColor: Colors.black,
+                            backgroundColor:
+                                const Color.fromARGB(255, 228, 185, 112),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                          ),
+                          child: const Text('Edit Profile'),
+                        ),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 30),
 
                   //---------------------------------END---------------------------------//

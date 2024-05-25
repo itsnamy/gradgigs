@@ -23,8 +23,6 @@ class _ApplicantUpdateBasicInformationState
   final TextEditingController fullnameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
-  final TextEditingController nationalityController = TextEditingController();
-  final TextEditingController genderController = TextEditingController();
 
   @override
   void initState() {
