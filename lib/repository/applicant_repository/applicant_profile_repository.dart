@@ -45,4 +45,12 @@ class ApplicantProfileRepository extends GetxController {
           bankNumber: '');
     }
   }
+
+  updateApplicant(String appId, ApplicantProfile applicant) async {
+    await _db
+        .collection("applicant")
+        .doc(appId)
+        .update(applicant.toJson())
+        .whenComplete(() => Get.snackbar("Success", "User has been updated"));
+  }
 }

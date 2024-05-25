@@ -47,6 +47,14 @@ class ApplicantProfile {
     setBankNumber = "1234567890";
   }
 
+  //-------------------id---------------------//
+  String get getAppId => id;
+
+  //-------------------id---------------------//
+  set setAppId(String id) {
+    this.id = id;
+  }
+
   //-------------------email---------------------//
   set setEmail(String email) {
     this.email = email;

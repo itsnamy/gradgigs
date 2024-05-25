@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
+import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_supporting_documents.dart';
@@ -40,6 +43,9 @@ class _ApplicantUpdateBankDetailsState
     widget.applicant.setBankName = bankName;
     widget.applicant.setBankHolderName = bankHolderName;
     widget.applicant.setBankNumber = bankNumber;
+
+    final appProfileRepo = Get.put(ApplicantProfileRepository());
+    appProfileRepo.updateApplicant(widget.applicant.getAppId, widget.applicant);
 
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ApplicantProfilePage()));

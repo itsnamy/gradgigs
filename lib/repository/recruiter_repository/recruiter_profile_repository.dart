@@ -23,4 +23,12 @@ class RecruiterProfileRepository extends GetxController {
         snapshot.docs.map((e) => RecruiterProfile.fromSnapshot(e)).single;
     return recruiterProfileData;
   }
+
+  updateRecruiter(String recId, RecruiterProfile recruiter) async {
+    await _db
+        .collection("recruiter")
+        .doc(recId)
+        .update(recruiter.toJson())
+        .whenComplete(() => Get.snackbar("Success", "User has been updated"));
+  }
 }

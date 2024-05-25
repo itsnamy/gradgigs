@@ -25,6 +25,9 @@ class _ApplicantUpdateSupportingDocumentsState
   //               ApplicantBankDetails(applicant: widget.applicant)));
   // }
 
+  // final appProfileRepo = Get.put(ApplicantProfileRepository());
+  //   appProfileRepo.updateApplicant(widget.applicant.getAppId, widget.applicant);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
