@@ -9,11 +9,12 @@ class ApplicantViewSupportingDocuments extends StatefulWidget {
   ApplicantViewSupportingDocuments({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewSupportingDocuments> createState() => _ApplicantViewSupportingDocumentsState();
+  State<ApplicantViewSupportingDocuments> createState() =>
+      _ApplicantViewSupportingDocumentsState();
 }
 
-class _ApplicantViewSupportingDocumentsState extends State<ApplicantViewSupportingDocuments> {
-
+class _ApplicantViewSupportingDocumentsState
+    extends State<ApplicantViewSupportingDocuments> {
   final _formkey = GlobalKey<FormState>();
 
   applicantSupportingDocuments() {
@@ -23,7 +24,7 @@ class _ApplicantViewSupportingDocumentsState extends State<ApplicantViewSupporti
             builder: (context) =>
                 ApplicantBankDetails(applicant: widget.applicant)));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +90,6 @@ class _ApplicantViewSupportingDocumentsState extends State<ApplicantViewSupporti
                       ],
                     ),
 
-
                     //----------------------------RESUME----------------------------------//
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -104,7 +104,8 @@ class _ApplicantViewSupportingDocumentsState extends State<ApplicantViewSupporti
                           child: Center(
                             child: Row(
                               children: const [
-                                Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
+                                Icon(Icons.upload_file,
+                                    color: Color(0xccCCCCCC)),
                                 Text("Upload Resume",
                                     style: TextStyle(color: Color(0xCCCCCCCC)))
                               ],
@@ -128,7 +129,8 @@ class _ApplicantViewSupportingDocumentsState extends State<ApplicantViewSupporti
                           child: Center(
                             child: Row(
                               children: const [
-                                Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
+                                Icon(Icons.upload_file,
+                                    color: Color(0xccCCCCCC)),
                                 Text("Upload Certifications",
                                     style: TextStyle(color: Color(0xCCCCCCCC)))
                               ],
@@ -140,34 +142,34 @@ class _ApplicantViewSupportingDocumentsState extends State<ApplicantViewSupporti
 
                     //------------------------------BUTTONS---------------------------------//
 
-                  //  Container(
-                  //     padding: const EdgeInsets.symmetric(
-                  //         horizontal: 20, vertical: 16),
-                  //     child: Center(
-                  //       child: SizedBox(
-                  //         height: 50,
-                  //         width: 250,
-                  //         child: ElevatedButton(
-                  //           onPressed: () {
-                  //             Navigator.pop(context);
-                  //           },
-                  //           style: ElevatedButton.styleFrom(
-                  //             textStyle: const TextStyle(
-                  //               fontWeight: FontWeight.bold,
-                  //             ),
-                  //             foregroundColor: Colors.black,
-                  //             backgroundColor:
-                  //                 const Color.fromARGB(255, 228, 185, 112),
-                  //             shape: const RoundedRectangleBorder(
-                  //               borderRadius:
-                  //                   BorderRadius.all(Radius.circular(10)),
-                  //             ),
-                  //           ),
-                  //           child: const Text('Next'),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
+                    //  Container(
+                    //     padding: const EdgeInsets.symmetric(
+                    //         horizontal: 20, vertical: 16),
+                    //     child: Center(
+                    //       child: SizedBox(
+                    //         height: 50,
+                    //         width: 250,
+                    //         child: ElevatedButton(
+                    //           onPressed: () {
+                    //             Navigator.pop(context);
+                    //           },
+                    //           style: ElevatedButton.styleFrom(
+                    //             textStyle: const TextStyle(
+                    //               fontWeight: FontWeight.bold,
+                    //             ),
+                    //             foregroundColor: Colors.black,
+                    //             backgroundColor:
+                    //                 const Color.fromARGB(255, 228, 185, 112),
+                    //             shape: const RoundedRectangleBorder(
+                    //               borderRadius:
+                    //                   BorderRadius.all(Radius.circular(10)),
+                    //             ),
+                    //           ),
+                    //           child: const Text('Next'),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
                     SizedBox(height: 30),
 
                     //---------------------------------END---------------------------------//
