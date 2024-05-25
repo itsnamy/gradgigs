@@ -13,6 +13,7 @@ class RecruiterJobUploadModel extends RecruiterProfile {
   late String jobStart; //start date
   late String jobEnd; //end date
   late String jobUploaderEmail;
+  int numOfApplicant = 0;
 
   //RecruiterProfile recruiterProfile = RecruiterProfile();
   //class RecruiterJobUploadModel extends RecruiterProfile {
@@ -25,6 +26,7 @@ class RecruiterJobUploadModel extends RecruiterProfile {
     jobStart = "Job Start";
     jobEnd = "Job End";
     jobUploaderEmail = "Job Uploader Email";
+    numOfApplicant = 0;
   } //super(email) untuk test je, nanti kena tukar
 
   RecruiterJobUploadModel.dataHandling(
@@ -36,7 +38,8 @@ class RecruiterJobUploadModel extends RecruiterProfile {
       required this.jobSalary,
       required this.jobStart,
       required this.jobEnd,
-      required this.jobUploaderEmail});
+      required this.jobUploaderEmail,
+      required this.numOfApplicant});
 
   //-------------------id---------------------//
   String get getJobId => id;
@@ -96,6 +99,13 @@ class RecruiterJobUploadModel extends RecruiterProfile {
 
   String get getJobUploaderEmail => jobUploaderEmail;
 
+  //-------------------numOfApplicant---------------------//
+  set setNumOfApplicant(int numOfApplicant) {
+    this.numOfApplicant = numOfApplicant;
+  }
+
+  int get getNumOfApplicant => numOfApplicant;
+
   toJson() {
     return {
       "jobTitle": jobTitle,
@@ -106,6 +116,7 @@ class RecruiterJobUploadModel extends RecruiterProfile {
       "jobStart": jobStart,
       "jobEnd": jobEnd,
       "jobUploaderEmail": jobUploaderEmail,
+      "numOfApplicant": numOfApplicant,
     };
   }
 
@@ -121,7 +132,8 @@ class RecruiterJobUploadModel extends RecruiterProfile {
       jobSalary: data["jobSalary"],
       jobStart: data["jobStart"],
       jobEnd: data["jobEnd"],
-      jobUploaderEmail: data["jobUploaderEmail"]
+      jobUploaderEmail: data["jobUploaderEmail"],
+      numOfApplicant: data["numOfApplicant"],
     );
   }
 }
