@@ -15,10 +15,12 @@ class JobStatusRepository extends GetxController {
   }
 
   Future<List<ApplicantJobStatus>> getAllRecruiterJobs(String aplEmail) async {
-    final snapshot = await _db.collection("jobApplication").where("aplEmail", isEqualTo: aplEmail).get();
-    final jobData = snapshot.docs
-        .map((e) => ApplicantJobStatus.fromSnapshot(e))
-        .toList();
+    final snapshot = await _db
+        .collection("jobApplication")
+        .where("aplEmail", isEqualTo: aplEmail)
+        .get();
+    final jobData =
+        snapshot.docs.map((e) => ApplicantJobStatus.fromSnapshot(e)).toList();
     return jobData;
   }
 
@@ -33,8 +35,7 @@ class JobStatusRepository extends GetxController {
     return jobData;
   }
 
-  Future<List<ApplicantJobStatus>> getJobDetailsByJobId(
-      String jobId) async {
+  Future<List<ApplicantJobStatus>> getJobDetailsByJobId(String jobId) async {
     final snapshot = await _db
         .collection("jobApplication")
         .where("jobId", isEqualTo: jobId)
@@ -65,9 +66,30 @@ class JobStatusRepository extends GetxController {
   }
 
   createJobApplication(ApplicantJobStatus jobStatus) async {
-    await _db
-        .collection("jobApplication")
-        .add(jobStatus.toJson())
-        .whenComplete(() => Get.snackbar("Success", "Application has been added"));
+    await _db.collection("jobApplication").add(jobStatus.toJson()).whenComplete(
+        () => Get.snackbar("Success", "Application has been added"));
+  }
+
+  Future<bool> checkApplicationStatus(
+      String jobId, String applicantEmail) async {
+    bool applicationExists = false;
+
+    try {
+      // Perform the query
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection("jobApplication")
+          .where("jobId", isEqualTo: jobId)
+          .where("aplEmail", isEqualTo: applicantEmail)
+          .get();
+
+      // Check if any documents are returned
+      if (querySnapshot.docs.isNotEmpty) {
+        applicationExists = true;
+      }
+    } catch (e) {
+      print("Error getting documents: $e");
+    }
+
+    return applicationExists;
   }
 }

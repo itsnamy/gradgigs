@@ -8,11 +8,22 @@ import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:get/get.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantJobDetailsPage extends StatelessWidget {
+class ApplicantJobDetailsPage extends StatefulWidget {
   final RecruiterJobUploadModel job;
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
   const ApplicantJobDetailsPage({super.key, required this.job});
+
+  @override
+  State<ApplicantJobDetailsPage> createState() => _ApplicantJobDetailsPageState();
+}
+
+class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
+
+  final jobStatusRepo = Get.put(JobStatusRepository());
+  final jobRepository = Get.put(JobRepository());
+
+  bool applicationExists = false;
+  bool isLoading = true;
 
   Future<void> _submitApplication(BuildContext context) async {
     const String pendingStatus = "Pending";
@@ -20,21 +31,33 @@ class ApplicantJobDetailsPage extends StatelessWidget {
     ApplicantJobStatus jobApplication = ApplicantJobStatus(
       id: '',
       aplEmail: FirebaseAuth.instance.currentUser!.email.toString(),
-      jobSalary: job.getJobSalary,
+      jobSalary: widget.job.getJobSalary,
       jobStatus: pendingStatus,
-      jobTitle: job.jobTitle,
-      recEmail: job.getJobUploaderEmail,
-      jobId : job.getJobId,
+      jobTitle: widget.job.jobTitle,
+      recEmail: widget.job.getJobUploaderEmail,
+      jobId: widget.job.getJobId,
     );
 
-    final jobRepo = Get.put(JobStatusRepository());
-    await  jobRepo.createJobApplication(jobApplication);
+    await jobStatusRepo.createJobApplication(jobApplication);
+    await jobRepository.incrementNumOfApplicants(widget.job.id);
 
-    final jobRepository = Get.put(JobRepository());
-    await jobRepository.incrementNumOfApplicants(job.id); 
-    
+    // Check application status again to refresh the page
+    await _checkApplicationStatus();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _checkApplicationStatus();
+  }
+
+  Future<void> _checkApplicationStatus() async {
+    bool status = await jobStatusRepo.checkApplicationStatus(widget.job.getJobId, FirebaseAuth.instance.currentUser!.email!);
+    setState(() {
+      applicationExists = status;
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,105 +65,103 @@ class ApplicantJobDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Job Details"),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: Center(
+      body: isLoading 
+        ? Center(child: CircularProgressIndicator())
+        : SingleChildScrollView(
             child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFE4BA70),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    job.jobTitle,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+              color: Colors.white,
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFE4BA70),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  SizedBox(height: 16),
-                  Image.network(
-                    "https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(height: 16),
-                  _buildDetailItem(
-                    "Working Hours:",
-                    "${job.getJobStart} - ${job.getJobEnd}",
-                  ),
-                  SizedBox(height: 8),
-                  _buildDetailItem("Pay Per Hour (RM):", job.getJobSalary),
-                  SizedBox(height: 8),
-                  _buildDetailItem("Location:", job.getJobLocation),
-                  SizedBox(height: 8),
-                  _buildDetailItem("Description:", job.getJobDesc),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                    child: Center(
-                      child: SizedBox(
-                        height: 50,
-                        width: 250,
-                        child: ElevatedButton(
-                           onPressed: () => _submitApplication(context),
-                          style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            foregroundColor: Colors.white,
-                            backgroundColor:
-                                const Color.fromARGB(255, 91, 0, 30),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                          ),
-                          child: const Text('Apply Job'),
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        widget.job.jobTitle,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                      SizedBox(height: 16),
+                      Image.network(
+                        "https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: 16),
+                      _buildDetailItem(
+                        "Working Hours:",
+                        "${widget.job.getJobStart} - ${widget.job.getJobEnd}",
+                      ),
+                      SizedBox(height: 8),
+                      _buildDetailItem("Pay Per Hour (RM):", widget.job.getJobSalary),
+                      SizedBox(height: 8),
+                      _buildDetailItem("Location:", widget.job.getJobLocation),
+                      SizedBox(height: 8),
+                      _buildDetailItem("Description:", widget.job.getJobDesc),
+                      SizedBox(height: 16),
+                      if (!applicationExists)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          child: Center(
+                            child: SizedBox(
+                              height: 50,
+                              width: 250,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  await _submitApplication(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: const Color.fromARGB(255, 91, 0, 30),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                                child: const Text('Apply Job'),
+                              ),
+                            ),
+                          ),
+                        )
+                      else 
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          child: Center(
+                            child: SizedBox(
+                              height: 50,
+                              width: 250,
+                              child: ElevatedButton(
+                                onPressed: () async {}, // Disabled button
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.green, // Disabled color
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                                child: const Text('Applied'),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20, vertical: 16),
-                  //   child: Center(
-                  //     child: SizedBox(
-                  //       height: 50,
-                  //       width: 250,
-                  //       child: ElevatedButton(
-                  //         onPressed: () {
-                  //           //delete function
-                  //           JobRepository.instance.deleteJob(job.getJobId);
-                  //           Navigator.pop(context);
-                  //         },
-                  //         style: ElevatedButton.styleFrom(
-                  //           textStyle: const TextStyle(
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //           foregroundColor: Colors.white,
-                  //           backgroundColor: Color.fromARGB(255, 248, 66, 66),
-                  //           shape: const RoundedRectangleBorder(
-                  //             borderRadius:
-                  //                 BorderRadius.all(Radius.circular(10)),
-                  //           ),
-                  //         ),
-                  //         child: const Text('Delete Job'),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
     );
   }
 
