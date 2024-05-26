@@ -8,50 +8,33 @@ import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:get/get.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantJobDetailsPage extends StatefulWidget {
+class ApplicantJobDetailsPage extends StatelessWidget {
   final RecruiterJobUploadModel job;
   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
   const ApplicantJobDetailsPage({super.key, required this.job});
 
-  _ApplicantJobDetailsPageState createState() => _ApplicantJobDetailsPageState();
-}
-
-class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isButtonVisible = true;
-
   Future<void> _submitApplication(BuildContext context) async {
     const String pendingStatus = "Pending";
-
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
 
     ApplicantJobStatus jobApplication = ApplicantJobStatus(
       id: '',
       aplEmail: FirebaseAuth.instance.currentUser!.email.toString(),
-      jobSalary: widget.job.getJobSalary,
+      jobSalary: job.getJobSalary,
       jobStatus: pendingStatus,
-      jobTitle: widget.job.jobTitle,
-      recEmail: widget.job.getJobUploaderEmail,
-      jobId : widget.job.getJobId,
+      jobTitle: job.jobTitle,
+      recEmail: job.getJobUploaderEmail,
+      jobId : job.getJobId,
     );
 
     final jobRepo = Get.put(JobStatusRepository());
     await  jobRepo.createJobApplication(jobApplication);
 
     final jobRepository = Get.put(JobRepository());
-    await jobRepository.incrementNumOfApplicants(widget.job.id); 
+    await jobRepository.incrementNumOfApplicants(job.id); 
     
-     Get.snackbar("Success", "Application has been submitted and applicant count incremented");
-
-      // Hide the button
-      setState(() {
-        _isButtonVisible = false;
-      });
-
-    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +57,7 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    widget.job.jobTitle,
+                    job.jobTitle,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -89,14 +72,14 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
                   SizedBox(height: 16),
                   _buildDetailItem(
                     "Working Hours:",
-                    "${widget.job.getJobStart} - ${widget.job.getJobEnd}",
+                    "${job.getJobStart} - ${job.getJobEnd}",
                   ),
                   SizedBox(height: 8),
-                  _buildDetailItem("Pay Per Hour (RM):", widget.job.getJobSalary),
+                  _buildDetailItem("Pay Per Hour (RM):", job.getJobSalary),
                   SizedBox(height: 8),
-                  _buildDetailItem("Location:", widget.job.getJobLocation),
+                  _buildDetailItem("Location:", job.getJobLocation),
                   SizedBox(height: 8),
-                  _buildDetailItem("Description:", widget.job.getJobDesc),
+                  _buildDetailItem("Description:", job.getJobDesc),
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 16),
