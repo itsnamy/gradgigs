@@ -8,33 +8,50 @@ import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:get/get.dart';
 // ignore_for_file: prefer_const_constructors
 
-class ApplicantJobDetailsPage extends StatelessWidget {
+class ApplicantJobDetailsPage extends StatefulWidget {
   final RecruiterJobUploadModel job;
   // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
   const ApplicantJobDetailsPage({super.key, required this.job});
 
+  _ApplicantJobDetailsPageState createState() => _ApplicantJobDetailsPageState();
+}
+
+class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _isButtonVisible = true;
+
   Future<void> _submitApplication(BuildContext context) async {
     const String pendingStatus = "Pending";
+
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
 
     ApplicantJobStatus jobApplication = ApplicantJobStatus(
       id: '',
       aplEmail: FirebaseAuth.instance.currentUser!.email.toString(),
-      jobSalary: job.getJobSalary,
+      jobSalary: widget.job.getJobSalary,
       jobStatus: pendingStatus,
-      jobTitle: job.jobTitle,
-      recEmail: job.getJobUploaderEmail,
-      jobId : job.getJobId,
+      jobTitle: widget.job.jobTitle,
+      recEmail: widget.job.getJobUploaderEmail,
+      jobId : widget.job.getJobId,
     );
 
     final jobRepo = Get.put(JobStatusRepository());
     await  jobRepo.createJobApplication(jobApplication);
 
     final jobRepository = Get.put(JobRepository());
-    await jobRepository.incrementNumOfApplicants(job.id); 
+    await jobRepository.incrementNumOfApplicants(widget.job.id); 
     
-  }
+     Get.snackbar("Success", "Application has been submitted and applicant count incremented");
 
+      // Hide the button
+      setState(() {
+        _isButtonVisible = false;
+      });
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +74,7 @@ class ApplicantJobDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    job.jobTitle,
+                    widget.job.jobTitle,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -72,14 +89,14 @@ class ApplicantJobDetailsPage extends StatelessWidget {
                   SizedBox(height: 16),
                   _buildDetailItem(
                     "Working Hours:",
-                    "${job.getJobStart} - ${job.getJobEnd}",
+                    "${widget.job.getJobStart} - ${widget.job.getJobEnd}",
                   ),
                   SizedBox(height: 8),
-                  _buildDetailItem("Pay Per Hour (RM):", job.getJobSalary),
+                  _buildDetailItem("Pay Per Hour (RM):", widget.job.getJobSalary),
                   SizedBox(height: 8),
-                  _buildDetailItem("Location:", job.getJobLocation),
+                  _buildDetailItem("Location:", widget.job.getJobLocation),
                   SizedBox(height: 8),
-                  _buildDetailItem("Description:", job.getJobDesc),
+                  _buildDetailItem("Description:", widget.job.getJobDesc),
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 16),
