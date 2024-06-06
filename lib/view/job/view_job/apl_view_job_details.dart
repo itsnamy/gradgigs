@@ -56,7 +56,7 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
     String message = '$aplEmail wants to apply for this job';
 
     final serviceId = 'service_d8vzsmb';
-    final templateId = 'template_a74yhwh';
+    final templateId = 'template_saewflr';
     final userId = '30CWMDFTO5X7Xg2LR';
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     final response =  await http.post(
