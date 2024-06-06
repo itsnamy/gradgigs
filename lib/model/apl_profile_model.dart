@@ -250,4 +250,5 @@ class ApplicantProfile {
     required this.bankHolderName,
     required this.bankNumber,
   });
+
 }

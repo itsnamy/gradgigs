@@ -5,7 +5,12 @@ import 'package:gradgigs/repository/job_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/model/job_status_model.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
+import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
+import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantJobDetailsPage extends StatefulWidget {
@@ -21,9 +26,12 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
 
   final jobStatusRepo = Get.put(JobStatusRepository());
   final jobRepository = Get.put(JobRepository());
+  // final aplProfileRepository = Get.put(ApplicantProfileRepository());
+  // late ApplicantProfile applicantProfile;
 
   bool applicationExists = false;
   bool isLoading = true;
+
 
   Future<void> _submitApplication(BuildContext context) async {
     const String pendingStatus = "Pending";
@@ -40,6 +48,36 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
 
     await jobStatusRepo.createJobApplication(jobApplication);
     await jobRepository.incrementNumOfApplicants(widget.job.id);
+
+    String name = widget.job.getJobUploaderEmail;
+    String email = widget.job.getJobUploaderEmail;
+    String subject = 'Application for part time at ${widget.job.jobTitle}';
+    String aplEmail = FirebaseAuth.instance.currentUser!.email.toString();
+    String message = '$aplEmail wants to apply for this job';
+
+    final serviceId = 'service_d8vzsmb';
+    final templateId = 'template_a74yhwh';
+    final userId = '30CWMDFTO5X7Xg2LR';
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response =  await http.post(
+      url,
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params':{
+            'user_name': name,
+            'user_email': email,
+            'user_subject': subject,
+            'user_message': message,
+          },
+      }),
+      );
+
+    print(response.body);
 
     // Check application status again to refresh the page
     await _checkApplicationStatus();
@@ -105,6 +143,8 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
                       _buildDetailItem("Location:", widget.job.getJobLocation),
                       SizedBox(height: 8),
                       _buildDetailItem("Description:", widget.job.getJobDesc),
+                      SizedBox(height: 8),
+                      _buildDetailItem("Recruiter email:", widget.job.getJobUploaderEmail),
                       SizedBox(height: 16),
                       if (!applicationExists)
                         Container(
