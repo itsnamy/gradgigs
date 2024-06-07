@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gradgigs/model/job_status_model.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
+import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -26,6 +27,7 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
 
   final jobStatusRepo = Get.put(JobStatusRepository());
   final jobRepository = Get.put(JobRepository());
+  final recProfile = Get.put(RecruiterProfileRepository());
   // final aplProfileRepository = Get.put(ApplicantProfileRepository());
   // late ApplicantProfile applicantProfile;
 
@@ -49,7 +51,7 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
     await jobStatusRepo.createJobApplication(jobApplication);
     await jobRepository.incrementNumOfApplicants(widget.job.id);
 
-    String name = widget.job.getJobUploaderEmail;
+    String? name = await recProfile.getRecruiterNameByEmail(widget.job.getJobUploaderEmail);
     String email = widget.job.getJobUploaderEmail;
     String subject = 'Application for part time at ${widget.job.jobTitle}';
     String aplEmail = FirebaseAuth.instance.currentUser!.email.toString();

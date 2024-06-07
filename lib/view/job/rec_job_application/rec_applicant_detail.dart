@@ -7,6 +7,9 @@ import 'package:gradgigs/model/job_status_model.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:gradgigs/view/job/rec_job_application/rec_applicant_list.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecruiterApplicantDetail extends StatefulWidget {
   final RecruiterJobUploadModel job;
@@ -24,6 +27,45 @@ class RecruiterApplicantDetail extends StatefulWidget {
 }
 
 class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
+
+  Future<void> _updateApplication(BuildContext context) async {
+
+    String? name = widget.aplDetails.getFullname;
+    String email = widget.aplDetails.getEmail;
+    String subject = 'Application for part time at ${widget.job.jobTitle}';
+    String? message;
+    if(widget.application.jobStatus == "Accepted"){
+      message = 'Congrats your job application for ${widget.job.jobTitle} are accepted';
+    }else{
+      message = 'We are regret to inform that you are rejected for the job ${widget.job.jobTitle}';
+    }
+    
+    final serviceId = 'service_d8vzsmb';
+    final templateId = 'template_saewflr';
+    final userId = '30CWMDFTO5X7Xg2LR';
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response =  await http.post(
+      url,
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params':{
+            'user_name': name,
+            'user_email': email,
+            'user_subject': subject,
+            'user_message': message,
+          },
+      }),
+      );
+
+    print(response.body);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,9 +196,10 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
                         height: 50,
                         width: 250,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             JobStatusRepository.instance.updateJobStatus(
                                 widget.application.statusId, "Accepted");
+                            await _updateApplication(context);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -190,10 +233,11 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
                         height: 50,
                         width: 250,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             //reject applicant
                             JobStatusRepository.instance.updateJobStatus(
                                 widget.application.statusId, "Rejected");
+                            await _updateApplication(context);
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(

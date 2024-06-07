@@ -31,4 +31,24 @@ class RecruiterProfileRepository extends GetxController {
         .update(recruiter.toJson())
         .whenComplete(() => Get.snackbar("Success", "User has been updated"));
   }
+
+  Future<String?> getRecruiterNameByEmail(String email) async {
+    try {
+      QuerySnapshot querySnapshot = await _db
+          .collection("recruiter")
+          .where("recruiterEmail", isEqualTo: email)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var doc = querySnapshot.docs.first;
+        return doc["fullname"] as String;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      Get.snackbar("Error", "Failed to fetch recruiter name: $error");
+      return null;
+    }
+  }
 }
