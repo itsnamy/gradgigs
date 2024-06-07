@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/view/job/view_job/apl_view_liked_jobs.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
 import 'package:gradgigs/view/job/apl_job_status/apl_job_status.dart';
 import 'package:gradgigs/view/home/apl_home.dart';
@@ -30,8 +31,8 @@ class _AplCustomBottomNavigationBarState
     extends State<AplCustomBottomNavigationBar> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    SearchPage(),
     JobsPage(),
+    LikedJobsPageRedirect(),
     MessagePage(),
     ProfilePage(),
   ];
@@ -51,12 +52,12 @@ class _AplCustomBottomNavigationBarState
         backgroundColor: const Color.fromARGB(255, 91, 0, 30),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.card_travel),
             label: 'Jobs',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Liked Jobs',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.work),
@@ -76,7 +77,7 @@ class _AplCustomBottomNavigationBarState
   }
 }
 
-class SearchPage extends StatelessWidget {
+class JobsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return Container(
@@ -88,12 +89,14 @@ class SearchPage extends StatelessWidget {
   }
 }
 
-class JobsPage extends StatelessWidget {
+class LikedJobsPageRedirect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Liked Job Page')),
-    );
+    // return Container(
+    //   child: Center(child: Text('Liked Job Page')),
+    // );
+
+    return LikedJobsPage();
   }
 }
 

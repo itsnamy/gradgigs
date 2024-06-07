@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class ApplicantProfileRepository extends GetxController {
   static ApplicantProfileRepository get instance => Get.find();

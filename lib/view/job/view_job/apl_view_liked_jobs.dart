@@ -1,41 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:get/get.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
-import 'package:gradgigs/repository/job_repository.dart';
 import 'package:gradgigs/view/job/view_job/apl_view_job_details.dart';
 
-class AplicantViewJob extends StatefulWidget {
-  AplicantViewJob({Key? key}) : super(key: key);
-
+class LikedJobsPage extends StatefulWidget {
   @override
-  State<AplicantViewJob> createState() => _AplicantViewJobWidgetState();
+  _LikedJobsPageState createState() => _LikedJobsPageState();
 }
 
-class _AplicantViewJobWidgetState extends State<AplicantViewJob>
-    with TickerProviderStateMixin {
-  final JobRepository _jobRepository = Get.put(JobRepository());
+class _LikedJobsPageState extends State<LikedJobsPage> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  List<RecruiterJobUploadModel> likedJobs = [];
+  String? userEmail;
 
   @override
   void initState() {
     super.initState();
+    _fetchUserEmail();
   }
 
-  // method to compare if start date of job is before current date
-  // before = true, after = false
-  bool compareDate(String dateString) {
-    DateTime currentDate = DateTime.now();
+  void _fetchUserEmail() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      userEmail = user.email;
+      _fetchLikedJobs();
+    }
+  }
 
-    // Create a DateFormat instance with the expected format
-    DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+  void _fetchLikedJobs() async {
+    if (userEmail != null) {
+      final likedJobsSnapshot = await _firestore
+          .collection('userLikes')
+          .doc(userEmail)
+          .collection('likedJobs')
+          .get();
 
-    // Parse the string to a DateTime object
-    DateTime parsedDate = dateFormat.parse(dateString);
+      final likedJobIds = likedJobsSnapshot.docs.map((doc) => doc.id).toList();
 
-    // Compare the parsed date with the current date
-    return parsedDate.isBefore(currentDate);
+      if (likedJobIds.isNotEmpty) {
+        final jobDetailsSnapshot = await _firestore
+            .collection('jobs')
+            .where("jobTitle", whereIn: likedJobIds)
+            .get();
+
+        setState(() {
+          likedJobs = jobDetailsSnapshot.docs
+              .map((doc) => RecruiterJobUploadModel.fromSnapshot(doc))
+              .toList();
+        });
+      }
+    }
   }
 
   @override
@@ -44,7 +60,7 @@ class _AplicantViewJobWidgetState extends State<AplicantViewJob>
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          'Home Page',
+          'Liked Jobs',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
@@ -62,33 +78,15 @@ class _AplicantViewJobWidgetState extends State<AplicantViewJob>
         centerTitle: true,
       ),
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          child: FutureBuilder<List<RecruiterJobUploadModel>>(
-            future: _jobRepository.getAllJobDetails(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else if (snapshot.hasData) {
-                final List<RecruiterJobUploadModel> jobDetails = snapshot.data!;
-                return ListView.builder(
-                  itemCount: jobDetails.length,
-                  itemBuilder: (context, index) {
-                    final job = jobDetails[index];
-                    if (compareDate(job.getJobEnd)) {
-                      return SizedBox.shrink(); // Do not build the card if the job has ended
-                    }
-                    return JobCard(job: job);
-                  },
-                );
-              } else {
-                return Text('No Data Available');
-              }
-            },
-          ),
-        ),
+        child: likedJobs.isEmpty
+            ? Text('No liked jobs')
+            : ListView.builder(
+                itemCount: likedJobs.length,
+                itemBuilder: (context, index) {
+                  final job = likedJobs[index];
+                  return JobCard(job: job);
+                },
+              ),
       ),
     );
   }
