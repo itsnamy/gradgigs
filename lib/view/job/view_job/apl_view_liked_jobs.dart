@@ -170,7 +170,8 @@ class _JobCardState extends State<JobCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12)),
               child: Image.network(
                 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2669&q=80',
                 height: 200,
@@ -184,14 +185,14 @@ class _JobCardState extends State<JobCard> {
                 children: [
                   Text(
                     widget.job.jobTitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 255, 255, 255)),
+                        color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "RM " + widget.job.getJobSalary + " per hour",
+                    "RM ${widget.job.getJobSalary} per hour",
                     style: const TextStyle(
                       fontSize: 16,
                       color: Color.fromARGB(255, 255, 255, 255),
