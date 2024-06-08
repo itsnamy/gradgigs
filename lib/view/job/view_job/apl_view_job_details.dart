@@ -55,7 +55,7 @@ class _ApplicantJobDetailsPageState extends State<ApplicantJobDetailsPage> {
     String email = widget.job.getJobUploaderEmail;
     String subject = 'Application for part time at ${widget.job.jobTitle}';
     String aplEmail = FirebaseAuth.instance.currentUser!.email.toString();
-    String message = '$aplEmail wants to apply for this job';
+    String message = '${aplEmail} is interested in applying for this job.';
 
     final serviceId = 'service_d8vzsmb';
     final templateId = 'template_saewflr';
