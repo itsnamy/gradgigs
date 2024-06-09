@@ -33,10 +33,10 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
     String? message;
     if (widget.application.jobStatus == "Accepted") {
       message =
-          'Congrats your job application for ${widget.job.jobTitle} are accepted';
+          'Congratulations! Your job application for ${widget.job.jobTitle} has been accepted.';
     } else {
       message =
-          'We are regret to inform that you are rejected for the job ${widget.job.jobTitle}';
+          'We regret to inform you that your application for ${widget.job.jobTitle} has not been successful.';
     }
 
     final serviceId = 'service_d8vzsmb';
