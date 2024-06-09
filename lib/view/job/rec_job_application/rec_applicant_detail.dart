@@ -26,12 +26,16 @@ class RecruiterApplicantDetail extends StatefulWidget {
 }
 
 class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
-  Future<void> _updateApplication(BuildContext context) async {
+
+  final String acceptedStatus = "Accepted";
+  final String rejectedStatus = "Rejected";
+
+  Future<void> _updateApplication(BuildContext context, String status) async {
     String? name = widget.aplDetails.getFullname;
     String email = widget.aplDetails.getEmail;
     String subject = 'Application for part time at ${widget.job.jobTitle}';
     String? message;
-    if (widget.application.jobStatus == "Accepted") {
+    if (status == acceptedStatus) {
       message =
           'Congratulations! Your job application for ${widget.job.jobTitle} has been accepted.';
     } else {
@@ -197,7 +201,7 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
                           onPressed: () async {
                             JobStatusRepository.instance.updateJobStatus(
                                 widget.application.statusId, "Accepted");
-                            await _updateApplication(context);
+                            await _updateApplication(context, acceptedStatus);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -235,7 +239,7 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
                             //reject applicant
                             JobStatusRepository.instance.updateJobStatus(
                                 widget.application.statusId, "Rejected");
-                            await _updateApplication(context);
+                            await _updateApplication(context, rejectedStatus);
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
