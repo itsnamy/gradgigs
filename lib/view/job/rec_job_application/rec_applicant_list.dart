@@ -45,7 +45,7 @@ class _RecruiterApplicantListState extends State<RecruiterApplicantList> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          'Job List',
+          'Applicant List',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,

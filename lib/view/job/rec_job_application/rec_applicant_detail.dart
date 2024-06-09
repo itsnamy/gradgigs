@@ -9,7 +9,6 @@ import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:gradgigs/view/job/rec_job_application/rec_applicant_list.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class RecruiterApplicantDetail extends StatefulWidget {
   final RecruiterJobUploadModel job;
@@ -27,43 +26,42 @@ class RecruiterApplicantDetail extends StatefulWidget {
 }
 
 class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
-
   Future<void> _updateApplication(BuildContext context) async {
-
     String? name = widget.aplDetails.getFullname;
     String email = widget.aplDetails.getEmail;
     String subject = 'Application for part time at ${widget.job.jobTitle}';
     String? message;
-    if(widget.application.jobStatus == "Accepted"){
-      message = 'Congrats your job application for ${widget.job.jobTitle} are accepted';
-    }else{
-      message = 'We are regret to inform that you are rejected for the job ${widget.job.jobTitle}';
+    if (widget.application.jobStatus == "Accepted") {
+      message =
+          'Congrats your job application for ${widget.job.jobTitle} are accepted';
+    } else {
+      message =
+          'We are regret to inform that you are rejected for the job ${widget.job.jobTitle}';
     }
-    
+
     final serviceId = 'service_d8vzsmb';
     final templateId = 'template_saewflr';
     final userId = '30CWMDFTO5X7Xg2LR';
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-    final response =  await http.post(
+    final response = await http.post(
       url,
-      headers:{
+      headers: {
         'Content-Type': 'application/json',
       },
       body: json.encode({
         'service_id': serviceId,
         'template_id': templateId,
         'user_id': userId,
-        'template_params':{
-            'user_name': name,
-            'user_email': email,
-            'user_subject': subject,
-            'user_message': message,
-          },
+        'template_params': {
+          'user_name': name,
+          'user_email': email,
+          'user_subject': subject,
+          'user_message': message,
+        },
       }),
-      );
+    );
 
     print(response.body);
-
   }
 
   @override
