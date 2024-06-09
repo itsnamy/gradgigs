@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/navbar/apl_navbar.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
+import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:get/get.dart';
@@ -38,9 +35,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
     aplRepo.createApplicant(widget.applicant);
 
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => AplCustomBottomNavigationBar()));
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   @override

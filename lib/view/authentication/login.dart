@@ -12,11 +12,10 @@ import 'package:gradgigs/view/user_profile/apl_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
 class LoginPage extends StatefulWidget {
-  final String title;
   late ApplicantProfile? applicant;
   late RecruiterProfile? recruiter;
 
-  LoginPage({super.key, required this.title});
+  LoginPage({super.key});
 
 /*
   // Constructor for Applicant

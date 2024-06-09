@@ -291,7 +291,7 @@ Future<void> loginPage(
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => LoginPage(title: 'Sign In'),
+      builder: (context) => LoginPage(),
     ),
   );
 }

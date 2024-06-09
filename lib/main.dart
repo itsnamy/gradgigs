@@ -44,9 +44,7 @@ class MyApp extends StatelessWidget {
             height: 68,
           ),
         ),
-        //RecruiterJobUploadView
-        //nextScreen: RecruiterJobUploadView(),
-        nextScreen: LoginPage(title: 'Sign In'), //login page
+        nextScreen: LoginPage(), //login page
         splashTransition: SplashTransition.fadeTransition,
       ),
     );

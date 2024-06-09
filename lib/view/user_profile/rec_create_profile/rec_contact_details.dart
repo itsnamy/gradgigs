@@ -2,12 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/recruiter_repository/recruiter_profile_repository.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:gradgigs/model/rec_profile_model.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
+import 'package:gradgigs/view/authentication/login.dart';
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterContactDetails extends StatefulWidget {
@@ -33,10 +32,7 @@ class _RecruiterContactDetailsState extends State<RecruiterContactDetails> {
     jobRepo.createRecruiter(widget.recruiter);
 
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                CustomBottomNavigationBar()));
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   @override
