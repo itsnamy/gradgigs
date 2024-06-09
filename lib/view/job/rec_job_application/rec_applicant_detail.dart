@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/model/job_status_model.dart';
 import 'package:gradgigs/model/rec_job_model.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:gradgigs/view/job/rec_job_application/rec_applicant_list.dart';
 import 'package:http/http.dart' as http;
@@ -204,9 +205,8 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RecruiterApplicantList(
-                                  job: widget.job,
-                                ),
+                                builder: (context) =>
+                                    CustomBottomNavigationBar(),
                               ),
                             );
                           },
