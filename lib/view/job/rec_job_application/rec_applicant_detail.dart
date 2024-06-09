@@ -26,7 +26,6 @@ class RecruiterApplicantDetail extends StatefulWidget {
 }
 
 class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
-
   final String acceptedStatus = "Accepted";
   final String rejectedStatus = "Rejected";
 
@@ -240,7 +239,14 @@ class _RecruiterApplicantDetailState extends State<RecruiterApplicantDetail> {
                             JobStatusRepository.instance.updateJobStatus(
                                 widget.application.statusId, "Rejected");
                             await _updateApplication(context, rejectedStatus);
-                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RecruiterApplicantList(
+                                  job: widget.job,
+                                ),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(

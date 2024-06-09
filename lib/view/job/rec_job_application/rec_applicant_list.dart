@@ -7,6 +7,7 @@ import 'package:gradgigs/model/rec_job_model.dart';
 import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
 import 'package:gradgigs/repository/job_repository/job_status_repository.dart';
 import 'package:gradgigs/view/job/rec_job_application/rec_applicant_detail.dart';
+import 'package:gradgigs/view/job/rec_job_application/rec_application_list.dart';
 
 class RecruiterApplicantList extends StatefulWidget {
   final RecruiterJobUploadModel job;
@@ -65,7 +66,12 @@ class _RecruiterApplicantListState extends State<RecruiterApplicantList> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RecruiterJobApplicationList(),
+              ),
+            );
           },
         ),
       ),
