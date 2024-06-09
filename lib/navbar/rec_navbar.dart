@@ -28,7 +28,6 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    SearchPage(),
     JobsPage(),
     UploadPage(),
     ApplicationPage(),
@@ -49,10 +48,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color.fromARGB(255, 91, 0, 30),
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.card_travel),
             label: 'Jobs',
@@ -75,15 +70,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         unselectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
-    );
-  }
-}
-
-class SearchPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('Search Page')),
     );
   }
 }
