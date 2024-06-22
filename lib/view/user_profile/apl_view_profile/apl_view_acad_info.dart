@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
+import 'package:gradgigs/view/user_profile/apl_update_profile/apl_update_acad_info.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantViewAcademicInformation extends StatefulWidget {
@@ -8,14 +9,15 @@ class ApplicantViewAcademicInformation extends StatefulWidget {
   const ApplicantViewAcademicInformation({super.key, required this.applicant});
 
   @override
-  State<ApplicantViewAcademicInformation> createState() => _ApplicantViewAcademicInformationState();
+  State<ApplicantViewAcademicInformation> createState() =>
+      _ApplicantViewAcademicInformationState();
 }
 
-class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademicInformation> {
+class _ApplicantViewAcademicInformationState
+    extends State<ApplicantViewAcademicInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: const Text(
           'Academic information',
@@ -42,8 +44,7 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
           },
         ),
       ),
-
-       body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Center(
@@ -52,31 +53,29 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
                 color: Color(0xFF5C001F),
                 borderRadius: BorderRadius.circular(20),
               ),
-              
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    //----------------------------FULLNAME DISPLAY----------------------------------//
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
-                          child: Text(
-                            widget.applicant.getFullname,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  //----------------------------FULLNAME DISPLAY----------------------------------//
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 0),
+                        child: Text(
+                          widget.applicant.getFullname,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
-                      ],
-                    ),
-                    //----------------------------STUDENT EMAIL----------------------------------//
-                    Row(
+                      ),
+                    ],
+                  ),
+                  //----------------------------STUDENT EMAIL----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -131,8 +130,8 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
                     ],
                   ),
 
-                    //----------------------------FACULTY----------------------------------//
-                    Row(
+                  //----------------------------FACULTY----------------------------------//
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -187,9 +186,9 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
                     ],
                   ),
 
-                    //----------------------------COLLEGE----------------------------------//
+                  //----------------------------COLLEGE----------------------------------//
 
-                    Row(
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
@@ -244,49 +243,51 @@ class _ApplicantViewAcademicInformationState extends State<ApplicantViewAcademic
                     ],
                   ),
 
-                    //------------------------------BUTTONS---------------------------------//
+                  //------------------------------BUTTONS---------------------------------//
 
-                    // Container(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 20, vertical: 16),
-                    //   child: Center(
-                    //     child: SizedBox(
-                    //       height: 50,
-                    //       width: 250,
-                    //       child: ElevatedButton(
-                    //         onPressed: () {
-                    //           Navigator.pop(context);
-                    //         },
-                    //         style: ElevatedButton.styleFrom(
-                    //           textStyle: const TextStyle(
-                    //             fontWeight: FontWeight.bold,
-                    //           ),
-                    //           foregroundColor: Colors.black,
-                    //           backgroundColor:
-                    //               const Color.fromARGB(255, 228, 185, 112),
-                    //           shape: const RoundedRectangleBorder(
-                    //             borderRadius:
-                    //                 BorderRadius.all(Radius.circular(10)),
-                    //           ),
-                    //         ),
-                    //         child: const Text('Next'),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
+                    child: Center(
+                      child: SizedBox(
+                        height: 50,
+                        width: 250,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ApplicantUpdateAcademicInformation(
+                                            applicant: widget.applicant)));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            foregroundColor: Colors.black,
+                            backgroundColor:
+                                const Color.fromARGB(255, 228, 185, 112),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                          ),
+                          child: const Text('Edit Profile'),
+                        ),
+                      ),
+                    ),
+                  ),
 
-                    SizedBox(height: 30),
+                  SizedBox(height: 30),
 
-                    //---------------------------------END---------------------------------//
-                  ],
-                ),
+                  //---------------------------------END---------------------------------//
+                ],
               ),
             ),
           ),
-        ),      
-
+        ),
+      ),
     );
   }
-
-  
 }

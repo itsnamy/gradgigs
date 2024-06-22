@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/user_profile/rec_create_profile/rec_role_information.dart';
 
 // ignore_for_file: prefer_const_constructors
 
 class RecruiterBasicInformation extends StatefulWidget {
-  final ReqruiterProfile recruiter;
+  final RecruiterProfile recruiter;
   const RecruiterBasicInformation({super.key, required this.recruiter});
 
   @override

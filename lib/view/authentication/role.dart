@@ -33,7 +33,7 @@ class RoleSignUp extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const LoginPage(title: 'Sign In'),
+                builder: (context) => LoginPage(),
               ),
             );
           },
