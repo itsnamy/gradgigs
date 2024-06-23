@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 import 'package:gradgigs/view/authentication/login.dart';
 
@@ -14,7 +15,8 @@ class RecruiterSignupPage extends StatefulWidget {
 }
 
 class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
-  ReqruiterProfile recruiter = ReqruiterProfile();
+  RecruiterProfile recruiter = RecruiterProfile();
+  final AuthService _authService = AuthService();
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
@@ -26,7 +28,7 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
   bool _obscurePassword = true;
   String? selectedCategory;
 
-  void recruiterSignUp() {
+  Future<void> recruiterSignUp() async {
     //get details recruiter
     String email = emailController.text;
     //String password = passwordController.text;
@@ -34,6 +36,10 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
     String password = passwordController.text;
 
     // create account in firebase
+    String message = await _authService.signUp(
+        email, password, fullname, widget.role, selectedCategory!);
+
+    showMessage(context, message);
 
     // save data to class
     recruiter.setEmail = email;
@@ -45,6 +51,14 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
         MaterialPageRoute(
             builder: (context) =>
                 RecruiterBasicInformation(recruiter: recruiter)));
+  }
+
+  void showMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   @override
@@ -356,9 +370,7 @@ class _RecruiterSignupPageState extends State<RecruiterSignupPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginPage(
-                                title: 'Sign in',
-                              ),
+                              builder: (context) => LoginPage(),
                             ),
                           );
                         },

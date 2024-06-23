@@ -105,7 +105,8 @@ class _ApplicantSupportingDocumentsState
                           child: Center(
                             child: Row(
                               children: const [
-                                Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
+                                Icon(Icons.upload_file,
+                                    color: Color(0xccCCCCCC)),
                                 Text("Upload Resume",
                                     style: TextStyle(color: Color(0xCCCCCCCC)))
                               ],
@@ -129,7 +130,8 @@ class _ApplicantSupportingDocumentsState
                           child: Center(
                             child: Row(
                               children: const [
-                                Icon(Icons.upload_file, color: Color(0xccCCCCCC)),
+                                Icon(Icons.upload_file,
+                                    color: Color(0xccCCCCCC)),
                                 Text("Upload Certifications",
                                     style: TextStyle(color: Color(0xCCCCCCCC)))
                               ],

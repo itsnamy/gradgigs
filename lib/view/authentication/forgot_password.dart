@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/service/auth_validator.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -9,15 +10,41 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  //final _formkey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService();
+
+  final _formkey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forget Password"),
+        title: const Text(
+          'Forgot password',
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        toolbarHeight: 70,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
+          ),
+        ),
+        elevation: 5,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Form(
+        key: _formkey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -30,12 +57,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 height: 68,
               ),
             ),
-            Padding(
+           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               child: TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Please enter your email"),
+                  border: OutlineInputBorder(),
+                  labelText: "Please enter your email",
+                  prefixIcon: Icon(Icons.email),
+                ),
                 validator: (value) => Validator.validateEmail(value!),
               ),
             ),
@@ -43,13 +73,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             SizedBox(
               width: 400,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ForgotPasswordPage(),
-                    ),
-                  );
+                onPressed: () async {
+                  if (_formkey.currentState!.validate()) {
+                    String email = emailController.text;
+                    try {
+                      await _authService.changePassword(email);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Password Reset Email Sent')));
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    } catch (e) {
+                      print(e);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Invalid Email')));
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please fill input')));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   padding:

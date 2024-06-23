@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:gradgigs/view/user_profile/apl_create_profile/apl_bank_details.dart';
+import 'package:gradgigs/view/authentication/login.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:get/get.dart';
+import 'package:gradgigs/repository/applicant_repository/applicant_profile_repository.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ApplicantBankDetails extends StatefulWidget {
@@ -18,10 +18,11 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
   final _formkey = GlobalKey<FormState>();
 
   final TextEditingController bankNameController = TextEditingController();
-  final TextEditingController bankHolderNameController = TextEditingController();
+  final TextEditingController bankHolderNameController =
+      TextEditingController();
   final TextEditingController bankNumberController = TextEditingController();
 
-  applicantBankDetails(){
+  applicantBankDetails() {
     String bankName = bankHolderNameController.text;
     String bankHolderName = bankHolderNameController.text;
     String bankNumber = bankNumberController.text;
@@ -30,12 +31,11 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
     widget.applicant.setBankHolderName = bankHolderName;
     widget.applicant.bankNumber = bankNumber;
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                ApplicantProfilePage(applicant: widget.applicant)));
+    final aplRepo = Get.put(ApplicantProfileRepository());
+    aplRepo.createApplicant(widget.applicant);
 
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   @override
@@ -243,7 +243,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
                         ),
                       ],
                     ),
-                    
+
                     //------------------------------BUTTONS---------------------------------//
 
                     Container(
@@ -275,7 +275,7 @@ class _ApplicantBankDetailsState extends State<ApplicantBankDetails> {
                                     BorderRadius.all(Radius.circular(10)),
                               ),
                             ),
-                            child: const Text('Next'),
+                            child: const Text('Done'),
                           ),
                         ),
                       ),

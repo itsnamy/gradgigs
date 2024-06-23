@@ -1,52 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:gradgigs/model/apl_profile_model.dart';
-import 'package:gradgigs/model/req_profile_model.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gradgigs/model/rec_profile_model.dart';
+import 'package:gradgigs/navbar/rec_navbar.dart';
+import 'package:gradgigs/navbar/apl_navbar.dart';
+import 'package:gradgigs/service/auth_service.dart';
 import 'package:gradgigs/view/authentication/forgot_password.dart';
 import 'package:gradgigs/view/authentication/role.dart';
 import 'package:gradgigs/service/auth_validator.dart';
+import 'package:gradgigs/view/job/create_job/job_create1.dart';
 import 'package:gradgigs/view/user_profile/apl_profile.dart';
-import 'package:gradgigs/view/user_profile/rec_profile.dart';
 // ignore_for_file: prefer_const_constructors
 
 class LoginPage extends StatefulWidget {
-  final String title;
-  final ApplicantProfile? applicant;
-  final ReqruiterProfile? recruiter;
+  late ApplicantProfile? applicant;
+  late RecruiterProfile? recruiter;
 
-  // Constructor for neither
-  const LoginPage({super.key, required this.title})
-      : applicant = null,
-        recruiter = null;
+  LoginPage({super.key});
 
+/*
   // Constructor for Applicant
   const LoginPage.forApplicant(
       {super.key, required this.title, required this.applicant})
       : recruiter = null;
 
-  // Constructor for Applicant
+  // Constructor for Recruiter
   const LoginPage.forRecruiter(
       {super.key, required this.title, required this.recruiter})
-      : applicant = null;
+      : applicant = null; */
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPage> createState() {
+    return _LoginPageState();
+  }
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthService _authService = AuthService();
+
   final _formkey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool passToggle = true;
 
-  ApplicantProfile applicantDefault = ApplicantProfile();
-  ReqruiterProfile recruiterDefault = ReqruiterProfile();
+  late ApplicantProfile applicant;
+  late RecruiterProfile recruiter;
+
+  Future<void> SignIn(BuildContext context, String email, String password,
+      bool signedUp) async {
+    String role = await _authService.logIn(email, password);
+
+    if (role == "applicant") {
+      signedUp = true;
+      // showMessage("Welcome, Applicant");
+      //applicant = await _authService.getApplicant(email);
+      //applicantPage(applicant);
+      applicantPage();
+    } else if (role == "recruiter") {
+      signedUp = true;
+      recruiterPage();
+    }
+
+    if (signedUp == false) {
+      showInvalidDialog();
+    }
+  }
+
+  void applicantPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AplCustomBottomNavigationBar()),
+      // MaterialPageRoute(
+      //     builder: (context) => ApplicantProfilePage(applicant: applicant))
+    );
+  }
+
+  void recruiterPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()),
+    );
+  }
+
+  void showInvalidDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Invalid Credentials'),
+          content: Text('Please enter valid email and password.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    //MaterialPageRoute route =
-    //    MaterialPageRoute(builder: (context) => RoleSignUp());
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -84,7 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                 height: 68,
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               child: TextFormField(
@@ -117,6 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const ForgotPasswordPage(),
+                    //builder: (context) => const CreateJob1(),
                   ),
                 );
               },
@@ -128,35 +192,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            //   child: Center(
-            //     child: SizedBox(
-            //       width: 374, // Same width as the TextFormField
-            //       height: 52, // Same height as the TextFormField
-            //       child: ElevatedButton(
-            //         onPressed: () {
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //                 builder: (context) => const ApplicantProfilePage()),
-            //           );
-            //         },
-            //         style: ElevatedButton.styleFrom(
-            //           textStyle: const TextStyle(
-            //             color: Color.fromRGBO(255, 255, 255, 0.9),
-            //             fontWeight: FontWeight.bold,
-            //           ),
-            //           backgroundColor: const Color.fromRGBO(22, 184, 184, 1),
-            //           shape: const RoundedRectangleBorder(
-            //             borderRadius: BorderRadius.all(Radius.circular(25)),
-            //           ),
-            //         ),
-            //         child: const Text('Log in'),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             SizedBox(height: 10),
             SizedBox(
               width:
@@ -168,59 +203,14 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   bool signedUp = false;
 
-                  if (widget.applicant != null) {
-                    if (widget.applicant!.getEmail == emailController.text &&
-                        widget.applicant!.getPassword ==
-                            passwordController.text) {
-                      ApplicantProfile applicantNotNull = widget.applicant!;
-                      signedUp = true;
+                  if (_formkey.currentState!.validate()) {
+                    String email = emailController.text;
+                    String password = passwordController.text;
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ApplicantProfilePage(applicant: applicantNotNull),
-                        ),
-                      );
-                    }
-                  }
-
-                  if (widget.recruiter != null) {
-                    if (widget.recruiter!.getEmail == emailController.text &&
-                        widget.recruiter!.getPassword ==
-                            passwordController.text) {
-                      ReqruiterProfile recruiterNotNull = widget.recruiter!;
-                      signedUp = true;
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              RecruiterProfilePage(recruiter: recruiterNotNull),
-                        ),
-                      );
-                    }
-                  }
-
-                  if (signedUp == false) {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text('Invalid Credentials'),
-                          content:
-                              Text('Please enter valid email and password.'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    SignIn(context, email, password, signedUp);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please fill input')));
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -298,14 +288,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-void applicantProfilePage(BuildContext context, ApplicantProfile applicant) {
-  Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ApplicantProfilePage(applicant: applicant)));
-}
-
-//void recruiterProfilePage(BuildContext context){
-//  Navigator.push(context, MaterialPageRoute(builder: (context) => RecruiterProfilePage()));
-//}
